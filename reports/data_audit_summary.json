@@ -1,0 +1,192 @@
+{
+  "validation_date": "2026-10-28",
+  "environment": "Local Linux / Python 3.11; não executado no Colab",
+  "source": {
+    "kind": "official_csv",
+    "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+    "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+    "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+  },
+  "python": "3.11.14",
+  "versions": {
+    "reviewsense-ptbr": "0.1.0",
+    "pandas": "3.1.0",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1"
+  },
+  "config": {
+    "seed": 42,
+    "train_size": 0.7,
+    "val_size": 0.15,
+    "test_size": 0.15
+  },
+  "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+  "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+  "audit": {
+    "rows": 132373,
+    "columns": [
+      "submission_date",
+      "reviewer_id",
+      "product_id",
+      "product_name",
+      "product_brand",
+      "site_category_lv1",
+      "site_category_lv2",
+      "review_title",
+      "overall_rating",
+      "recommend_to_a_friend",
+      "review_text",
+      "reviewer_birth_year",
+      "reviewer_gender",
+      "reviewer_state"
+    ],
+    "dtypes": {
+      "submission_date": "str",
+      "reviewer_id": "str",
+      "product_id": "str",
+      "product_name": "str",
+      "product_brand": "str",
+      "site_category_lv1": "str",
+      "site_category_lv2": "str",
+      "review_title": "str",
+      "overall_rating": "int64",
+      "recommend_to_a_friend": "str",
+      "review_text": "string",
+      "reviewer_birth_year": "float64",
+      "reviewer_gender": "str",
+      "reviewer_state": "str"
+    },
+    "missing_values": {
+      "submission_date": 0,
+      "reviewer_id": 0,
+      "product_id": 0,
+      "product_name": 84,
+      "product_brand": 91391,
+      "site_category_lv1": 6,
+      "site_category_lv2": 4013,
+      "review_title": 302,
+      "overall_rating": 0,
+      "recommend_to_a_friend": 18,
+      "review_text": 3275,
+      "reviewer_birth_year": 5984,
+      "reviewer_gender": 4136,
+      "reviewer_state": 3991
+    },
+    "empty_texts_including_missing": 3275,
+    "duplicate_rows_excess": 955,
+    "duplicate_text_groups": 1744,
+    "duplicate_text_rows_excess": 2385,
+    "conflicting_label_groups": 21,
+    "conflicting_label_rows": 43,
+    "conflicting_rating_groups": 71,
+    "rating_distribution": {
+      "1": 27369,
+      "2": 8389,
+      "3": 16315,
+      "4": 32345,
+      "5": 47955
+    },
+    "class_distribution": {
+      "negativo": {
+        "count": 35758,
+        "fraction": 0.27013061576001146
+      },
+      "neutro": {
+        "count": 16315,
+        "fraction": 0.12325020963489533
+      },
+      "positivo": {
+        "count": 80300,
+        "fraction": 0.6066191746050932
+      }
+    },
+    "text_characters": {
+      "count": 129098.0,
+      "mean": 136.359796433717,
+      "std": 126.07603070180042,
+      "min": 4.0,
+      "50%": 95.0,
+      "90%": 260.0,
+      "95%": 355.0,
+      "99%": 646.0,
+      "max": 4548.0
+    },
+    "text_words_whitespace": {
+      "count": 129098.0,
+      "mean": 23.02266495220685,
+      "std": 22.152798006169697,
+      "min": 1.0,
+      "50%": 16.0,
+      "90%": 45.0,
+      "95%": 62.0,
+      "99%": 112.0,
+      "max": 795.0
+    },
+    "cleaning": {
+      "policy": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+      "input_rows": 132373,
+      "empty_rows_removed": 3275,
+      "conflicting_rows_removed": 43,
+      "duplicate_rows_removed": 2363,
+      "output_rows": 126692
+    }
+  },
+  "splits": {
+    "train": {
+      "rows": 88684,
+      "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+      "class_distribution": {
+        "negativo": {
+          "count": 22818,
+          "fraction": 0.25729556628027606
+        },
+        "neutro": {
+          "count": 11089,
+          "fraction": 0.12503946596905868
+        },
+        "positivo": {
+          "count": 54777,
+          "fraction": 0.6176649677506653
+        }
+      }
+    },
+    "val": {
+      "rows": 19004,
+      "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+      "class_distribution": {
+        "negativo": {
+          "count": 4889,
+          "fraction": 0.2572616291307093
+        },
+        "neutro": {
+          "count": 2377,
+          "fraction": 0.12507893075142076
+        },
+        "positivo": {
+          "count": 11738,
+          "fraction": 0.6176594401178699
+        }
+      }
+    },
+    "test": {
+      "rows": 19004,
+      "fingerprint": "3c2c5d9cf600821a8fdf7be5fc630c621bb4453616fdffc5d45d69baf40a5a57",
+      "class_distribution": {
+        "negativo": {
+          "count": 4890,
+          "fraction": 0.2573142496316565
+        },
+        "neutro": {
+          "count": 2376,
+          "fraction": 0.1250263102504736
+        },
+        "positivo": {
+          "count": 11738,
+          "fraction": 0.6176594401178699
+        }
+      }
+    }
+  },
+  "csv_roundtrip_integrity_verified": true,
+  "implementation_commit": "2f99568c6cdf91c38127d834180ef8a79feca87b"
+}
