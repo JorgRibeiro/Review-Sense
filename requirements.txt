@@ -1,0 +1,2 @@
+# Executar a partir da raiz do repositório (também no Colab).
+-e .

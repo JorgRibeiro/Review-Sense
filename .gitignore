@@ -1,0 +1,33 @@
+# Ambientes e ferramentas
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+
+# Dados e artefatos locais; nunca versionar avaliações brutas ou processadas
+/data/*
+!/data/README.md
+*.csv
+*.parquet
+*.arrow
+*.jsonl
+*.joblib
+*.safetensors
+*.pt
+*.pth
+/cache/
+/models/
+/checkpoints/
+/outputs/
+/notebooks/*executed*.ipynb

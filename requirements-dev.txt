@@ -1,0 +1,2 @@
+# Inclui runtime, testes, lint e execução local do notebook.
+-e .[dev]
