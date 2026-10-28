@@ -1,8 +1,10 @@
-# ReviewSense PT-BR — Plano técnico v1.0
+# ReviewSense PT-BR — Plano técnico v1.1
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 28/10/2026. **Estado:** planejado; ainda não treinado, avaliado ou publicado.
+**Data de referência:** 28/10/2026. **Estado:** Fase 1 implementada e validada localmente; modelos ainda não treinados, avaliados ou publicados.
+
+**Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
 ## 1. Escopo e fontes
 
@@ -38,7 +40,7 @@ Validação e EDA -> limpeza / deduplicação -> splits imutáveis
 
 | Área | Ferramentas |
 | --- | --- |
-| Ambiente | Python 3.11+, Google Colab com GPU disponível, Git |
+| Ambiente | Python 3.11+, ambiente virtual local, CPU/GPU local conforme suporte, Git |
 | Dados e EDA | `datasets`, `pandas`, `numpy`, `matplotlib` |
 | Baseline | `scikit-learn`, `joblib` |
 | Fine-tuning | `torch`, `transformers`, `accelerate` |
@@ -47,7 +49,7 @@ Validação e EDA -> limpeza / deduplicação -> splits imutáveis
 | Demo | `gradio`; hospedagem no Spaces sujeita ao plano da conta |
 | Qualidade | `pytest`, `ruff`, GitHub Actions (etapa posterior) |
 
-Preferir versões fixadas em `requirements.txt` após validar a primeira execução no Colab.
+Registrar as versões do ambiente local validado em `requirements-lock.txt`; manter as dependências do pacote em `pyproject.toml`. A compatibilidade com Colab será verificada apenas se ele for utilizado.
 
 ## 4. Estrutura de pastas
 
@@ -127,7 +129,7 @@ Concluir o MVP apenas com links verificáveis de GitHub e HF Hub, resultados rea
 - Modelo base: https://huggingface.co/neuralmind/bert-base-portuguese-cased (BERTimbau Base, 110M parâmetros, MIT).
 - Guia de classificação: https://huggingface.co/docs/transformers/tasks/sequence_classification
 - Regras atuais do Spaces: https://huggingface.co/docs/hub/spaces-overview — Static Spaces gratuitos; Gradio/Docker em compute requerem plano pago na criação, com exceção anunciada de até 2 Gradio ZeroGPU para contas pessoais gratuitas elegíveis. Não presumir que sua conta tem acesso.
-- Treinamento: Colab GPU, preferindo lotes pequenos e mixed precision quando suportada. Começar com smoke test em subconjunto pequeno e depois ampliar, sem prometer duração fixa nem resultados.
+- Treinamento: priorizar a GPU local, após verificar hardware, drivers e suporte da biblioteca na fase correspondente. Usar CPU quando apropriado. Começar com smoke test, lotes pequenos e mixed precision quando suportada; ampliar conforme RAM, VRAM e tempo medidos. Avaliar Colab ou outra infraestrutura externa apenas se os recursos locais se tornarem limitantes, sem prometer duração fixa nem resultados.
 
 ## 8. Primeira etapa da implementação
 

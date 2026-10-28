@@ -10,6 +10,15 @@ As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (
 Os resultados futuros estarão inicialmente limitados a avaliações de produtos
 no domínio do corpus; não comprovam generalização para delivery ou outros setores.
 
+## Ambiente principal
+
+O desenvolvimento e as execuções usam o computador do desenvolvedor. A Fase 1
+roda em CPU; fases futuras poderão usar a GPU local após verificar hardware,
+drivers e suporte das bibliotecas. CPU e GPU podem ser usadas no mesmo ambiente
+virtual. Não há uso de TPU previsto. Colab ou outra infraestrutura externa ficam
+como alternativas se memória ou tempo de execução se tornarem limitantes.
+A validação no Colab é opcional e não bloqueia esta fase.
+
 ## Instalação e execução local
 
 Requer Python 3.11 ou superior. Execute os comandos na raiz do repositório:
@@ -49,13 +58,15 @@ python -m pip install -r requirements-lock.txt
 O lock local não representa validação no Colab. A instalação por intervalos de
 versões é o caminho inicial para testar outros ambientes.
 
-## Google Colab e notebook
+## Notebook local e alternativa no Google Colab
 
 Abra [`notebooks/01_data_audit_eda.ipynb`](notebooks/01_data_audit_eda.ipynb).
-O notebook contém instruções para clonar o repositório no Colab, instalar o pacote
-e executar a auditoria sem duplicar as regras de processamento. Não é necessária GPU.
-Os commits desta entrega precisam estar disponíveis no remoto antes de usar `git clone`;
-alternativamente, transfira o repositório completo para a sessão.
+Execute-o localmente com o kernel da `.venv`, após instalar as dependências de
+desenvolvimento. A auditoria utiliza os módulos do pacote e não requer GPU.
+
+Se os recursos locais se tornarem limitantes e você optar pelo Colab, o notebook
+também inclui instruções de preparação. Para clonar, os commits devem estar no
+remoto; alternativamente, transfira o repositório completo para a sessão.
 
 Depois de clonar/transferir a pasta no Colab:
 

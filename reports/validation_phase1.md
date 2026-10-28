@@ -66,13 +66,17 @@ fingerprints está em [data_audit_summary.json](data_audit_summary.json).
 Esse resumo não contém textos nem IDs individuais das avaliações. Os manifests
 com IDs e os CSVs permanecem somente em `data/`, ignorados pelo Git.
 
-## O que ainda depende do Colab e de fases futuras
+## Ambiente principal e limites da validação
 
-A instalação e execução **dentro do Google Colab ainda não foram realizadas**.
-A implementação usa Python 3.11+, CPU e caminhos configuráveis, e o notebook
-inclui instruções de preparação. Confirmar no Colab a instalação das dependências,
-execução em ordem das células, acesso à fonte e persistência dos artefatos fora de
-`/content`. Não é necessário testar GPU nesta fase.
+Por decisão do desenvolvedor, o computador local é o ambiente principal. As
+validações locais acima atendem à Fase 1; Colab passa a ser uma alternativa opcional
+caso os recursos locais se tornem limitantes.
+
+A instalação e execução **dentro do Google Colab não foram realizadas**. Se essa
+alternativa for adotada, confirmar instalação, execução das células, acesso à fonte
+e persistência dos artefatos fora de `/content`. A GPU local também não foi validada
+nesta fase, pois o pipeline de dados roda em CPU. Seu suporte será verificado antes
+do treinamento dos modelos.
 
 A execução técnica não substitui auditoria humana de exemplos, dados sensíveis e
 discrepâncias semânticas entre texto e nota. A normalização não anonimiza o conteúdo.

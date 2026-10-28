@@ -40,4 +40,5 @@ excluir colunas de autor; a limpeza desta fase não realiza anonimização do co
 
 O comando `python -m reviewsense.data` cria esses artefatos. A saída existente
 não é sobrescrita: para outra execução, use `--output-dir data/processed/v2`.
-Copie os artefatos para armazenamento persistente no Colab; `/content` é efêmero.
+O armazenamento local é o padrão. Se futuramente utilizar Colab, copie os
+artefatos para armazenamento persistente; `/content` é efêmero.
