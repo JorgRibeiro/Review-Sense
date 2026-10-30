@@ -141,3 +141,18 @@ ou implementação da Fase 4A é alterado.
 Auditoria: [FASE4B_LICENSE_REVIEW.md](FASE4B_LICENSE_REVIEW.md).
 Publicação depende dos gates e da autorização da
 [FASE4C_RELEASE_PLAN.md](FASE4C_RELEASE_PLAN.md), não do sucesso técnico do pacote.
+
+
+## Resultado do candidato desta entrega
+
+Preparado e verificado localmente a partir do commit `a95cd2c66f3544a24a2338367487e3f73a3ebd36`:
+**9 arquivos / 436422679 bytes**. Original e pacote coincidiram nas cinco entradas
+sintéticas em CPU/FP32 e GPU/FP16; diferenças máximas observadas de logits/scores
+iguais a zero em cada modo. O exemplo literal do Card executou isolado, sem acesso
+às origens ou rede. **253 testes offline aprovados** e checks de qualidade verdes.
+
+O manifest técnico versionado está em `reports/phase4b_package_manifest.json`;
+o pacote com pesos continua apenas em outputs, ignorado. Relatório completo:
+[validation_phase4b.md](../reports/validation_phase4b.md). Licenciamento permanece
+**REQUIRES_REVIEW** e publicação **não autorizada**; a Fase 4B está tecnicamente
+concluída e os gates da 4C continuam pendentes.

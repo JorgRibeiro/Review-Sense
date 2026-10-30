@@ -7,7 +7,9 @@ apenas treino e validação. A **Fase 3A** executa um smoke de BERTimbau em GPU 
 limitado a 256/96 exemplos. A **Fase 3B** concluiu três épocas nos 88.684 textos
 de treino, após piloto de GPU e prova de retomada. A **Fase 3C** concluiu a avaliação
 independente no teste, com protocolo congelado e uma passagem por modelo. A **Fase 4A**
-implementa o serviço de inferência reutilizável e a demonstração Gradio local.
+implementa o serviço de inferência reutilizável e a demonstração Gradio local. A
+**Fase 4B** preparou Model Card e pacote independente; publicação segue bloqueada
+por revisão de licenciamento e autorização pendente na Fase 4C.
 
 As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (1),
 4–5 → positivo (2)**. Isso é uma proxy de sentimento, não uma anotação direta.
@@ -42,7 +44,31 @@ Validação local: **217 testes aprovados**, BERT/GPU, BERT/CPU, SVM e interface
 **SVM 4.29 ms**. Excluem carga, fila, HTTP e renderização;
 não substituem os benchmarks de dataset da Fase 3C. Condições e evidências:
 [phase4a_inference_smoke.json](reports/phase4a_inference_smoke.json).
-A Fase 4B tratará Model Card, licenciamento e preparação da publicação.
+A Fase 4B preparou o Model Card e o pacote; a publicação depende dos gates da Fase 4C.
+
+## Preparação de distribuição — Fase 4B
+
+**Tecnicamente concluída; pesos não publicados.** O candidato local do BERTimbau
+contém nove arquivos de inferência/documentação, preserva os bytes do checkpoint
+da época 1/update 5543 e carrega fora da estrutura de desenvolvimento. CPU/FP32 e
+GPU/FP16 produziram classes e logits equivalentes ao original nos exemplos sintéticos.
+A suíte ampliada tem **253 testes offline aprovados**.
+
+**Licenciamento: `REQUIRES_REVIEW`; upload não autorizado.** O Model Card usa
+`license: unknown`. A declaração MIT do base/código e a licença dos dados não
+resolvem automaticamente a situação dos pesos ajustados. Consulte a
+[auditoria e pendências](docs/FASE4B_LICENSE_REVIEW.md).
+
+- [Model Card preparado](publishing/model_card/README.md).
+- [Manifest, arquivos e hashes](reports/phase4b_package_manifest.json).
+- [Relatório de equivalência e preservação](reports/validation_phase4b.md).
+- [Guia de empacotamento e reprodução](docs/FASE4B_MODEL_PACKAGING.md).
+- [Plano da Fase 4C](docs/FASE4C_RELEASE_PLAN.md): direitos/autorização, destino,
+  publicação e demonstração verificadas, release e LinkedIn somente no encerramento.
+
+O pacote com pesos está apenas em `outputs/phase4b/model-repo-staging/`, ignorado
+pelo Git. Não houve treinamento, nova avaliação do teste ou operação de upload.
+A aplicação local da Fase 4A continua utilizando seu carregador original.
 
 ## Ambiente principal
 

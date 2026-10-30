@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.6
+# ReviewSense PT-BR — Plano técnico v1.7
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Fase 3C concluída com avaliação independente de teste. Fase 4A concluída com inferência reutilizável e Gradio local em GPU/CPU; publicação continua pendente na Fase 4B.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Fase 3C concluída com avaliação independente de teste. Fase 4A concluída com inferência reutilizável e Gradio local em GPU/CPU; Fase 4B tecnicamente concluída com Model Card e pacote independente. Publicação não autorizada: REQUIRES_REVIEW, pendente de direitos e autorização na Fase 4C.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -227,3 +227,42 @@ Os artefatos e resultados anteriores continuam preservados, sem acesso ao teste.
 
 Não houve publicação, push ou merge nesta entrega. A Fase 4B tratará Model Card,
 licenciamento e preparação da publicação. O projeto ainda não está publicado.
+
+
+## 14. Fase 4B — Model Card e pacote local tecnicamente concluídos
+
+Branch `feat/phase4b-model-card-packaging`, base main d3d71f3. Auditoria separa
+MIT do código, MIT declarado do base, CC BY-NC-SA 4.0 do dataset original e a
+situação dos pesos ajustados. O espelho declara CC BY 4.0, divergência não resolvida.
+Status dos pesos **REQUIRES_REVIEW**, upload **não autorizado**; Model Card
+`license: unknown`. Prontidão técnica não equivale a autorização jurídica.
+
+Pacote candidato `1.0.0-rc.1`, identidade `reviewsense-ptbr-bertimbau-v1`, com
+quatro artefatos Transformers e cinco documentos por allowlist explícita. Bytes
+preservados, sem dados, estados de treino, SVM ou cache. Manifest técnico fora do
+pacote, com hashes, métricas congeladas e repo_id HF ainda nulo. O código literal
+do Model Card carrega isolado, com cache vazio e zero acesso à origem/rede.
+
+Equivalência confirmada em CPU/FP32 e GPU/FP16 em cinco entradas sintéticas por modo,
+sem novas métricas de dataset. **253 testes offline aprovados**. Nenhuma leitura
+adicional de test.csv, treinamento, calibração, alteração da aplicação 4A, publicação,
+push, deploy ou post no LinkedIn nesta execução. Pesos permanecem ignorados pelo Git.
+
+Referências: [auditoria](docs/FASE4B_LICENSE_REVIEW.md),
+[Model Card](publishing/model_card/README.md),
+[guia](docs/FASE4B_MODEL_PACKAGING.md) e
+[relatório](reports/validation_phase4b.md).
+
+## 15. Fase 4C — Lançamento e encerramento planejados, não executados
+
+[FASE4C_RELEASE_PLAN.md](docs/FASE4C_RELEASE_PLAN.md) organiza resolução dos direitos,
+autorização explícita e confirmação do destino, publicação da allowlist aprovada,
+validação por revisão fixa, adaptação do resolvedor de artefatos, demonstração
+pública, links e release estável. Requer descritor público de inferência separado
+dos relatórios internos do desenvolvedor. Não se presume hospedagem disponível.
+
+Somente após artefatos públicos funcionarem será escrito e revisado o post final
+no LinkedIn, com métricas reais, treinamento local, engenharia, limites, visual
+autorizado e links verificáveis. Não haverá publicação automática nem alegação
+de parceria ou de rotulagem manual. Se direitos relevantes não forem esclarecidos,
+o gate de publicação permanece fechado e o lançamento precisa de nova decisão.

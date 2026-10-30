@@ -1,0 +1,119 @@
+{
+  "phase": "4B",
+  "status": "technically_complete_publication_not_authorized",
+  "code_commit": "a95cd2c66f3544a24a2338367487e3f73a3ebd36",
+  "manifest_sha256": "79f5c0fed08c051a571506b01cb058674c2e856f89d7b4acb8bb0fd6cbf0ef18",
+  "package_content_sha256": "40b214be9bcc62e1713acd933c46bf9ca1c5e9d2ac84e3b690c1cda58946e22e",
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "verification": {
+    "cpu_fp32": {
+      "status": "technically_verified",
+      "upload_authorized": false,
+      "license_status": "REQUIRES_REVIEW",
+      "artifact_bytes_identical": true,
+      "original_files_unchanged": true,
+      "comparison": {
+        "same_predicted_classes": true,
+        "logits_allclose": true,
+        "normalized_scores_allclose": true,
+        "atol": 1e-06,
+        "rtol": 1e-05,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_score_difference": 0.0,
+        "samples": 5,
+        "device": "cpu",
+        "precision": "fp32"
+      },
+      "configuration_and_tokenization": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      },
+      "independent_loading": {
+        "literal_model_card_example_executed": true,
+        "outside_repository": true,
+        "empty_hf_cache": true,
+        "isolated_python": true,
+        "device": "cpu",
+        "precision": "fp32",
+        "original_models_reports_data_accesses": 0,
+        "network_connections": 0,
+        "reviewsense_module_not_imported": true,
+        "finite_three_class_scores": true
+      },
+      "network_connections": 0,
+      "test_metrics_recomputed": false,
+      "test_csv_read_opens": 0,
+      "blocked_test_csv_opens": 0
+    },
+    "cuda_fp16": {
+      "status": "technically_verified",
+      "upload_authorized": false,
+      "license_status": "REQUIRES_REVIEW",
+      "artifact_bytes_identical": true,
+      "original_files_unchanged": true,
+      "comparison": {
+        "same_predicted_classes": true,
+        "logits_allclose": true,
+        "normalized_scores_allclose": true,
+        "atol": 0.001,
+        "rtol": 0.001,
+        "max_absolute_logit_difference": 0.0,
+        "max_absolute_score_difference": 0.0,
+        "samples": 5,
+        "device": "cuda",
+        "precision": "fp16"
+      },
+      "configuration_and_tokenization": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      },
+      "independent_loading": {
+        "literal_model_card_example_executed": true,
+        "outside_repository": true,
+        "empty_hf_cache": true,
+        "isolated_python": true,
+        "device": "cpu",
+        "precision": "fp32",
+        "original_models_reports_data_accesses": 0,
+        "network_connections": 0,
+        "reviewsense_module_not_imported": true,
+        "finite_three_class_scores": true
+      },
+      "network_connections": 0,
+      "test_metrics_recomputed": false,
+      "test_csv_read_opens": 0,
+      "blocked_test_csv_opens": 0
+    }
+  },
+  "quality": {
+    "offline_tests_passed": 253,
+    "previous_tests": 217,
+    "new_tests": 36,
+    "failed": 0,
+    "skipped": 0,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "pip_check": true,
+    "full_suite_test_read_opens": 0,
+    "full_suite_blocked_test_opens": 0
+  },
+  "preservation": {
+    "previous_models_and_reports_hashes_unchanged": true,
+    "final_evaluation_marker_and_result_hashes_unchanged": true,
+    "split_inode_size_mtime_unchanged": true,
+    "csv_content_not_read": true
+  },
+  "remote_operations": {
+    "uploads": 0,
+    "repository_creations": 0,
+    "logins": 0,
+    "deployments": 0,
+    "model_card_remote_validation_performed": false,
+    "linkedin_post_drafted_or_published": false
+  }
+}
