@@ -1,0 +1,191 @@
+{
+  "phase": "4C-zerogpu-readiness",
+  "status": "LOCAL_ADAPTATION_PREPARED_REAL_ZEROGPU_UNVALIDATED",
+  "phase4c_complete": false,
+  "branch": "feat/phase4c-zerogpu-readiness",
+  "base_main_commit": "c977087",
+  "code_commit": "6ffd035f72c583d7a4770b9af98ce4effbf80062",
+  "recorded_at_utc": "2026-10-30T23:43:53.305416+00:00",
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "account": {
+    "user_confirmed": "JorgeRibeiru",
+    "authentication_or_eligibility_checked": false,
+    "candidate_model_repo": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "candidate_space_repo": "JorgeRibeiru/reviewsense-ptbr",
+    "repositories_existence_checked": false
+  },
+  "bundle": {
+    "local_directory": "outputs/phase4c-zerogpu/space-candidate-v2",
+    "files": {
+      "LICENSE": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499",
+      "README.md": "762d396dc967960e4b0b736ce012674b07a2b555858868261115cd2e0aa29bf4",
+      "app.py": "ae4902eb7cd0a5b9e9595b8d325cbc432d8772915e90fe24814e95ead607cad3",
+      "app/__init__.py": "958f55fb4956e523b20275b5bd0fb7c6d1a1dde8f47ce417b7e716635ce3abf4",
+      "app/app.py": "f4ec3b9fc3ba01d13d6bfa82f2180d51863e21dfa0c586ba7a3cee7205971b42",
+      "app/config.py": "27cfe5c8dda651ddae09b316e77f3b9a61f1187729bfda0ddf6d1608749ac080",
+      "app/style.css": "858de5a4d3b7ef431ed12a4d5912acd43ed7a50a00478056bb2c4a2771effb0d",
+      "model_descriptor.json": "bb51b7f6a0f774871975d744d0c7d582fd6301a324deb72951ec906e1a4aa117",
+      "requirements.txt": "1c4a97e71d235ad1c5e3c9b75da451a35cbfb30747617d91eecb0e6af61c9001",
+      "reviewsense/__init__.py": "dba8fd99295b2efd2109db101eee1bf5434749e98e71c9d59af0c7e378c6ac6c",
+      "reviewsense/artifacts.py": "70d9d2aa0c7ce02dac3a614520396f92497c9cbfa4ad331e8ddc760b79a5cac4",
+      "reviewsense/hub_cache.py": "7d4ceb323d244c8109db16f7aa3792dbb9af55e00e2497bb77f1b302cc50f2af",
+      "reviewsense/labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1",
+      "reviewsense/model_resolution.py": "5037bdbd52b48aff18de3a8dd66793cffeb1125d442dc7615efeb0eb54ac0dcf",
+      "reviewsense/predict.py": "b92c0512e0e52d0537539168cfdeeafe0e69bc1768eec85fc776841a99f94070",
+      "reviewsense/zerogpu.py": "a90a3d93ce2f80f6f65df31a5110f42b68a681fd1510b693bbed2194dc8230c6",
+      "runtime.json": "d223c90dbe707b7a6552974fdc5b909fcb53f25b2cbf2b2c739119714e31d681"
+    },
+    "file_count": 17,
+    "total_bytes": 76404,
+    "inventory_sha256": "4e9aa7f7ab889893b0f8254635e89577b03cf844b5c96fd08fb432d96d8d135e",
+    "weights_datasets_reports_or_approvals_included": false,
+    "frozen_descriptor_bytes_identical": true,
+    "standalone_blocked_startup": {
+      "network_connections": 0,
+      "original_repository_opens": 0,
+      "pending_rights_fail_closed": true,
+      "standalone_imports": true,
+      "no_spaces_or_torch_loaded": true
+    }
+  },
+  "quality": {
+    "tests_passed": 370,
+    "previous_tests": 342,
+    "new_tests": 28,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 14.83,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "python_files_format_checked": 54,
+    "pip_check": true,
+    "test_csv_read_opens": 0,
+    "blocked_test_csv_opens": 0
+  },
+  "synthetic_zero_checks": {
+    "math_device": "CPU only",
+    "real_zerogpu_hardware_tested": false,
+    "decorator_and_allocation_simulated": true,
+    "single_model_load_and_single_cuda_placement_intent": true,
+    "preload_precedes_decorator": true,
+    "local_cpu_score_equivalence_atol": 1e-06,
+    "original_tiny_weights_unchanged": true,
+    "shared_gradio_concurrency": 1,
+    "gradio_queue_size": 8,
+    "requested_gpu_duration_seconds": 10,
+    "duration_is_measurement_or_SLA": false,
+    "classes": 3,
+    "max_length": 256,
+    "max_input_characters": 8000,
+    "scheduler_and_startup_failures_sanitized": true
+  },
+  "versions": {
+    "target": {
+      "python_version": "3.12.12",
+      "packages": {
+        "torch": "2.13.0",
+        "spaces": "0.51.3",
+        "gradio": "6.31.0",
+        "huggingface-hub": "2.4.0",
+        "transformers": "5.22.1",
+        "tokenizers": "0.23.3",
+        "safetensors": "0.8.0",
+        "numpy": "2.4.6"
+      },
+      "managed_by_platform": [
+        "torch",
+        "spaces",
+        "gradio",
+        "huggingface-hub"
+      ],
+      "validation": "STATIC_METADATA_ONLY_REAL_ZEROGPU_REQUIRED",
+      "candidate_model_repo": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+      "candidate_space_repo": "JorgeRibeiru/reviewsense-ptbr",
+      "license_status": "REQUIRES_REVIEW",
+      "upload_authorized": false
+    },
+    "local_actual": {
+      "python": "3.11.14",
+      "torch": "2.14.1+cu132",
+      "spaces": null,
+      "gradio": "6.31.0",
+      "huggingface-hub": "2.4.0",
+      "transformers": "5.22.1",
+      "tokenizers": "0.23.3",
+      "safetensors": "0.8.0",
+      "numpy": "2.4.6"
+    },
+    "local_environment_changed": false,
+    "full_target_environment_installed_or_resolved": false,
+    "static_dependencies_receipt": "reports/phase4c_zerogpu_dependencies.json",
+    "spaces_source_inspection_version": "0.51.3"
+  },
+  "preservation": {
+    "previous_files_sha256_unchanged": 67,
+    "split_metadata_unchanged": true,
+    "csv_content_read": false,
+    "original_weight_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "phase4b_package_and_descriptor_unchanged": true,
+    "historical_metrics_reports_and_final_evaluation_marker_unchanged": true,
+    "previous_validator_AST_preserved": true,
+    "policy_not_to_email_unchanged": true
+  },
+  "sources": [
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-zerogpu",
+      "purpose": "CUDA emulation, lifecycle, versions, eligibility, quotas"
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-overview",
+      "purpose": "SDKs and account conditions"
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-config-reference",
+      "purpose": "README metadata and preload risks"
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-dependencies",
+      "purpose": "Runtime and extra dependencies"
+    },
+    {
+      "url": "https://github.com/huggingface/skills/blob/main/skills/huggingface-spaces/SKILL.md",
+      "purpose": "Technical import-order and platform-managed dependencies guidance; no operational login/deploy steps executed"
+    },
+    {
+      "url": "https://pypi.org/project/spaces/0.51.3/",
+      "purpose": "Public Python source wheel inspected temporarily; not installed"
+    }
+  ],
+  "remote_operations": {
+    "model_weights_downloaded": 0,
+    "private_repositories_consulted": 0,
+    "authentication_or_token_requests": 0,
+    "uploads_or_spaces_created": 0,
+    "deployments": 0,
+    "paid_resources_purchased": 0,
+    "messages_or_email_sent": 0,
+    "push_merge_tag_release_performed": false,
+    "linkedin_drafted_or_published": false,
+    "read_only_documentation_and_pypi_metadata_used": true,
+    "spaces_source_wheel_downloaded_to_tmp_without_install": true
+  },
+  "limits": [
+    "No actual ZeroGPU image, CUDA emulation, scheduling, quotas or GPU hardware validated.",
+    "Target version matrix checked only by official docs, Python Requires-Python and known dependency edges; transitive solver/ABI unvalidated.",
+    "Managed image version drift fails startup until reviewed.",
+    "Rights, approved model revision/destinations, host_zerogpu authorization and eligibility remain unresolved.",
+    "No global model-singleton guarantee across provider workers or replicas.",
+    "Future public snapshot provisioning is gated and tested only with mocks."
+  ],
+  "source_sha256": {
+    "src/reviewsense/artifacts.py": "70d9d2aa0c7ce02dac3a614520396f92497c9cbfa4ad331e8ddc760b79a5cac4",
+    "src/reviewsense/local_inference.py": "25e0a9cb9bebc47810b841aae10d7e3c2fcedb5727c801fd2fab5f8c2a43e8d7",
+    "src/reviewsense/predict.py": "b92c0512e0e52d0537539168cfdeeafe0e69bc1768eec85fc776841a99f94070",
+    "src/reviewsense/zerogpu.py": "a90a3d93ce2f80f6f65df31a5110f42b68a681fd1510b693bbed2194dc8230c6",
+    "src/reviewsense/space_bundle.py": "491696628406f37557b7c23ffef940345e97aa6baad85987e788897feea0982e",
+    "app/app.py": "f4ec3b9fc3ba01d13d6bfa82f2180d51863e21dfa0c586ba7a3cee7205971b42",
+    "app/config.py": "27cfe5c8dda651ddae09b316e77f3b9a61f1187729bfda0ddf6d1608749ac080",
+    "tests/phase4c/test_zerogpu.py": "437e3934c237958703ce6bdc9005f59249c246e5b2111207d3fb95038a6acfdf"
+  }
+}
