@@ -286,18 +286,24 @@ def main() -> None:
         help="Permite acesso pela rede local (0.0.0.0), sem share/túnel.",
     )
     args = parser.parse_args()
-    settings = AppSettings(
-        environment=args.environment,
-        origin=args.model_origin,
-        model_dir=args.model_dir,
-        descriptor=args.descriptor,
-        allowed_root=args.allowed_root,
-        repo_id=args.repo_id,
-        revision=args.revision,
-        approval_root=args.approval_root,
-        cache_root=args.cache_root,
-        enable_svm=not args.bert_only and args.environment == "local",
-    )
+    try:
+        settings = AppSettings(
+            environment=args.environment,
+            origin=args.model_origin,
+            model_dir=args.model_dir,
+            descriptor=args.descriptor,
+            allowed_root=args.allowed_root,
+            repo_id=args.repo_id,
+            revision=args.revision,
+            approval_root=args.approval_root,
+            cache_root=args.cache_root,
+            enable_svm=not args.bert_only and args.environment == "local",
+        )
+        service = service_from_settings(settings, device=args.device)
+        if args.preload or args.environment == "hosted":
+            service.prepare()
+    except Exception:
+        parser.exit(2, "Configuração/modelo indisponível ou lançamento não autorizado.\n")
     options = launch_options(port=args.port, public_network=args.public_network)
     options["blocked_paths"].extend(
         str(path.absolute())
@@ -309,12 +315,6 @@ def main() -> None:
         )
         if path is not None
     )
-    try:
-        service = service_from_settings(settings, device=args.device)
-        if args.preload or args.environment == "hosted":
-            service.prepare()
-    except Exception:
-        parser.exit(2, "Configuração/modelo indisponível ou lançamento não autorizado.\n")
     create_app(service, settings=settings).launch(**options)
 
 

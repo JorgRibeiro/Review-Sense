@@ -71,3 +71,26 @@ def test_artifact_and_approval_directories_blocked_from_file_serving():
 
     names = {Path(p).name for p in launch_options()["blocked_paths"]}
     assert {"outputs", "models", "data", "reports", "publishing", "cache"} <= names
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["--model-origin", "hub-cache"],
+        ["--environment", "hosted"],
+    ],
+)
+def test_cli_invalid_or_unauthorized_configuration_never_launches(arguments, monkeypatch, capsys):
+    from unittest.mock import Mock
+
+    from app.app import main
+
+    launch = Mock(side_effect=AssertionError("must not build app"))
+    monkeypatch.setattr("app.app.create_app", launch)
+    monkeypatch.setattr("sys.argv", ["reviewsense-app", *arguments])
+    with pytest.raises(SystemExit) as caught:
+        main()
+    assert caught.value.code == 2
+    error = capsys.readouterr().err
+    assert "não autorizado" in error and "Traceback" not in error and "/home/" not in error
+    launch.assert_not_called()
