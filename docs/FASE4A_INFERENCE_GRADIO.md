@@ -183,3 +183,54 @@ inferência desta fase altera os pesos ou escolhas das fases anteriores.
 Na Fase 4B serão tratados Model Card, licenciamento e preparação da publicação.
 Esta entrega não publica modelo, dataset, aplicação ou Space e não implementa um
 resolvedor remoto. A separação `ArtifactPaths`/serviço/UI mantém esse caminho aberto.
+
+
+## Resultado real desta entrega
+
+**Fase 4A concluída**, localmente em 2026-10-30. Código executado:
+`03d372bb5d83d5491806483f4dfb416094d37586`, árvore limpa na medição; hashes dos módulos constam no JSON.
+GPU NVIDIA RTX 3050 Laptop 6 GB e CPU 13th Gen Intel(R) Core(TM) i5-13450HX.
+Os modelos/pesos/tokenizer permaneceram iguais aos registros anteriores.
+
+| Cenário | Carga sob demanda (s) | Primeira inferência (ms) | Mediana aquecida (ms) | Entrada longa, 8.000 caracteres (ms) |
+| --- | ---: | ---: | ---: | ---: |
+| BERT · CUDA/FP16 | 3.401 | 162.90 | 6.81 | 15.30 |
+| SVM · CPU | 0.244 | 17.15 | 4.29 | 4.84 |
+| BERT · CPU/FP32 | 0.434 | 34.68 | 31.57 | 209.52 |
+
+São 12 requisições aquecidas por cenário, batch 1, quatro textos sintéticos. A
+primeira inferência GPU inicializa kernels e é bem mais lenta que as seguintes.
+Carga e inferência são medidas separadamente. A carga CPU foi medida depois da
+GPU, com bibliotecas já importadas; não representa o startup de um processo CPU
+inteiramente novo. A entrada longa é uma checagem separada, fora da mediana.
+Não se repetiram o teste final ou benchmarks de qualidade sobre datasets.
+
+Nos quatro exemplos sintéticos, ambos os modelos retornaram positivo, negativo,
+neutro e neutro, respectivamente; o BERT concordou entre CPU/GPU nesses exemplos.
+Isso valida o caminho de execução, não estima Accuracy/F1 ou generalização.
+No SVM não foram apresentados scores probabilísticos.
+
+- **217 testes offline aprovados**, sendo 173 anteriores e 44 novos, sem skips.
+  Ruff (incluindo app/scripts), formatação e pip check aprovados.
+- Navegador Chromium/Brave headless: seleção de modelo, inferência BERT/GPU e SVM,
+  mensagem de entrada vazia, remoção de resultado anterior, nenhum erro JS e
+  **zero requisições externas**. Larguras **320, 390, 768 e 1440 px** sem overflow
+  horizontal. Preferência escura do navegador também carregou a interface.
+- Gradio em CPU também validado via HTTP com BERT original e SVM. O serviço foi
+  exercitado com textos longos e a suíte testou microbatches e chamadas concorrentes.
+- Guardas ativas: **zero leituras/tentativas de abertura de test.csv** na suíte,
+  smoke e servidor de verificação. Nenhum dataset foi usado pelo aplicativo.
+- Integridade de pesos/tokenizer conferida antes/depois. Erros de CUDA/OOM foram
+  simulados nos testes; não foi necessário provocar OOM na GPU real.
+- Servidores temporários de verificação encerrados ao concluir os checks.
+
+Evidências agregadas: [phase4a_inference_smoke.json](../reports/phase4a_inference_smoke.json).
+Capturas só com exemplo sintético: [desktop](../reports/figures/phase4a_desktop.png)
+e [celular](../reports/figures/phase4a_mobile.png).
+
+Problemas encontrados e resolvidos: o requisito Pillow <13 do Gradio exigiu o pin
+12.3.0; o pacote app fora de src exigiu a raiz no path dos testes; o escopo de CSS
+no Gradio não aplicava uma regra de mídia ao contêiner raiz, causando overflow no
+celular. A largura responsiva passou a usar clamp e padding controlado, com
+verificação real nas quatro larguras. Nenhum ajuste alterou modelos, resultados da
+Fase 3C, splits ou notebooks anteriores.
