@@ -153,7 +153,7 @@ Para retomar a execução original em uma pasta existente:
 
 ```bash
 .venv/bin/python -m reviewsense.phase3b train \
-  --resume models/bertimbau/phase3b-full-v2/checkpoint-N
+  --resume models/bertimbau/phase3b-full-v3/checkpoint-N
 ```
 
 Use o checkpoint completo mais recente que existe. O comando exige os mesmos
@@ -190,3 +190,9 @@ intencional confirmou: update pulado sem alterar os pesos, escala 16.384→8.192
 update seguinte finito alterando pesos normalmente. A retomada com BERTimbau foi
 refeita em processos separados depois da correção. O treino final usa pasta nova;
 a tentativa interrompida permanece local para diagnóstico.
+
+A segunda tentativa também parou antes do primeiro checkpoint: o Trainer tentava
+descalar novamente ao receber norma ausente. A integração agora impede essa segunda
+chamada. Um teste CUDA dentro do Trainer, com overflow intencional, completou quatro
+grupos (três updates válidos e um skip protegido), sem pesos não finitos. O checkpoint
+e o scaler foram salvos e a prova de retomada BERTimbau foi repetida antes do reinício.

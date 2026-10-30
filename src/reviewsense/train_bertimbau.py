@@ -137,6 +137,12 @@ def create_stable_trainer(*args, **kwargs):
                 return None
             return norm
 
+        def _get_grad_norm(self, model, grad_norm=None):
+            if self.pending_amp_overflow:
+                # Trainer 5.22 recomputa se receber None; unscale_ só pode ocorrer uma vez.
+                return None
+            return super()._get_grad_norm(model, grad_norm=grad_norm)
+
     kwargs.setdefault("compute_loss_func", normalized_classification_loss)
     return StableTrainer(*args, **kwargs)
 

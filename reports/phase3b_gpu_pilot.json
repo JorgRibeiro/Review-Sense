@@ -960,7 +960,7 @@
       "pilot_result_id": "256-b2-gc0"
     },
     "features_sha256": "456949349f4a8c30ec2710885c58ade1b0e2111a76e3e02eda9389948a817f6c",
-    "runtime_source_sha256": "36fcf1e5f98e1b5a6c56291c7c1df82a5e3971d523ec1f36021a6ee10bd01e36",
+    "runtime_source_sha256": "3209e9b5a13f2aea79a8a3c7ac6e52d4f38b0fbb7fe6ab746773e32c27dfacb8",
     "required_free_at_start_bytes": 3500146688,
     "resume_proof": {
       "control_steps": 4,
@@ -973,7 +973,7 @@
         "scaler.pt": true
       },
       "same_runtime_source": true,
-      "runtime_source_sha256": "36fcf1e5f98e1b5a6c56291c7c1df82a5e3971d523ec1f36021a6ee10bd01e36",
+      "runtime_source_sha256": "3209e9b5a13f2aea79a8a3c7ac6e52d4f38b0fbb7fe6ab746773e32c27dfacb8",
       "config": {
         "checkpoint": "neuralmind/bert-base-portuguese-cased",
         "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
@@ -1042,5 +1042,21 @@
     "before_first_checkpoint": true,
     "reason": "overstrict nonfinite gradient guard prevented standard GradScaler recovery",
     "learning_rate_or_data_changed": false
+  },
+  "amp_trainer_integration": {
+    "trainer_integration_passed": true,
+    "global_steps": 4,
+    "successful_updates": 3,
+    "loss_scale_after": 8192.0,
+    "nonfinite_norms": 1,
+    "skipped_updates": 1,
+    "consecutive_skips": 0,
+    "nonfinite_weights": 0,
+    "recovered_amp_overflows": 1
+  },
+  "second_full_run_interruption": {
+    "last_logged_update": 200,
+    "before_first_checkpoint": true,
+    "reason": "Trainer attempted a second unscale after omitted nonfinite norm; fixed and integration-tested"
   }
 }

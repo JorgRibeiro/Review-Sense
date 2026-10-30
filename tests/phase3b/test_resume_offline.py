@@ -149,3 +149,21 @@ def test_amp_persistent_skips_and_corrupted_weights_are_rejected():
     numeric["consecutive_skips"] = 0
     with pytest.raises(FloatingPointError, match="Pesos não finitos"):
         verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=True), model, numeric, 4)
+
+
+def test_trainer_does_not_unscale_twice_after_overflow(tmp_path, monkeypatch):
+    torch = pytest.importorskip("torch")
+    transformers = pytest.importorskip("transformers")
+    from reviewsense.train_bertimbau import create_stable_trainer
+
+    monkeypatch.setattr(torch.cuda, "is_available", lambda: False)
+    model = torch.nn.Linear(1, 1)
+    args = transformers.TrainingArguments(output_dir=str(tmp_path), use_cpu=True, report_to=[])
+    trainer = create_stable_trainer(model=model, args=args)
+    trainer.pending_amp_overflow = True
+
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError("A norma não pode descalar novamente após detectar overflow.")
+
+    monkeypatch.setattr(trainer.accelerator, "clip_grad_norm_", fail_if_called)
+    assert trainer._get_grad_norm(model, grad_norm=None) is None
