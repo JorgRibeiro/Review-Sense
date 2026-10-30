@@ -114,6 +114,7 @@ def create_stable_trainer(*args, **kwargs):
     class StableTrainer(Trainer):
         nonfinite_losses = 0
         nonfinite_norms = 0
+        pending_amp_overflow = False
 
         def training_step(self, model, inputs, num_items_in_batch=None):
             loss = super().training_step(model, inputs, num_items_in_batch)
@@ -126,11 +127,43 @@ def create_stable_trainer(*args, **kwargs):
             norm = super()._clip_grad_norm(model)
             if not math.isfinite(float(norm)):
                 self.nonfinite_norms += 1
-                raise FloatingPointError("Norma de gradientes não finita; treino interrompido.")
+                if self.accelerator.scaler is None:
+                    raise FloatingPointError(
+                        "Norma não finita sem GradScaler para proteger o update."
+                    )
+                self.pending_amp_overflow = True
+                # O scaler já detectou o overflow durante unscale_ e deve pular o update.
+                # None evita registrar uma norma falsa ou serializar Infinity nos logs.
+                return None
             return norm
 
     kwargs.setdefault("compute_loss_func", normalized_classification_loss)
     return StableTrainer(*args, **kwargs)
+
+
+def verify_amp_recovery(trainer, optimizer, model, numeric: dict, step: int):
+    """Confirma que overflows de FP16 pulam o update sem contaminar pesos."""
+    import torch
+
+    skipped = bool(getattr(optimizer, "step_was_skipped", False))
+    pending = trainer.pending_amp_overflow
+    if pending and not skipped:
+        raise FloatingPointError("Overflow detectado sem proteção do GradScaler.")
+    if skipped:
+        numeric["skipped_updates"] += 1
+        numeric["consecutive_skips"] += 1
+        finite = torch.stack([torch.isfinite(p.detach()).all() for p in model.parameters()]).all()
+        if not bool(finite):
+            numeric["nonfinite_weights"] += 1
+            raise FloatingPointError("Pesos não finitos após overflow; interrompendo.")
+        numeric["recovered_amp_overflows"] += 1
+    else:
+        numeric["consecutive_skips"] = 0
+    trainer.pending_amp_overflow = False
+    if numeric["consecutive_skips"] >= 3 or (
+        step >= 1000 and numeric["skipped_updates"] / step > 0.01
+    ):
+        raise FloatingPointError("Overflows persistentes ou excessivos; interrompendo.")
 
 
 def run_training(
@@ -213,7 +246,14 @@ def run_training(
     if resume:
         resumed_step = json.loads((resume / "trainer_state.json").read_text())["global_step"]
         history = [entry for entry in history if entry["global_step"] <= resumed_step]
-    numeric = {"nonfinite_losses": 0, "nonfinite_gradient_norms": 0, "skipped_updates": 0}
+    numeric = {
+        "nonfinite_losses": 0,
+        "nonfinite_gradient_norms": 0,
+        "skipped_updates": 0,
+        "consecutive_skips": 0,
+        "nonfinite_weights": 0,
+        "recovered_amp_overflows": 0,
+    }
     started = perf_counter()
 
     def compute_metrics(prediction):
@@ -234,8 +274,7 @@ def run_training(
                 control.should_save = True
                 control.should_training_stop = True
             optimizer = kwargs.get("optimizer")
-            if getattr(optimizer, "step_was_skipped", False):
-                numeric["skipped_updates"] += 1
+            verify_amp_recovery(trainer, optimizer, kwargs["model"], numeric, state.global_step)
             return control
 
         def on_save(self, args, state, control, **kwargs):
@@ -276,6 +315,10 @@ def run_training(
                     "max_steps": state.max_steps,
                     "elapsed_seconds": perf_counter() - started,
                     "latest_log": logs,
+                    "numerical": {**numeric, "nonfinite_gradient_norms": trainer.nonfinite_norms},
+                    "loss_scale": trainer.accelerator.scaler.get_scale()
+                    if trainer.accelerator.scaler is not None
+                    else None,
                 },
             )
 

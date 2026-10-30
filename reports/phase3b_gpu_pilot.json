@@ -960,7 +960,7 @@
       "pilot_result_id": "256-b2-gc0"
     },
     "features_sha256": "456949349f4a8c30ec2710885c58ade1b0e2111a76e3e02eda9389948a817f6c",
-    "runtime_source_sha256": "3b65b1f3cadc2a472f7717010b3c1514c4c1d49256da1a01571a20a0a7fe73e3",
+    "runtime_source_sha256": "36fcf1e5f98e1b5a6c56291c7c1df82a5e3971d523ec1f36021a6ee10bd01e36",
     "required_free_at_start_bytes": 3500146688,
     "resume_proof": {
       "control_steps": 4,
@@ -973,7 +973,7 @@
         "scaler.pt": true
       },
       "same_runtime_source": true,
-      "runtime_source_sha256": "3b65b1f3cadc2a472f7717010b3c1514c4c1d49256da1a01571a20a0a7fe73e3",
+      "runtime_source_sha256": "36fcf1e5f98e1b5a6c56291c7c1df82a5e3971d523ec1f36021a6ee10bd01e36",
       "config": {
         "checkpoint": "neuralmind/bert-base-portuguese-cased",
         "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
@@ -1004,17 +1004,43 @@
         "control": {
           "nonfinite_losses": 0,
           "nonfinite_gradient_norms": 0,
-          "skipped_updates": 0
+          "skipped_updates": 0,
+          "consecutive_skips": 0,
+          "nonfinite_weights": 0,
+          "recovered_amp_overflows": 0
         },
         "resumed": {
           "nonfinite_losses": 0,
           "nonfinite_gradient_norms": 0,
-          "skipped_updates": 0
+          "skipped_updates": 0,
+          "consecutive_skips": 0,
+          "nonfinite_weights": 0,
+          "recovered_amp_overflows": 0
         }
       },
       "test_csv_open_attempts": 0,
       "verified": true
     },
     "selection_uses_quality_metrics": false
+  },
+  "amp_recovery_probe": {
+    "intentional_overflow_skipped": true,
+    "weights_unchanged_on_skip": true,
+    "subsequent_finite_update_changed_weights": true,
+    "scale_before": 16384.0,
+    "scale_after_overflow": 8192.0,
+    "numerical": {
+      "skipped_updates": 1,
+      "consecutive_skips": 0,
+      "nonfinite_weights": 0,
+      "recovered_amp_overflows": 1
+    },
+    "device": "cuda:0"
+  },
+  "initial_full_run_interruption": {
+    "last_logged_update": 200,
+    "before_first_checkpoint": true,
+    "reason": "overstrict nonfinite gradient guard prevented standard GradScaler recovery",
+    "learning_rate_or_data_changed": false
   }
 }

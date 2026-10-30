@@ -225,9 +225,9 @@ def main():
     parser.add_argument("--config", type=Path, default=Path("configs/bertimbau_phase3b.json"))
     parser.add_argument("--work-dir", type=Path, default=Path("models/bertimbau/phase3b-pilot-v3"))
     parser.add_argument(
-        "--resume-dir", type=Path, default=Path("models/bertimbau/phase3b-resume-v2")
+        "--resume-dir", type=Path, default=Path("models/bertimbau/phase3b-resume-v3")
     )
-    parser.add_argument("--run-dir", type=Path, default=Path("models/bertimbau/phase3b-full-v1"))
+    parser.add_argument("--run-dir", type=Path, default=Path("models/bertimbau/phase3b-full-v2"))
     parser.add_argument("--resume", type=Path)
     args = parser.parse_args()
     if args.stage == "prepare":

@@ -134,8 +134,11 @@ confusão, sem leitura do teste final.
 O Trainer gerencia AMP, scheduler linear, clipping e checkpoints. AdamW usa
 foreach=False; bias e LayerNorm ficam sem weight decay pelo agrupamento padrão
 do Trainer. Os demais parâmetros usam weight decay 0,01. Atenção eager e TF32
-desativado mantêm as condições do piloto. Loss e norma são verificadas a cada
-update; erros não finitos interrompem, em vez de ficarem escondidos nos logs.
+desativado mantêm as condições do piloto. A loss é verificada a cada microbatch. Loss/pesos não finitos interrompem. Overflows
+isolados de gradientes são tratados pelo GradScaler: o update deve ser pulado,
+a escala reduzida e os pesos permanecerem finitos. Três skips consecutivos ou mais
+de 1% após mil updates interrompem por persistência. Eventos recuperados são
+contados explicitamente; nenhuma norma fictícia substitui Infinity nos logs.
 
 Checkpoints completos são salvos a cada 500 updates e ao fim das épocas. O limite
 de dois preserva o melhor e o mais recente; apenas checkpoints desta nova execução
@@ -150,7 +153,7 @@ Para retomar a execução original em uma pasta existente:
 
 ```bash
 .venv/bin/python -m reviewsense.phase3b train \
-  --resume models/bertimbau/phase3b-full-v1/checkpoint-N
+  --resume models/bertimbau/phase3b-full-v2/checkpoint-N
 ```
 
 Use o checkpoint completo mais recente que existe. O comando exige os mesmos
@@ -176,3 +179,14 @@ margem se outros processos passarem a usar a GPU. Pesos e dados não são public
 
 Referências primárias: [checkpointing do Accelerate](https://huggingface.co/docs/accelerate/usage_guides/checkpoint)
 e [acumulação de gradientes](https://huggingface.co/docs/accelerate/usage_guides/gradient_accumulation).
+
+### Correção da supervisão AMP antes de concluir o treino
+
+A execução inicial foi interrompida antes do primeiro checkpoint, após o último
+log de 200 updates. O verificador considerava qualquer norma não finita fatal,
+impedindo o mecanismo normal de recuperação do GradScaler. Essa supervisão foi
+corrigida sem alterar LR, dados, batch ou época. Uma prova CUDA com overflow
+intencional confirmou: update pulado sem alterar os pesos, escala 16.384→8.192 e
+update seguinte finito alterando pesos normalmente. A retomada com BERTimbau foi
+refeita em processos separados depois da correção. O treino final usa pasta nova;
+a tentativa interrompida permanece local para diagnóstico.

@@ -103,3 +103,49 @@ def test_loss_is_normalized_over_the_actual_effective_batch():
     actual_grad = torch.autograd.grad(accumulated, logits)[0]
     assert torch.allclose(whole, accumulated)
     assert torch.allclose(expected_grad, actual_grad)
+
+
+def test_amp_overflow_requires_skipped_update_and_finite_weights():
+    torch = pytest.importorskip("torch")
+    from types import SimpleNamespace
+
+    from reviewsense.train_bertimbau import verify_amp_recovery
+
+    model = torch.nn.Linear(1, 1)
+    trainer = SimpleNamespace(pending_amp_overflow=True)
+    numeric = {
+        "skipped_updates": 0,
+        "consecutive_skips": 0,
+        "nonfinite_weights": 0,
+        "recovered_amp_overflows": 0,
+    }
+    with pytest.raises(FloatingPointError, match="sem proteção"):
+        verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=False), model, numeric, 1)
+    verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=True), model, numeric, 1)
+    assert numeric["recovered_amp_overflows"] == 1
+    assert not trainer.pending_amp_overflow
+    verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=False), model, numeric, 2)
+    assert numeric["consecutive_skips"] == 0
+
+
+def test_amp_persistent_skips_and_corrupted_weights_are_rejected():
+    torch = pytest.importorskip("torch")
+    from types import SimpleNamespace
+
+    from reviewsense.train_bertimbau import verify_amp_recovery
+
+    model = torch.nn.Linear(1, 1)
+    trainer = SimpleNamespace(pending_amp_overflow=True)
+    numeric = {
+        "skipped_updates": 2,
+        "consecutive_skips": 2,
+        "nonfinite_weights": 0,
+        "recovered_amp_overflows": 2,
+    }
+    with pytest.raises(FloatingPointError, match="persistentes"):
+        verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=True), model, numeric, 3)
+    model.weight.data.fill_(float("nan"))
+    trainer.pending_amp_overflow = True
+    numeric["consecutive_skips"] = 0
+    with pytest.raises(FloatingPointError, match="Pesos não finitos"):
+        verify_amp_recovery(trainer, SimpleNamespace(step_was_skipped=True), model, numeric, 4)
