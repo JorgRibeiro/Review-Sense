@@ -139,16 +139,24 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
                 )
             with gr.Column(scale=5, min_width=300, elem_id="output-panel"):
                 output = gr.HTML(EMPTY_RESULT, elem_id="sentiment-result")
-        with gr.Group(elem_id="examples-panel"):
-            gr.Examples(
-                examples=[[text] for text in EXAMPLES],
-                inputs=[text],
-                example_labels=["Positiva", "Negativa", "Neutra", "Ambígua"],
-                label="Experimente um exemplo sintético",
-                cache_examples=False,
-                run_on_click=False,
-                preload=False,
+        with gr.Column(elem_id="examples-panel", min_width=0):
+            gr.HTML(
+                '<h2 class="examples-title">Experimente um exemplo sintético</h2>'
+                '<p class="examples-hint">Escolha um exemplo '
+                "para preencher o campo de avaliação.</p>"
             )
+            with gr.Row(elem_id="example-buttons"):
+                for label, example in zip(
+                    ("Positiva", "Negativa", "Neutra", "Ambígua"), EXAMPLES, strict=True
+                ):
+                    example_button = gr.Button(label, variant="secondary", min_width=110)
+                    example_button.click(
+                        lambda value=example: value,
+                        inputs=None,
+                        outputs=text,
+                        queue=False,
+                        api_visibility="private",
+                    )
         gr.HTML("""<section class="limitations"><h2>Uma estimativa, com contexto.</h2>
           <p>Os rótulos vêm de estrelas de avaliações de produtos de 2018. Textos neutros,
           ironia e sentimentos mistos podem ser difíceis de identificar. O treinamento

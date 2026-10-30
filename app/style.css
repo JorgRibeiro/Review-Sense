@@ -57,9 +57,13 @@ body { background: #f7f8f5; }
 .device-note { font-size: 11px !important; }
 .error { background: #fff4ed; border-color: #e8d3c7; }
 .error h2 { font-size: 26px; }
-#examples-panel { margin-top: 20px; padding: 20px 22px; border-radius: 12px; background: transparent; border: 1px solid #dde3da; }
-#examples-panel .label { color: #596d60; }
-#examples-panel table { font-size: 12px; }
+#examples-panel { margin-top: 20px; padding: 20px 22px; border-radius: 12px; background: #ffffff !important; border: 1px solid #dde3da; gap: 14px; }
+#examples-panel .examples-title { margin: 0 0 5px; color: #284534; font-size: 14px; font-weight: 600; }
+#examples-panel .examples-hint { margin: 0; color: #596d60; font-size: 12px; line-height: 1.6; }
+#example-buttons { gap: 10px; }
+#example-buttons button { min-height: 44px; border: 1px solid #cfddce !important; border-radius: 9px; background: #f3f7ef !important; color: #214b38 !important; box-shadow: none !important; font-size: 13px; font-weight: 600; }
+#example-buttons button:hover { background: #e5f0e1 !important; border-color: #7b9e81 !important; }
+#example-buttons button:focus-visible { outline: 2px solid #2e7254; outline-offset: 3px; }
 .limitations { padding: 25px 0 24px; margin-top: 10px; border-bottom: 1px solid #dce2db; }
 .limitations h2 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
 .limitations p { color: #657369; font-size: 12px; line-height: 1.8; max-width: 880px; }
