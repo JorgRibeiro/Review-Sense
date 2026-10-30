@@ -19,6 +19,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+gpu-monitor = ["nvidia-ml-py>=13,<14"]
 # Instalar PyTorch CUDA separadamente; a instalação opcional não escolhe sua variante.
 transformer = [
     "transformers>=5.22,<6",

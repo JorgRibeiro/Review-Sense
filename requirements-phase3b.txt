@@ -1,0 +1,3 @@
+# Preserva Torch CUDA e todos os pins das fases anteriores.
+-r requirements-transformer-lock.txt
+nvidia-ml-py==13.615.71

@@ -1,0 +1,185 @@
+{
+  "config": {
+    "checkpoint": "neuralmind/bert-base-portuguese-cased",
+    "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "seed": 42,
+    "max_epochs": 3,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "max_length": 256,
+    "train_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "eval_batch_size": 2,
+    "gradient_checkpointing": false,
+    "cpu_threads": 2,
+    "checkpoint_every_steps": 500,
+    "logging_steps": 100,
+    "min_driver_free_bytes": 1073741824,
+    "monitor_interval_seconds": 0.05,
+    "pilot_representative_samples": 256,
+    "pilot_long_samples": 64,
+    "pilot_repeats": 2,
+    "pilot_warmup_samples": 32
+  },
+  "data": {
+    "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+    "source": {
+      "kind": "official_csv",
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+    },
+    "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+    "splits": {
+      "train": {
+        "rows": 88684,
+        "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+        "class_distribution": {
+          "negativo": {
+            "count": 22818,
+            "fraction": 0.25729556628027606
+          },
+          "neutro": {
+            "count": 11089,
+            "fraction": 0.12503946596905868
+          },
+          "positivo": {
+            "count": 54777,
+            "fraction": 0.6176649677506653
+          }
+        }
+      },
+      "val": {
+        "rows": 19004,
+        "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+        "class_distribution": {
+          "negativo": {
+            "count": 4889,
+            "fraction": 0.2572616291307093
+          },
+          "neutro": {
+            "count": 2377,
+            "fraction": 0.12507893075142076
+          },
+          "positivo": {
+            "count": 11738,
+            "fraction": 0.6176594401178699
+          }
+        }
+      }
+    },
+    "test_csv_opened": false
+  },
+  "lengths": {
+    "train": {
+      "samples": 88684,
+      "min": 3,
+      "max": 2357,
+      "mean": 37.15845022777502,
+      "percentile_method": "linear",
+      "percentiles": {
+        "P50": 26.0,
+        "P90": 69.0,
+        "P95": 95.0,
+        "P99": 177.0
+      },
+      "exceeds": {
+        "128": {
+          "count": 2086,
+          "percent": 2.3521717558973436
+        },
+        "256": {
+          "count": 318,
+          "percent": 0.3585765188760092
+        }
+      },
+      "includes_special_tokens": true,
+      "truncation": false
+    },
+    "val": {
+      "samples": 19004,
+      "min": 3,
+      "max": 1448,
+      "mean": 37.41901704904231,
+      "percentile_method": "linear",
+      "percentiles": {
+        "P50": 26.0,
+        "P90": 71.0,
+        "P95": 98.0,
+        "P99": 181.97000000000116
+      },
+      "exceeds": {
+        "128": {
+          "count": 465,
+          "percent": 2.4468532940433594
+        },
+        "256": {
+          "count": 79,
+          "percent": 0.4157019574826352
+        }
+      },
+      "includes_special_tokens": true,
+      "truncation": false
+    }
+  },
+  "pilot_samples": {
+    "representative": {
+      "samples": 256,
+      "min": 12,
+      "max": 315,
+      "mean": 37.8359375,
+      "percentile_method": "linear",
+      "percentiles": {
+        "P50": 27.0,
+        "P90": 69.0,
+        "P95": 95.25,
+        "P99": 180.1499999999997
+      },
+      "exceeds": {
+        "128": {
+          "count": 7,
+          "percent": 2.734375
+        },
+        "256": {
+          "count": 1,
+          "percent": 0.390625
+        }
+      },
+      "includes_special_tokens": true,
+      "truncation": false
+    },
+    "long_stress": {
+      "samples": 64,
+      "min": 422,
+      "max": 2357,
+      "mean": 615.34375,
+      "percentile_method": "linear",
+      "percentiles": {
+        "P50": 495.5,
+        "P90": 800.9000000000002,
+        "P95": 1115.2999999999993,
+        "P99": 2052.7099999999987
+      },
+      "exceeds": {
+        "128": {
+          "count": 64,
+          "percent": 100.0
+        },
+        "256": {
+          "count": 64,
+          "percent": 100.0
+        }
+      },
+      "includes_special_tokens": true,
+      "truncation": false
+    },
+    "source": "train_only",
+    "same_examples_all_variants": true
+  },
+  "features_sha256": "456949349f4a8c30ec2710885c58ade1b0e2111a76e3e02eda9389948a817f6c",
+  "execution_checks": {
+    "test_csv_open_attempts": 0,
+    "source_artifacts_unchanged": true
+  }
+}

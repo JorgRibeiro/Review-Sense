@@ -1,0 +1,473 @@
+{
+  "phase": "3B",
+  "mode": "full",
+  "config": {
+    "checkpoint": "neuralmind/bert-base-portuguese-cased",
+    "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "seed": 42,
+    "initial_loss_scale": 16384.0,
+    "loss_scale_growth_interval": 1000000,
+    "max_epochs": 3,
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "max_length": 256,
+    "train_batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "eval_batch_size": 2,
+    "gradient_checkpointing": false,
+    "cpu_threads": 2,
+    "checkpoint_every_steps": 500,
+    "logging_steps": 100,
+    "min_driver_free_bytes": 1073741824,
+    "monitor_interval_seconds": 0.05,
+    "pilot_representative_samples": 256,
+    "pilot_long_samples": 64,
+    "pilot_repeats": 2,
+    "pilot_warmup_samples": 32
+  },
+  "features_sha256": "456949349f4a8c30ec2710885c58ade1b0e2111a76e3e02eda9389948a817f6c",
+  "data": {
+    "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+    "source": {
+      "kind": "official_csv",
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+    },
+    "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+    "splits": {
+      "train": {
+        "rows": 88684,
+        "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+        "class_distribution": {
+          "negativo": {
+            "count": 22818,
+            "fraction": 0.25729556628027606
+          },
+          "neutro": {
+            "count": 11089,
+            "fraction": 0.12503946596905868
+          },
+          "positivo": {
+            "count": 54777,
+            "fraction": 0.6176649677506653
+          }
+        }
+      },
+      "val": {
+        "rows": 19004,
+        "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+        "class_distribution": {
+          "negativo": {
+            "count": 4889,
+            "fraction": 0.2572616291307093
+          },
+          "neutro": {
+            "count": 2377,
+            "fraction": 0.12507893075142076
+          },
+          "positivo": {
+            "count": 11738,
+            "fraction": 0.6176594401178699
+          }
+        }
+      }
+    },
+    "test_csv_opened": false
+  },
+  "code_commit": "2cdcfd0bc53786b7bcb4e3f26dfe599f0a4453e2",
+  "source_sha256": "3209e9b5a13f2aea79a8a3c7ac6e52d4f38b0fbb7fe6ab746773e32c27dfacb8",
+  "software": {
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "accelerate": "1.15.0",
+    "nvidia-ml-py": "13.615.71"
+  },
+  "diagnostic": {
+    "device": "cuda:0",
+    "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "compute_capability": [
+      8,
+      6
+    ],
+    "total_memory_bytes_torch": 6132858880,
+    "free_memory_bytes_at_diagnosis": 4915920896,
+    "visible_memory_bytes": 6132858880,
+    "fp16_operation_supported": true,
+    "torch": "2.14.1+cu132",
+    "cuda_build": "13.2",
+    "cudnn": 92400,
+    "nvidia_smi": [
+      {
+        "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+        "driver_version": "615.78.08",
+        "memory.total": "6144",
+        "memory.used": "1161",
+        "utilization.gpu": "19"
+      }
+    ]
+  },
+  "train_seconds": 6344.631124032001,
+  "train_result": {
+    "train_runtime": 6344.0037,
+    "train_samples_per_second": 41.938,
+    "train_steps_per_second": 2.621,
+    "train_loss": 0.3249546576122633,
+    "epoch": 3.0
+  },
+  "global_step": 16629,
+  "epoch": 3.0,
+  "best_metric": 0.755522497920137,
+  "best_checkpoint": "models/bertimbau/phase3b-full-v3/checkpoint-5543",
+  "selected_validation": {
+    "f1_macro": 0.755522497920137,
+    "precision_macro": 0.771570507308812,
+    "recall_macro": 0.7473980979030346,
+    "accuracy": 0.8636602820458851,
+    "per_class": {
+      "negativo": {
+        "precision": 0.8793407886992348,
+        "recall": 0.9167518920024544,
+        "f1-score": 0.8976567194071701,
+        "support": 4889.0
+      },
+      "neutro": {
+        "precision": 0.530835734870317,
+        "recall": 0.3874631888935633,
+        "f1-score": 0.4479571984435798,
+        "support": 2377.0
+      },
+      "positivo": {
+        "precision": 0.9045349983568847,
+        "recall": 0.9379792128130857,
+        "f1-score": 0.9209535759096612,
+        "support": 11738.0
+      }
+    },
+    "label_order": [
+      0,
+      1,
+      2
+    ],
+    "label_names": [
+      "negativo",
+      "neutro",
+      "positivo"
+    ],
+    "confusion_matrix": [
+      [
+        4482,
+        280,
+        127
+      ],
+      [
+        421,
+        921,
+        1035
+      ],
+      [
+        194,
+        534,
+        11010
+      ]
+    ],
+    "samples": 19004
+  },
+  "validation_history": [
+    {
+      "epoch": 1.0,
+      "global_step": 5543,
+      "metrics": {
+        "f1_macro": 0.755522497920137,
+        "precision_macro": 0.771570507308812,
+        "recall_macro": 0.7473980979030346,
+        "accuracy": 0.8636602820458851,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8793407886992348,
+            "recall": 0.9167518920024544,
+            "f1-score": 0.8976567194071701,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.530835734870317,
+            "recall": 0.3874631888935633,
+            "f1-score": 0.4479571984435798,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.9045349983568847,
+            "recall": 0.9379792128130857,
+            "f1-score": 0.9209535759096612,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4482,
+            280,
+            127
+          ],
+          [
+            421,
+            921,
+            1035
+          ],
+          [
+            194,
+            534,
+            11010
+          ]
+        ],
+        "samples": 19004
+      },
+      "eval_runtime": 100.4761
+    },
+    {
+      "epoch": 2.0,
+      "global_step": 11086,
+      "metrics": {
+        "f1_macro": 0.7412181004341937,
+        "precision_macro": 0.7730687468683891,
+        "recall_macro": 0.7300670825445047,
+        "accuracy": 0.8638181435487265,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8794520547945206,
+            "recall": 0.9192063816731438,
+            "f1-score": 0.8988898889888989,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.5470884255930984,
+            "recall": 0.3201514514093395,
+            "f1-score": 0.403927813163482,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8926657602175478,
+            "recall": 0.9508434145510308,
+            "f1-score": 0.9208365991502001,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4494,
+            203,
+            192
+          ],
+          [
+            466,
+            761,
+            1150
+          ],
+          [
+            150,
+            427,
+            11161
+          ]
+        ],
+        "samples": 19004
+      },
+      "eval_runtime": 94.4691
+    },
+    {
+      "epoch": 3.0,
+      "global_step": 16629,
+      "metrics": {
+        "f1_macro": 0.7496687502545695,
+        "precision_macro": 0.7653666908838795,
+        "recall_macro": 0.7408108974956592,
+        "accuracy": 0.8601873289833719,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8877980364656382,
+            "recall": 0.9063203109020249,
+            "f1-score": 0.8969635627530365,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.5087918321043675,
+            "recall": 0.37736642827092975,
+            "f1-score": 0.43333333333333335,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8995102040816326,
+            "recall": 0.9387459533140229,
+            "f1-score": 0.9187093546773387,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4431,
+            297,
+            161
+          ],
+          [
+            410,
+            897,
+            1070
+          ],
+          [
+            150,
+            569,
+            11019
+          ]
+        ],
+        "samples": 19004
+      },
+      "eval_runtime": 99.9036
+    }
+  ],
+  "numerical": {
+    "nonfinite_losses": 0,
+    "nonfinite_gradient_norms": 3,
+    "skipped_updates": 3,
+    "consecutive_skips": 0,
+    "nonfinite_weights": 0,
+    "recovered_amp_overflows": 3
+  },
+  "pytorch": {
+    "allocated_bytes": 1378040832,
+    "reserved_bytes": 1635778560,
+    "peak_allocated_bytes": 2396306944,
+    "peak_reserved_bytes": 2455764992,
+    "device_free_bytes": 3222142976,
+    "device_visible_total_bytes": 6132858880
+  },
+  "driver": {
+    "source": "NVML",
+    "sampling_interval_seconds": 0.05,
+    "samples": 128075,
+    "total_bytes": 6442450944,
+    "peak_used_bytes_sampled": 4421255168,
+    "min_free_bytes": 2021195776,
+    "peak_utilization_percent_sampled": 100,
+    "errors": [],
+    "includes_other_processes_and_driver": true
+  },
+  "saved_model_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+  "resume_from": null,
+  "test_csv_open_attempts": 0,
+  "checkpoint_files": {
+    "checkpoint-16629": {
+      "model.safetensors": 435725300,
+      "optimizer.pt": 871572107,
+      "rng_state.pth": 14645,
+      "scaler.pt": 1383,
+      "scheduler.pt": 1465,
+      "trainer_state.json": 33062,
+      "training_args.bin": 5265
+    },
+    "checkpoint-5543": {
+      "model.safetensors": 435725300,
+      "optimizer.pt": 871572107,
+      "rng_state.pth": 14645,
+      "scaler.pt": 1383,
+      "scheduler.pt": 1465,
+      "trainer_state.json": 11620,
+      "training_args.bin": 5265
+    }
+  },
+  "last_checkpoint_scaler_state": {
+    "scale": 2048.0,
+    "growth_factor": 2.0,
+    "backoff_factor": 0.5,
+    "growth_interval": 1000000,
+    "_growth_tracker": 248
+  },
+  "reload_verification": {
+    "success": true,
+    "device": "cpu",
+    "local_files_only": true,
+    "label_mappings_verified": true,
+    "cased_tokenizer_verified": true,
+    "all_weights_finite": true,
+    "synthetic_inference_finite": true,
+    "saved_weights_match_selected_checkpoint": true,
+    "test_csv_open_attempts": 0,
+    "seconds": 1.7847421350015793
+  },
+  "execution_checks": {
+    "previous_models_unchanged": {
+      "reports/baseline_validation.json": true,
+      "reports/bertimbau_smoke_metrics.json": true
+    },
+    "runtime_source_matches": true,
+    "source_artifacts_unchanged": true,
+    "source_sha256": {
+      "train.csv": "d6508aa963d2877398501d4b8b7f9ba17653fed8fed12ad26b7d00af31aca52c",
+      "val.csv": "e743636fe5aad8c3a71c0625e5f5585bbd318e11812f4cfcc1cd371b7ad6daed",
+      "manifest.json": "6469cafdd878deeadfd9ac20083ce6b3d5ec6856a1c6478716589a4978fa8bcd"
+    },
+    "selected_model_matches_checkpoint": true,
+    "test_csv_open_attempts": 0,
+    "final_validation": {
+      "offline_pytest": {
+        "passed": 143,
+        "failed": 0
+      },
+      "ruff_check": true,
+      "ruff_format_check": true,
+      "pip_check": true,
+      "notebook": {
+        "executed_locally": true,
+        "code_cells_in_repository": 6,
+        "saved_without_outputs": true,
+        "test_access_guard": true
+      },
+      "previous_versioned_code_and_metrics_unchanged_vs": "e42fb01",
+      "checkpoints": {
+        "checkpoint-16629": {
+          "complete_state_present": true,
+          "phase3b_state_present": true
+        },
+        "checkpoint-5543": {
+          "complete_state_present": true,
+          "phase3b_state_present": true
+        }
+      }
+    }
+  },
+  "launch": {
+    "started_at": "2026-10-30T13:02:49.296139-03:00",
+    "code_commit": "0dd1ed9a4de1a9884bf1eda4623c70a97671b59a",
+    "gate_sha256": "691f513eaaa1d667af7795dc56555ba862467b6734623d1cb388491b624ffe80",
+    "run_dir": "models/bertimbau/phase3b-full-v3"
+  },
+  "report_generated_at": "2026-10-30T14:51:10.502746-03:00"
+}

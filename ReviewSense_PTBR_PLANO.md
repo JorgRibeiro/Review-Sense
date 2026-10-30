@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.3
+# ReviewSense PT-BR — Plano técnico v1.4
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Teste final reservado; treinamento completo (3B) e publicação ainda não iniciados.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Teste final e publicação continuam pendentes.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -108,10 +108,10 @@ reviewsense-ptbr/
 - [ ] EDA com distribuição de classes, nulos, duplicados e exemplos auditados
 - [x] Splits reproduzíveis e ausência de vazamento por textos idênticos
 - [x] Baseline TF-IDF + LinearSVC treinado e avaliado na validação; teste reservado
-- [ ] BERTimbau Base fine-tuned em escala de treino e checkpoint salvo (smoke 3A concluído; treino completo 3B pendente)
-- [ ] Comparativo real usando F1 macro, métricas por classe e matriz de confusão
+- [x] BERTimbau Base fine-tuned nos 88.684 textos de treino, checkpoint e estado retomável salvos (Fase 3B)
+- [x] Comparativo de validação usando F1 macro, métricas por classe e matriz de confusão; teste final pendente
 - [ ] Modelo e tokenizer publicados no HF Hub com Model Card (dados, método, limitações, avaliação)
-- [ ] README com instruções para reproduzir e links dos resultados
+- [x] README com instruções para reproduzir e links dos resultados de validação
 
 **MVP 2 — Produto demonstrável:**
 - [ ] Gradio local com textarea, classe prevista e probabilidades se devidamente calibradas
@@ -157,8 +157,28 @@ acumulação 8, learning rate 2e-5, uma época e FP16 na RTX 3050 Laptop de 6 GB
 Treino, avaliação e recarga concluídos na configuração inicial, sem OOM. O PyTorch
 2.14.1+cu132 foi preservado. Não houve leitura do teste, Colab, publicação no Hub
 ou comparação definitiva com o SVM. O orçamento do smoke não demonstra qualidade
-preditiva: as 96 predições foram positivas. Treinamento completo fica para a 3B.
+preditiva: as 96 predições foram positivas. O treinamento completo foi realizado posteriormente na Fase 3B.
 
 Configuração: `configs/bertimbau_smoke.json`. Decisões e reprodução:
 `docs/FASE3A_BERTIMBAU_SMOKE.md`. Métricas agregadas, GPU/VRAM, testes e recomendações:
 `reports/validation_phase3a.md`. Modelos, cache e IDs individuais continuam locais.
+
+
+## 11. Fase 3B — Piloto e fine-tuning completo concluídos
+
+A branch `feat/phase3b-bertimbau-local` preserva as fases anteriores. Todos os textos
+de treino/validação tiveram comprimentos medidos antes do corte. A configuração
+escolhida no piloto foi max_length 256, batch 2/acumulação 8, FP16 e LR 2e-5.
+Batch 4 coube na RTX 3050 de 6 GB, mas apresentou overflow; a decisão não usou
+métricas de qualidade. Uma prova em processos separados confirmou retomada exata.
+
+Três épocas nos 88.684 textos de treino, com seleção pelo F1 Macro dos 19.004 textos
+de validação: **0,755522 / 0,741218 / 0,749669**. O checkpoint da primeira época
+(update 5543) foi selecionado e salvo para inferência. Checkpoints completos
+preservam estado para retomada. Não houve nova busca de hiperparâmetros.
+
+Resultados completos, medições de GPU, incidentes numéricos e limitações:
+[validation_phase3b.md](reports/validation_phase3b.md). Reprodução e funções:
+[FASE3B_BERTIMBAU.md](docs/FASE3B_BERTIMBAU.md). O notebook 03 apenas inspeciona
+resultados salvos. O teste final não foi aberto; publicação e demonstração continuam
+pendentes. A comparação de validação com SVM não constitui avaliação independente.
