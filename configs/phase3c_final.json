@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "data_dir": "data/processed/phase1-final",
+  "reference": "reports/data_audit_summary.json",
+  "svm_dir": "models/baseline/phase2-v1",
+  "bert_dir": "models/bertimbau/phase3b-full-v3/best_model",
+  "bert_checkpoint": "models/bertimbau/phase3b-full-v3/checkpoint-5543",
+  "svm_reference": "reports/baseline_validation.json",
+  "bert_reference": "reports/bertimbau_phase3b_metrics.json",
+  "protocol": "docs/FASE3C_PROTOCOL.md",
+  "run_dir": "outputs/phase3c-final-v1",
+  "max_length": 256,
+  "bert_batch_size": 2,
+  "svm_batch_size": 256,
+  "torch_threads": 2,
+  "svm_threads": 1,
+  "benchmark_samples": 1024,
+  "benchmark_repeats": 3,
+  "warmup_samples": 32,
+  "seed": 42,
+  "min_free_gpu_bytes": 1073741824,
+  "selected_bert_epoch": 1,
+  "selected_bert_step": 5543,
+  "svm_sha256": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623",
+  "bert_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+  "bert_file_sha256": {
+    "config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+    "tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+    "tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+  },
+  "expected_versions": {
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6"
+  },
+  "bootstrap": null
+}

@@ -1,0 +1,26 @@
+{
+  "phase": "3C",
+  "stage": "before_final_test_access",
+  "recorded_at": "2026-10-30T15:51:18.446648-03:00",
+  "tests": {
+    "offline_passed": 173,
+    "failed": 0,
+    "uses_real_test": false
+  },
+  "ruff_check": true,
+  "ruff_format_check": true,
+  "pip_check": true,
+  "preliminary_preflight": {
+    "status": "approved",
+    "created_at": "2026-10-30T15:49:47.909074-03:00",
+    "test_access": {
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "synthetic_inference_and_report_validated": true
+  },
+  "protocol_sha256": "a664dabc140d9bb05dce9ee58ecb48f73d6f81aeef8711618247cdb6a2a2b45e",
+  "config_sha256": "3c98596d536ea5409136be285247c0d0ab8449bffb28c8a6fab13f2c7af2319b",
+  "code_base_commit": "5d18377cf7a19faa5b74eb50b36224685a71c290",
+  "note": "Preflight preliminar com arquivos novos ainda não commitados. Após o commit de congelamento, repetir preflight para ancorar o commit e a árvore limpa antes da execução final."
+}
