@@ -1,0 +1,2 @@
+# Preservar a instalação CUDA local validada. Não substituir por build CPU.
+torch==2.14.1+cu132

@@ -19,11 +19,19 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Instalar PyTorch CUDA separadamente; a instalação opcional não escolhe sua variante.
+transformer = [
+    "transformers>=5.22,<6",
+    "accelerate>=1.15,<2",
+    "huggingface-hub>=1.31,<3",
+    "safetensors>=0.8,<1",
+]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "nbformat>=5.10,<6", "nbclient>=0.10,<1", "ipykernel>=6,<8"]
 
 [project.scripts]
 reviewsense-data = "reviewsense.data:main"
 reviewsense-baseline = "reviewsense.baseline:main"
+reviewsense-transformer = "reviewsense.train_transformer:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,0 +1,3 @@
+# Requer PyTorch CUDA já instalado; a constraint impede sua substituição.
+-c constraints-transformer.txt
+-e .[transformer]

@@ -1,0 +1,18 @@
+{
+  "checkpoint": "neuralmind/bert-base-portuguese-cased",
+  "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+  "seed": 42,
+  "train_samples": 256,
+  "val_samples": 96,
+  "max_length": 128,
+  "train_batch_size": 2,
+  "eval_batch_size": 2,
+  "gradient_accumulation_steps": 8,
+  "learning_rate": 0.00002,
+  "epochs": 1,
+  "mixed_precision": "fp16",
+  "gradient_checkpointing": false,
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "cpu_threads": 2
+}

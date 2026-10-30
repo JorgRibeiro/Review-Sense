@@ -1,0 +1,96 @@
+{
+  "torch_before": "2.14.1+cu132",
+  "torch_after": "2.14.1+cu132",
+  "cuda_build": "13.2",
+  "existing_packages_upgraded_or_removed": false,
+  "added_packages": {
+    "accelerate": {
+      "before": null,
+      "after": "1.15.0"
+    },
+    "annotated-doc": {
+      "before": null,
+      "after": "0.0.5"
+    },
+    "anyio": {
+      "before": null,
+      "after": "4.15.1"
+    },
+    "click": {
+      "before": null,
+      "after": "8.5.0"
+    },
+    "h11": {
+      "before": null,
+      "after": "0.16.0"
+    },
+    "hf-xet": {
+      "before": null,
+      "after": "1.8.0"
+    },
+    "httpcore2": {
+      "before": null,
+      "after": "2.16.0"
+    },
+    "httpx2": {
+      "before": null,
+      "after": "2.16.0"
+    },
+    "huggingface-hub": {
+      "before": null,
+      "after": "2.4.0"
+    },
+    "idna": {
+      "before": null,
+      "after": "3.20"
+    },
+    "markdown-it-py": {
+      "before": null,
+      "after": "4.2.0"
+    },
+    "mdurl": {
+      "before": null,
+      "after": "0.1.2"
+    },
+    "pyyaml": {
+      "before": null,
+      "after": "6.0.3"
+    },
+    "regex": {
+      "before": null,
+      "after": "2026.9.29"
+    },
+    "rich": {
+      "before": null,
+      "after": "15.0.0"
+    },
+    "safetensors": {
+      "before": null,
+      "after": "0.8.0"
+    },
+    "shellingham": {
+      "before": null,
+      "after": "1.5.4"
+    },
+    "tokenizers": {
+      "before": null,
+      "after": "0.23.3"
+    },
+    "tqdm": {
+      "before": null,
+      "after": "4.70.1"
+    },
+    "transformers": {
+      "before": null,
+      "after": "5.22.1"
+    },
+    "truststore": {
+      "before": null,
+      "after": "0.10.5"
+    },
+    "typer": {
+      "before": null,
+      "after": "0.27.3"
+    }
+  }
+}
