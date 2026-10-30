@@ -79,7 +79,7 @@
     "samples": 19004
   },
   "provenance": {
-    "packaging_code_commit": "a95cd2c66f3544a24a2338367487e3f73a3ebd36",
+    "packaging_code_commit": "9ee530c7c7b9b79076c7328062b345cf67cec0ea",
     "training_code_commit": "0dd1ed9a4de1a9884bf1eda4623c70a97671b59a",
     "evaluation_code_commit": "90893aa3fe3053433e3e72a22977fc40747bed5f",
     "metrics_reference": "reports/phase3c_final_metrics.json",
@@ -97,8 +97,8 @@
   "model_card": "README.md",
   "files": {
     "ATTRIBUTIONS.md": {
-      "bytes": 1688,
-      "sha256": "ea9b7fc056e9c6f0d21b03dcd1e0a3ba8802ab7b7248a7a78c266f5b40eed433"
+      "bytes": 1689,
+      "sha256": "761c4f1c432c6832b1fa0d215d769902df9350ecf178939eefd6376c9455c602"
     },
     "BASE_MODEL_LICENSE.txt": {
       "bytes": 1138,
@@ -113,8 +113,8 @@
       "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
     },
     "README.md": {
-      "bytes": 12907,
-      "sha256": "28ad39c4b8575166a8e0b6746405351855ef0d256b60333f2f6cc3f5ca2c4bec"
+      "bytes": 12912,
+      "sha256": "40f5d938039c09328d4de37410e636929561579ca18d9f8a10ea0a97bf90bfcb"
     },
     "config.json": {
       "bytes": 1061,
@@ -133,5 +133,5 @@
       "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
     }
   },
-  "package_content_sha256": "40b214be9bcc62e1713acd933c46bf9ca1c5e9d2ac84e3b690c1cda58946e22e"
+  "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471"
 }

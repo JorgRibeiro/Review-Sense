@@ -1,9 +1,9 @@
 {
   "phase": "4B",
   "status": "technically_complete_publication_not_authorized",
-  "code_commit": "a95cd2c66f3544a24a2338367487e3f73a3ebd36",
-  "manifest_sha256": "79f5c0fed08c051a571506b01cb058674c2e856f89d7b4acb8bb0fd6cbf0ef18",
-  "package_content_sha256": "40b214be9bcc62e1713acd933c46bf9ca1c5e9d2ac84e3b690c1cda58946e22e",
+  "code_commit": "9ee530c7c7b9b79076c7328062b345cf67cec0ea",
+  "manifest_sha256": "836f5745422f2e58dcf2f4ee8f7e5b02fedc5f1d77d95e223a1683bb6e64eb6e",
+  "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471",
   "license_status": "REQUIRES_REVIEW",
   "upload_authorized": false,
   "verification": {
@@ -115,5 +115,23 @@
     "deployments": 0,
     "model_card_remote_validation_performed": false,
     "linkedin_post_drafted_or_published": false
+  },
+  "pre_merge_correction": {
+    "reason": "Correct GitHub namespace to jorgeribeiru/Review-Sense",
+    "previous_package_content_sha256": "40b214be9bcc62e1713acd933c46bf9ca1c5e9d2ac84e3b690c1cda58946e22e",
+    "previous_manifest_sha256": "79f5c0fed08c051a571506b01cb058674c2e856f89d7b4acb8bb0fd6cbf0ef18",
+    "previous_staging_preserved_locally": true,
+    "changed_package_files": [
+      "ATTRIBUTIONS.md",
+      "README.md"
+    ],
+    "artifact_hashes_unchanged": true,
+    "tests_passed": 253,
+    "test_guard": {
+      "active": true,
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "link_audit": "reports/phase4b_link_audit.json"
   }
 }

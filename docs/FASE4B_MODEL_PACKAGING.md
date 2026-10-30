@@ -145,8 +145,8 @@ Publicação depende dos gates e da autorização da
 
 ## Resultado do candidato desta entrega
 
-Preparado e verificado localmente a partir do commit `a95cd2c66f3544a24a2338367487e3f73a3ebd36`:
-**9 arquivos / 436422679 bytes**. Original e pacote coincidiram nas cinco entradas
+Preparado e verificado localmente a partir do commit `9ee530c7c7b9b79076c7328062b345cf67cec0ea`:
+**9 arquivos / 436422685 bytes**. Original e pacote coincidiram nas cinco entradas
 sintéticas em CPU/FP32 e GPU/FP16; diferenças máximas observadas de logits/scores
 iguais a zero em cada modo. O exemplo literal do Card executou isolado, sem acesso
 às origens ou rede. **253 testes offline aprovados** e checks de qualidade verdes.
@@ -156,3 +156,5 @@ o pacote com pesos continua apenas em outputs, ignorado. Relatório completo:
 [validation_phase4b.md](../reports/validation_phase4b.md). Licenciamento permanece
 **REQUIRES_REVIEW** e publicação **não autorizada**; a Fase 4B está tecnicamente
 concluída e os gates da 4C continuam pendentes.
+
+Correção pré-merge: namespace GitHub `jorgeribeiru/Review-Sense`; staging reconstruído e equivalência CPU/GPU repetida. O candidato anterior permanece arquivado localmente. Auditoria de links e novos hashes estão no relatório da Fase 4B.
