@@ -1,0 +1,11 @@
+{
+  "test_csv_open_guard_active": true,
+  "test_csv_open_attempts": 0,
+  "train_val_manifest_unchanged": true,
+  "protected_artifact_directory": "data/processed/phase1-final",
+  "sha256_before_and_after": {
+    "manifest.json": "6469cafdd878deeadfd9ac20083ce6b3d5ec6856a1c6478716589a4978fa8bcd",
+    "train.csv": "d6508aa963d2877398501d4b8b7f9ba17653fed8fed12ad26b7d00af31aca52c",
+    "val.csv": "e743636fe5aad8c3a71c0625e5f5585bbd318e11812f4cfcc1cd371b7ad6daed"
+  }
+}

@@ -83,6 +83,21 @@ propósito das funções e reprodução. O notebook
 [`02_tfidf_svm_baseline.ipynb`](notebooks/02_tfidf_svm_baseline.ipynb) reabre os
 resultados salvos por padrão, sem repetir a busca.
 
+Resultado real desta execução (validação):
+
+| Modelo | F1 macro | Precision macro | Recall macro |
+| --- | ---: | ---: | ---: |
+| Dummy | 0,2545 | 0,2059 | 0,3333 |
+| TF-IDF + LinearSVC | **0,7271** | **0,7283** | **0,7288** |
+
+Vencedor: `C=0.1`, `ngram_range=(1,2)`, `class_weight=balanced`. A classe neutra
+teve F1 de 0,4154 e permanece o principal limite. A busca completa levou cerca de
+65 segundos neste computador. São resultados de validação usada na seleção;
+não constituem uma avaliação final independente.
+
+O [relatório da Fase 2](reports/validation_phase2.md) contém todas as configurações,
+métricas por classe, matrizes de confusão, hardware, tempos e verificações.
+
 ## Notebook local e alternativa no Google Colab
 
 Abra [`notebooks/01_data_audit_eda.ipynb`](notebooks/01_data_audit_eda.ipynb).
@@ -164,6 +179,8 @@ app/                                # Reserva para Gradio, sem implementação n
 data/README.md                      # Proveniência, licença e artefatos locais
 reports/validation_phase1.md         # Evidências da validação executada
 reports/data_audit_summary.json      # Resumo agregado, sem textos ou IDs de avaliações
+reports/validation_phase2.md         # Comparação real, medições e limites da Fase 2
+reports/baseline_validation.json      # Métricas completas e proveniência do experimento
 reports/figures/                     # Destino de figuras agregadas
 ```
 
