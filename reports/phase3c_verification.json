@@ -1,0 +1,44 @@
+{
+  "phase": "3C",
+  "status": "verified",
+  "recorded_at": "2026-10-30T15:57:16.986754-03:00",
+  "evaluation_code_commit": "90893aa3fe3053433e3e72a22977fc40747bed5f",
+  "offline_tests_before": 173,
+  "offline_tests_after": 173,
+  "ruff_check": true,
+  "ruff_format_check": true,
+  "pip_check": true,
+  "notebook": {
+    "path": "notebooks/04_final_model_comparison.ipynb",
+    "original_code_cells": 4,
+    "executed_locally": true,
+    "errors": 0,
+    "saved_without_outputs": true,
+    "test_read_opens": 0,
+    "blocked_test_opens": 0
+  },
+  "post_evaluation_tests": {
+    "test_read_opens": 0,
+    "blocked_test_opens": 0,
+    "real_test_guard_active": true
+  },
+  "post_evaluation_integrity_checks": {
+    "inventory_matches": true,
+    "phase3a_artifacts_unchanged": true,
+    "test_read_opens": 0,
+    "blocked_test_opens": 0
+  },
+  "final_evaluation": {
+    "read_opens": 1,
+    "inference_passes": {
+      "svm": 1,
+      "bertimbau": 1
+    },
+    "failure_record_exists": false,
+    "status": "completed"
+  },
+  "raw_saved_result_matches_public_metrics": true,
+  "metrics_json_sha256": "8f32d5fa4dccd74b47f2b6c26455372bf7d50415390548eaa2085ed9e21bf302",
+  "protocol_sha256": "a664dabc140d9bb05dce9ee58ecb48f73d6f81aeef8711618247cdb6a2a2b45e",
+  "configuration_sha256": "3c98596d536ea5409136be285247c0d0ab8449bffb28c8a6fab13f2c7af2319b"
+}

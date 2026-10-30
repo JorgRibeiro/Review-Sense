@@ -109,3 +109,19 @@ Não são versionados CSV, textos, IDs, predições individuais, pesos, caches o
 estados do otimizador. Os relatórios usam caminhos relativos ao repositório,
 agregados e hashes de artefatos. A licença original dos dados continua
 CC BY-NC-SA 4.0. Model Card, Hub e Gradio pertencem à próxima fase.
+
+
+## Execução desta entrega
+
+Concluída em 30/10/2026, protocolo e código congelados em `90893aa` antes de abrir
+o teste. F1 Macro final: **SVM 0,723094; BERTimbau 0,754461**. Diferença absoluta
+0,031367 (+4,3379% relativa). O F1 aumentou nas três classes; o neutro continua
+com Recall de 38,55%. Ver contagens e análise no
+[relatório final](../reports/validation_phase3c.md).
+
+Uma leitura do CSV, uma passagem/modelo e zero falhas; a execução
+`outputs/phase3c-final-v1/` está concluída. Não a repetir. O notebook foi executado
+localmente sem outputs no Git; 173 testes offline, Ruff e pip check aprovados.
+Código, configuração e protocolo permanecem os do congelamento, sem alterações
+após observar resultados. Para verificar/visualizar a entrega, usar somente os
+resultados salvos. Não há pendência de Colab nem execução de Fase 4 nesta branch.
