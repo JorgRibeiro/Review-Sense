@@ -9,7 +9,12 @@ não confirmado.** Não há script de publicação executável nesta entrega.
 - Resolver materialmente as questões da auditoria 4B e documentar licença/avisos
   aprovados para os pesos e para a demonstração hospedada; finalidade/jurisdição
   e eventual exploração comercial precisam ser consideradas.
-- Guardar os esclarecimentos/autorizações aplicáveis ou orientação especializada.
+- O usuário decidiu não encaminhar solicitações de autorização por e-mail. O
+  rascunho anterior não será enviado; não há contato a executar nesta etapa.
+  Aplicar a [política de atribuição, transparência e reclamações](FASE4C_RIGHTS_OUTREACH.md),
+  confirmar canal/responsável antes do lançamento e resolver materialmente os direitos.
+  Finalidade não comercial e retirada não são autorização nem eliminam obrigações.
+- Guardar evidências aplicáveis à análise e orientação especializada quando necessária.
   Uma mudança de metadata para MIT/CC/READY, isoladamente, não satisfaz esse gate.
 - Se continuar REQUIRES_REVIEW ou houver impedimento BLOCKED, não publicar pesos
   nem tratar a versão como lançada. Definir o próximo passo com o usuário.

@@ -16,6 +16,7 @@ from threadpoolctl import threadpool_limits
 from reviewsense.baseline import load_experiment
 from reviewsense.data import file_sha256
 from reviewsense.labels import LABEL_NAMES
+from reviewsense.model_resolution import LocalPackage, ModelSource
 
 ModelName = Literal["bertimbau", "svm"]
 DevicePreference = Literal["auto", "cpu", "cuda"]
@@ -163,10 +164,25 @@ class InferenceService:
     e espera pelo lock. A carga fria é informada separadamente. Nada persiste entradas.
     """
 
-    def __init__(self, paths: ArtifactPaths | None = None, *, device: DevicePreference = "auto"):
+    def __init__(
+        self,
+        paths: ArtifactPaths | None = None,
+        *,
+        device: DevicePreference = "auto",
+        model_source: ModelSource | None = None,
+    ):
         if device not in {"auto", "cpu", "cuda"}:
             raise ValueError("Dispositivo esperado: auto, cpu ou cuda.")
-        self.paths = paths or ArtifactPaths.from_repository(Path(__file__).resolve().parents[2])
+        root = Path(__file__).resolve().parents[2]
+        self.paths = paths or ArtifactPaths.from_repository(root)
+        self.model_source = model_source
+        if paths is None and model_source is None:
+            self.model_source = LocalPackage(
+                root / "outputs/phase4b/model-repo-staging",
+                root / "publishing/inference_descriptor.json",
+                root / "outputs/phase4b",
+            )
+        self._bert_directory = self.paths.bert_dir
         self.device_preference = device
         self._lock = threading.RLock()
         self._svm = None
@@ -200,6 +216,15 @@ class InferenceService:
             raise ArtifactError("Não foi possível carregar o baseline local verificado.") from None
 
     def _verify_bert(self) -> None:
+        if self.model_source is not None:
+            try:
+                self._bert_directory = self.model_source.resolve()
+                return
+            except Exception:
+                raise ArtifactError(
+                    "Pacote de inferência indisponível ou não autorizado. "
+                    "Confira a configuração conforme o README."
+                ) from None
         record = _record(self.paths.bert_record)
         final = _record(self.paths.final_record)
         try:
@@ -225,12 +250,13 @@ class InferenceService:
         from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
         tokenizer = AutoTokenizer.from_pretrained(
-            self.paths.bert_dir, local_files_only=True, trust_remote_code=False
+            self._bert_directory, local_files_only=True, trust_remote_code=False, token=False
         )
         model = AutoModelForSequenceClassification.from_pretrained(
-            self.paths.bert_dir,
+            self._bert_directory,
             local_files_only=True,
             trust_remote_code=False,
+            token=False,
             attn_implementation="eager",
         )
         if (
@@ -319,6 +345,12 @@ class InferenceService:
 
     def predict(self, text: str, *, model: ModelName = "bertimbau") -> Prediction:
         return self.predict_batch([text], model=model)[0]
+
+    def prepare(self) -> None:
+        """Pré-carga opcional previsível, sem entradas de usuários; mantém o padrão lazy."""
+        with self._lock:
+            if self._bert is None:
+                self._bert = self._load_bert()
 
     def predict_batch(
         self, texts: list[str], *, model: ModelName = "bertimbau"

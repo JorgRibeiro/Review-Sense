@@ -1,0 +1,71 @@
+{
+  "checked_at_utc": "2026-10-30T22:31:09.034437+00:00",
+  "scope": "URLs in unchanged Phase 4B Model Card and notices; read-only public HTTP, no authentication",
+  "links": [
+    {
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en"
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01"
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json"
+    },
+    {
+      "url": "https://github.com/neuralmind-ai/portuguese-bert",
+      "status": 200,
+      "resolved_url": "https://github.com/neuralmind-ai/portuguese-bert"
+    },
+    {
+      "url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01"
+    },
+    {
+      "url": "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/transformers/tasks/sequence_classification"
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased"
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE",
+      "status": 200,
+      "resolved_url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE"
+    }
+  ]
+}

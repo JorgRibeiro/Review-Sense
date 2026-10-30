@@ -1,0 +1,68 @@
+{
+  "phase": "4C-premerge-corrections",
+  "branch": "feat/phase4c-release-readiness",
+  "reviewed_base_commit": "8350d2605d3d61e625fb8b94a4a2ea75b10f8473",
+  "verified_at_utc": "2026-10-30T22:53:24.725474+00:00",
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "phase4c_complete": false,
+  "corrections": {
+    "hosted_svm": "AppSettings.__post_init__ forces enable_svm=False; local True/False behavior preserved.",
+    "rights": "No authorization request by email; previous draft will not be sent. Attribution, educational/noncommercial purpose, uncertainty, complaints and suspension/withdrawal policy documented; no legal clearance inferred.",
+    "hub_cache": "Direct offline reading of pinned models--namespace--repo/snapshots/SHA; bounded leaf links into same repository blobs; POSIX dir_fd/O_NOFOLLOW; byte count and SHA-256 verified; allowlist copied into regular validated package."
+  },
+  "quality": {
+    "tests_passed": 342,
+    "previous_test_case_count": 320,
+    "additional_cases": 22,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 13.63,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "pip_check": true,
+    "test_csv_read_opens": 0,
+    "blocked_test_csv_opens": 0
+  },
+  "cache_checks": [
+    "Realistic relative symlinks with Git/SHA-256 etags",
+    "Approved synthetic HubSnapshot integration with no Hub API or token calls",
+    "Regular snapshot files accepted",
+    "Unknown cached entries ignored, never copied",
+    "Absolute/outside/other-repository/chained/dangling links rejected",
+    "Symlink ancestors and blob links rejected",
+    "Nonregular files, FIFO, oversized or wrong-hash bytes rejected",
+    "Corrupted materialized output rejected, never repaired or overwritten",
+    "No POSIX safe-open support fails closed"
+  ],
+  "preservation": {
+    "previous_files_sha256_unchanged": 65,
+    "split_metadata_unchanged": true,
+    "csv_content_read": false,
+    "LocalPackage_ast_unchanged": true,
+    "original_weight_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "phase4b_package_manifest_and_descriptor_unchanged": true,
+    "all_historical_reports_unchanged": true
+  },
+  "remote_operations": {
+    "network_requests": 0,
+    "Hub_API_calls": 0,
+    "authentication": 0,
+    "messages_sent": 0,
+    "upload_deploy_push_merge_release": 0
+  },
+  "limitations": [
+    "POSIX dir_fd/O_NOFOLLOW required for materialization; unsupported platforms fail safely.",
+    "Cache layout inspected in installed huggingface-hub 2.4.0; future layout changes require review.",
+    "Integration tested using synthetic local caches, not a published or downloaded model.",
+    "Approved descriptor and cache root are trusted operator inputs; no signature or legal certification.",
+    "Rights, destination, hosting eligibility, human authorization and complaint-channel monitoring remain launch blockers."
+  ],
+  "source_sha256": {
+    "app/config.py": "39cea8f069829ff8688b35acb68307f44f2ad77ee9247e94a0e30978a2c4e5c4",
+    "src/reviewsense/model_resolution.py": "71470a32c2e5e556c0b71b3610d8dca3be41a16f35762999f050ce67726be26e",
+    "src/reviewsense/hub_cache.py": "c8674b6b825c4d4c4a49191ad8350132af1596ff0ce2661c9f89fcc09118fa84",
+    "tests/phase4c/test_hub_cache.py": "31ac835a6d17deb8329a0670e84008b2d75e4e5fc13bd316b159b58463791e93",
+    "docs/FASE4C_RIGHTS_OUTREACH.md": "a4d47bae3f479b180ce0ac18ce8e615e271578c315eb7aef6e859375e453f3a7"
+  }
+}
