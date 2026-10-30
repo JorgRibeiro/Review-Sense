@@ -1,0 +1,311 @@
+{
+  "scope": "tracked text files only; no dataset contents or ignored artifacts read",
+  "old_namespace_references": [],
+  "missing_local_markdown_targets": [],
+  "external_links": [
+    {
+      "url": "https://creativecommons.org/faq/#does-my-use-violate-the-noncommercial-clause-of-the-licenses",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/faq/#does-my-use-violate-the-noncommercial-clause-of-the-licenses",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "references": [
+        "data/README.md"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md",
+        "publishing/model_card/ATTRIBUTIONS.md"
+      ]
+    },
+    {
+      "url": "https://creativecommons.org/wp-content/uploads/2025/05/Using-CC-licensed-Works-for-AI-Training.pdf",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/wp-content/uploads/2025/05/Using-CC-licensed-Works-for-AI-Training.pdf",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md"
+      ]
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01",
+      "references": [
+        "README.md",
+        "ReviewSense_PTBR_PLANO.md",
+        "data/README.md",
+        "notebooks/01_data_audit_eda.ipynb",
+        "publishing/model_card/ATTRIBUTIONS.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense",
+      "references": [
+        "app/app.py",
+        "publishing/model_card/ATTRIBUTIONS.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense.git",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense",
+      "references": [
+        "notebooks/01_data_audit_eda.ipynb"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json",
+      "references": [
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md",
+      "references": [
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json",
+      "references": [
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/main/reports/validation_phase3c.md",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/main/reports/validation_phase3c.md",
+      "references": [
+        "app/app.py"
+      ]
+    },
+    {
+      "url": "https://github.com/neuralmind-ai/portuguese-bert",
+      "status": 200,
+      "resolved_url": "https://github.com/neuralmind-ai/portuguese-bert",
+      "references": [
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://github.com/neuralmind-ai/portuguese-bert/blob/master/LICENSE",
+      "status": 200,
+      "resolved_url": "https://github.com/neuralmind-ai/portuguese-bert/blob/master/LICENSE",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01",
+      "references": [
+        "ReviewSense_PTBR_PLANO.md",
+        "data/README.md",
+        "publishing/model_card/ATTRIBUTIONS.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01/blob/main/README.md",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01/blob/main/README.md",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/accelerate/usage_guides/checkpoint",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/accelerate/usage_guides/checkpoint",
+      "references": [
+        "docs/FASE3B_BERTIMBAU.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/accelerate/usage_guides/gradient_accumulation",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/accelerate/usage_guides/gradient_accumulation",
+      "references": [
+        "docs/FASE3A_BERTIMBAU_SMOKE.md",
+        "docs/FASE3B_BERTIMBAU.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/model-cards",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/hub/model-cards",
+      "references": [
+        "docs/FASE4B_MODEL_PACKAGING.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/repositories-licenses",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/hub/repositories-licenses",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md",
+        "docs/FASE4B_MODEL_PACKAGING.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/hub/spaces-overview",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/hub/spaces-overview",
+      "references": [
+        "ReviewSense_PTBR_PLANO.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/huggingface_hub/en/guides/upload",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/huggingface_hub/en/guides/upload",
+      "references": [
+        "docs/FASE4C_RELEASE_PLAN.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+      "references": [
+        "ReviewSense_PTBR_PLANO.md",
+        "docs/FASE3A_BERTIMBAU_SMOKE.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+      "references": [
+        "ReviewSense_PTBR_PLANO.md",
+        "docs/FASE3A_BERTIMBAU_SMOKE.md",
+        "publishing/model_card/ATTRIBUTIONS.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md",
+      "references": [
+        "docs/FASE4B_LICENSE_REVIEW.md",
+        "publishing/model_card/README.md"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/",
+      "error": "HTTP Error 404: Not Found",
+      "references": [
+        "src/reviewsense/data.py"
+      ],
+      "classification": "source_code_url_prefix_not_a_standalone_link",
+      "assembled_url_verified_by_head": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "status": 200,
+      "resolved_url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "references": [
+        "reports/baseline_validation.json",
+        "reports/bertimbau_phase3b_metrics.json",
+        "reports/bertimbau_smoke_metrics.json",
+        "reports/data_audit_summary.json",
+        "reports/phase3b_token_lengths.json",
+        "reports/phase3c_final_metrics.json"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE",
+      "status": 200,
+      "resolved_url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE",
+      "references": [
+        "publishing/model_card/ATTRIBUTIONS.md"
+      ]
+    },
+    {
+      "url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "status": 200,
+      "resolved_url": "https://scikit-learn.org/stable/common_pitfalls.html",
+      "references": [
+        "docs/FASE2_BASELINE.md"
+      ]
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html",
+      "status": 200,
+      "resolved_url": "https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html",
+      "references": [
+        "docs/FASE2_BASELINE.md"
+      ]
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+      "status": 200,
+      "resolved_url": "https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html",
+      "references": [
+        "docs/FASE2_BASELINE.md"
+      ]
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html",
+      "status": 200,
+      "resolved_url": "https://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html",
+      "references": [
+        "docs/FASE2_BASELINE.md"
+      ]
+    },
+    {
+      "url": "https://www.gradio.app/docs/gradio/blocks",
+      "status": 200,
+      "resolved_url": "https://gradio.app/docs/gradio/blocks",
+      "references": [
+        "docs/FASE4A_INFERENCE_GRADIO.md"
+      ]
+    },
+    {
+      "url": "https://www.gradio.app/docs/gradio/examples",
+      "status": 200,
+      "resolved_url": "https://gradio.app/docs/gradio/examples",
+      "references": [
+        "docs/FASE4A_INFERENCE_GRADIO.md"
+      ]
+    }
+  ],
+  "assembled_dataset_url_check": {
+    "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+    "method": "HEAD",
+    "status": 200,
+    "body_read": false
+  }
+}
