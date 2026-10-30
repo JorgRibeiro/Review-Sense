@@ -1,0 +1,380 @@
+{
+  "schema_version": 1,
+  "phase": "3A",
+  "purpose": "technical_smoke_not_final_performance",
+  "started_at": "2026-10-30T11:42:11.629713-03:00",
+  "finished_at": "2026-10-30T11:42:23.891122-03:00",
+  "code": {
+    "git_commit": "44612e347450182b987231e5c37e8e3d6f641ece",
+    "module_sha256": {
+      "train_transformer.py": "602b53cf7a6ea3153186bea3872b6064909bc735091e17dccb5553ff8ed47609",
+      "transformer_data.py": "f704a4c19d4d029dd81fccf7bc0e0900fb672125dce3ac3c99273938da936ea0",
+      "frozen_data.py": "e50b20bfa1ba9b976398fb70c4bacb258bcc561eb4b32d1207115f7dc9ec4d22",
+      "evaluate.py": "f593dc59e338278467229ea6c20583348a061e0427f9b55c100a05c3535542f1",
+      "data.py": "906ba34e293cfc73534d31f69d1043dbf0dfaadb5cd9c6a3b882eb9f3d865dd5",
+      "labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1"
+    },
+    "working_tree_dirty": false
+  },
+  "checkpoint_source": {
+    "repo_id": "neuralmind/bert-base-portuguese-cased",
+    "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "original_format": "pytorch_model.bin",
+    "trust_remote_code": false
+  },
+  "requested_config": {
+    "checkpoint": "neuralmind/bert-base-portuguese-cased",
+    "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "seed": 42,
+    "train_samples": 256,
+    "val_samples": 96,
+    "max_length": 128,
+    "train_batch_size": 2,
+    "eval_batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 2e-05,
+    "epochs": 1,
+    "mixed_precision": "fp16",
+    "gradient_checkpointing": false,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "cpu_threads": 2
+  },
+  "effective_config": {
+    "checkpoint": "neuralmind/bert-base-portuguese-cased",
+    "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "seed": 42,
+    "train_samples": 256,
+    "val_samples": 96,
+    "max_length": 128,
+    "train_batch_size": 2,
+    "eval_batch_size": 2,
+    "gradient_accumulation_steps": 8,
+    "learning_rate": 2e-05,
+    "epochs": 1,
+    "mixed_precision": "fp16",
+    "gradient_checkpointing": false,
+    "weight_decay": 0.01,
+    "max_grad_norm": 1.0,
+    "cpu_threads": 2
+  },
+  "adjustments": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "status": "completed",
+      "config": {
+        "checkpoint": "neuralmind/bert-base-portuguese-cased",
+        "revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+        "seed": 42,
+        "train_samples": 256,
+        "val_samples": 96,
+        "max_length": 128,
+        "train_batch_size": 2,
+        "eval_batch_size": 2,
+        "gradient_accumulation_steps": 8,
+        "learning_rate": 2e-05,
+        "epochs": 1,
+        "mixed_precision": "fp16",
+        "gradient_checkpointing": false,
+        "weight_decay": 0.01,
+        "max_grad_norm": 1.0,
+        "cpu_threads": 2
+      }
+    }
+  ],
+  "data": {
+    "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+    "source": {
+      "kind": "official_csv",
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+    },
+    "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+    "splits": {
+      "train": {
+        "rows": 88684,
+        "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+        "class_distribution": {
+          "negativo": {
+            "count": 22818,
+            "fraction": 0.25729556628027606
+          },
+          "neutro": {
+            "count": 11089,
+            "fraction": 0.12503946596905868
+          },
+          "positivo": {
+            "count": 54777,
+            "fraction": 0.6176649677506653
+          }
+        }
+      },
+      "val": {
+        "rows": 19004,
+        "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+        "class_distribution": {
+          "negativo": {
+            "count": 4889,
+            "fraction": 0.2572616291307093
+          },
+          "neutro": {
+            "count": 2377,
+            "fraction": 0.12507893075142076
+          },
+          "positivo": {
+            "count": 11738,
+            "fraction": 0.6176594401178699
+          }
+        }
+      }
+    },
+    "test_csv_opened": false
+  },
+  "smoke_samples": {
+    "train": {
+      "rows": 256,
+      "fingerprint": "2fd273285ba3b6345c23e248899d4b20b8283ab17525f4a76905ee8bed7d4d2a",
+      "class_counts": {
+        "negativo": 66,
+        "neutro": 32,
+        "positivo": 158
+      }
+    },
+    "val": {
+      "rows": 96,
+      "fingerprint": "d715f9ed1cffc11c2471ee9aeb5061d7e15a401705da109572975e7b381b15c1",
+      "class_counts": {
+        "negativo": 25,
+        "neutro": 12,
+        "positivo": 59
+      }
+    }
+  },
+  "token_lengths": {
+    "train": {
+      "min": 8,
+      "max": 128,
+      "mean": 38.75,
+      "at_max_length": 6,
+      "at_max_length_fraction": 0.0234375
+    },
+    "val": {
+      "min": 5,
+      "max": 120,
+      "mean": 31.552083333333332,
+      "at_max_length": 0,
+      "at_max_length_fraction": 0.0
+    }
+  },
+  "software": {
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "accelerate": "1.15.0",
+    "tokenizers": "0.23.3",
+    "safetensors": "0.8.0",
+    "huggingface-hub": "2.4.0",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.9.1",
+    "pandas": "3.1.0"
+  },
+  "python": "3.11.14",
+  "platform": "Linux-7.3.0-4-cachyos-x86_64-with-glibc2.44",
+  "gpu_diagnostic": {
+    "device": "cuda:0",
+    "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "compute_capability": [
+      8,
+      6
+    ],
+    "total_memory_bytes_torch": 6132858880,
+    "free_memory_bytes_at_diagnosis": 5019926528,
+    "visible_memory_bytes": 6132858880,
+    "fp16_operation_supported": true,
+    "torch": "2.14.1+cu132",
+    "cuda_build": "13.2",
+    "cudnn": 92400,
+    "nvidia_smi": [
+      {
+        "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+        "driver_version": "615.78.08",
+        "memory.total": "6144",
+        "memory.used": "1062",
+        "utilization.gpu": "0"
+      }
+    ]
+  },
+  "metrics": {
+    "f1_macro": 0.253763440860215,
+    "precision_macro": 0.20486111111111113,
+    "recall_macro": 0.3333333333333333,
+    "accuracy": 0.6145833333333334,
+    "per_class": {
+      "negativo": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 25.0
+      },
+      "neutro": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 12.0
+      },
+      "positivo": {
+        "precision": 0.6145833333333334,
+        "recall": 1.0,
+        "f1-score": 0.7612903225806451,
+        "support": 59.0
+      }
+    },
+    "label_order": [
+      0,
+      1,
+      2
+    ],
+    "label_names": [
+      "negativo",
+      "neutro",
+      "positivo"
+    ],
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        25
+      ],
+      [
+        0,
+        0,
+        12
+      ],
+      [
+        0,
+        0,
+        59
+      ]
+    ],
+    "samples": 96
+  },
+  "parameter_count": 108925443,
+  "training": {
+    "seconds": 5.492124387999866,
+    "mean_loss": 0.9371442794799805,
+    "samples_seen": 256,
+    "micro_batches": 128,
+    "expected_optimizer_updates": 16,
+    "successful_optimizer_updates": 16,
+    "skipped_optimizer_updates": 0,
+    "initial_classifier_sha256": "ebc063943706ddc607150ac1a9eb056c5b5a71230c4efef57cfd376435685aa3",
+    "final_classifier_sha256": "e391c3252527f7c21da2763c1065f64446f20348090feea0d6e37b09e50358e4",
+    "memory_before": {
+      "allocated_bytes": 470536704,
+      "reserved_bytes": 526385152,
+      "peak_allocated_bytes": 470536704,
+      "peak_reserved_bytes": 526385152,
+      "device_free_bytes": 4531879936,
+      "device_visible_total_bytes": 6132858880
+    },
+    "memory": {
+      "allocated_bytes": 1378046464,
+      "reserved_bytes": 2241855488,
+      "peak_allocated_bytes": 2181813760,
+      "peak_reserved_bytes": 2241855488,
+      "device_free_bytes": 2781806592,
+      "device_visible_total_bytes": 6132858880
+    }
+  },
+  "evaluation": {
+    "seconds": 0.42310775599980843,
+    "memory_before": {
+      "allocated_bytes": 1378040320,
+      "reserved_bytes": 1524629504,
+      "peak_allocated_bytes": 1378040320,
+      "peak_reserved_bytes": 1524629504,
+      "device_free_bytes": 3499032576,
+      "device_visible_total_bytes": 6132858880
+    },
+    "memory": {
+      "allocated_bytes": 1378040320,
+      "reserved_bytes": 1526726656,
+      "peak_allocated_bytes": 1389662720,
+      "peak_reserved_bytes": 1526726656,
+      "device_free_bytes": 3496935424,
+      "device_visible_total_bytes": 6132858880
+    }
+  },
+  "reload": {
+    "seconds_evaluation": 0.4248247809991881,
+    "same_predictions": true,
+    "logits_allclose_rtol_atol_1e4": true,
+    "max_absolute_logit_difference": 0.0,
+    "label_mappings_verified": true,
+    "tokenizer_outputs_verified": true,
+    "memory": {
+      "allocated_bytes": 504092160,
+      "reserved_bytes": 564133888,
+      "peak_allocated_bytes": 515714560,
+      "peak_reserved_bytes": 564133888,
+      "device_free_bytes": 4459528192,
+      "device_visible_total_bytes": 6132858880
+    }
+  },
+  "gpu_observations": {
+    "parameter_device": "cuda:0",
+    "input_device": "cuda:0",
+    "linear_output_dtype": "torch.float16",
+    "linear_output_device": "cuda:0",
+    "nvidia_smi_during_training": [
+      {
+        "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+        "driver_version": "615.78.08",
+        "memory.total": "6144",
+        "memory.used": "3195",
+        "utilization.gpu": "92"
+      }
+    ]
+  },
+  "execution_checks": {
+    "test_csv_guard_active": true,
+    "test_csv_open_attempts": 0,
+    "source_artifacts_unchanged": true,
+    "sha256_before_and_after": {
+      "train.csv": "d6508aa963d2877398501d4b8b7f9ba17653fed8fed12ad26b7d00af31aca52c",
+      "val.csv": "e743636fe5aad8c3a71c0625e5f5585bbd318e11812f4cfcc1cd371b7ad6daed",
+      "manifest.json": "6469cafdd878deeadfd9ac20083ce6b3d5ec6856a1c6478716589a4978fa8bcd"
+    }
+  },
+  "checkpoint_artifacts": {
+    "directory": "attempt-1/checkpoint",
+    "sha256": {
+      "config.json": "2aa4d3c97e33adf218121862f85d0e94262070c379b9650b22fa5b9200f8e646",
+      "model.safetensors": "4ef653f10045b3427b3243e20eac2e4d5baceb440fa32d38140d17f75cead55f",
+      "tokenizer.json": "0b30dd1ad4e4c9afd64ab98c743b061010ebf07ffda1432e369087be30a72ada",
+      "tokenizer_config.json": "bf2375fe362b4caa6f45efd19723ea86326796ef2c53a0c8c439d7b7377c94bb"
+    }
+  },
+  "total_seconds_before_report_write": 12.49951502299973,
+  "measurement_conditions": {
+    "training": "CUDA synchronized; compute/optimizer/collator/transfers",
+    "evaluation": "CUDA synchronized; collator/transfers/forward/CPU logits",
+    "memory": "PyTorch allocator peaks reset per stage; not total board usage",
+    "evaluation_optimizer_retained": true,
+    "cuda_cache_cleared_before_evaluation": true,
+    "attention": "eager",
+    "tf32": false,
+    "deterministic_algorithms": true,
+    "optimizer": "AdamW foreach=False",
+    "scheduler": "linear decay; zero warmup",
+    "padding": "dynamic per batch; multiple of 8",
+    "dataloader_workers": 0
+  },
+  "limitations": [
+    "Diagnostic smoke only; no comparison with the full-data baseline.",
+    "One epoch and 256 training examples; not a quality or throughput forecast.",
+    "CUDA allocator statistics exclude other processes and driver/context memory.",
+    "At-length-limit fraction is not an exact truncation rate."
+  ]
+}

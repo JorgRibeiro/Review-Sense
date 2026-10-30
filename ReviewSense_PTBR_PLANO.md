@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.2
+# ReviewSense PT-BR — Plano técnico v1.3
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Teste final reservado; BERTimbau e publicação ainda não iniciados.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Teste final reservado; treinamento completo (3B) e publicação ainda não iniciados.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -108,7 +108,7 @@ reviewsense-ptbr/
 - [ ] EDA com distribuição de classes, nulos, duplicados e exemplos auditados
 - [x] Splits reproduzíveis e ausência de vazamento por textos idênticos
 - [x] Baseline TF-IDF + LinearSVC treinado e avaliado na validação; teste reservado
-- [ ] BERTimbau Base fine-tuned com PyTorch/Transformers e checkpoint salvo
+- [ ] BERTimbau Base fine-tuned em escala de treino e checkpoint salvo (smoke 3A concluído; treino completo 3B pendente)
 - [ ] Comparativo real usando F1 macro, métricas por classe e matriz de confusão
 - [ ] Modelo e tokenizer publicados no HF Hub com Model Card (dados, método, limitações, avaliação)
 - [ ] README com instruções para reproduzir e links dos resultados
@@ -146,3 +146,19 @@ CSV de teste, alterar splits, treinar BERTimbau ou usar GPU nesta fase.
 Protocolo, conceitos e funções: `docs/FASE2_BASELINE.md`. Resultados reais,
 condições de medição e evidências: `reports/validation_phase2.md`. Os pesos e o
 vocabulário do modelo permanecem locais; somente métricas agregadas são versionadas.
+
+## 10. Fase 3A — Diagnóstico e smoke concluído
+
+Branch: `feat/phase3a-bertimbau-smoke`, a partir da main atualizada. Ciclo limitado
+a 256 exemplos de treino e 96 de validação, estratificados com semente 42, sem
+alterar os splits. BERTimbau Base cased, revisão fixa, max_length 128, batch 2,
+acumulação 8, learning rate 2e-5, uma época e FP16 na RTX 3050 Laptop de 6 GB.
+
+Treino, avaliação e recarga concluídos na configuração inicial, sem OOM. O PyTorch
+2.14.1+cu132 foi preservado. Não houve leitura do teste, Colab, publicação no Hub
+ou comparação definitiva com o SVM. O orçamento do smoke não demonstra qualidade
+preditiva: as 96 predições foram positivas. Treinamento completo fica para a 3B.
+
+Configuração: `configs/bertimbau_smoke.json`. Decisões e reprodução:
+`docs/FASE3A_BERTIMBAU_SMOKE.md`. Métricas agregadas, GPU/VRAM, testes e recomendações:
+`reports/validation_phase3a.md`. Modelos, cache e IDs individuais continuam locais.
