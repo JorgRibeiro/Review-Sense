@@ -1,9 +1,9 @@
 # ReviewSense PT-BR
 
-Pipeline reprodutível de preparação e auditoria de avaliações brasileiras.
-Esta entrega implementa exclusivamente a **Fase 1 — Estrutura inicial e pipeline
-de dados**, seguindo [o plano técnico](ReviewSense_PTBR_PLANO.md).
-**Nenhum SVM ou BERTimbau foi treinado ou avaliado.**
+Pipeline reprodutível de dados e classificação de polaridade de avaliações brasileiras,
+seguindo [o plano técnico](ReviewSense_PTBR_PLANO.md). A Fase 1 prepara os dados;
+a **Fase 2** compara DummyClassifier e TF-IDF + LinearSVC em CPU local, usando
+apenas treino e validação. **O teste final fica reservado; BERTimbau não foi iniciado.**
 
 As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (1),
 4–5 → positivo (2)**. Isso é uma proxy de sentimento, não uma anotação direta.
@@ -57,6 +57,46 @@ python -m pip install -r requirements-lock.txt
 
 O lock local não representa validação no Colab. A instalação por intervalos de
 versões é o caminho inicial para testar outros ambientes.
+
+## Fase 2 — Baseline clássico
+
+Com os artefatos congelados da Fase 1 disponíveis, execute:
+
+```bash
+.venv/bin/python -m reviewsense.baseline
+```
+
+O padrão usa `data/processed/phase1-final/` e verifica os fingerprints de treino e
+validação contra o manifest e `reports/data_audit_summary.json`. **Não execute o
+pipeline de dados novamente e não use `load_artifacts` nesta fase**, pois essa
+função abre também o CSV de teste. O carregador específico `load_training_data`
+abre apenas os dois conjuntos permitidos.
+
+A busca contém 12 combinações: `C` em 0,1/1/10, unigramas ou unigramas+bigramas,
+e pesos padrão ou balanceados. A seleção usa F1 macro de validação; não há refit
+em treino+validação. O modelo e o vocabulário ficam locais, fora do Git, em
+`models/baseline/phase2-v1/`, com configurações, métricas e tempos. Para repetir,
+escolha outra saída com `--output-dir`.
+
+Consulte [o guia da Fase 2](docs/FASE2_BASELINE.md) para conceitos, decisões,
+propósito das funções e reprodução. O notebook
+[`02_tfidf_svm_baseline.ipynb`](notebooks/02_tfidf_svm_baseline.ipynb) reabre os
+resultados salvos por padrão, sem repetir a busca.
+
+Resultado real desta execução (validação):
+
+| Modelo | F1 macro | Precision macro | Recall macro |
+| --- | ---: | ---: | ---: |
+| Dummy | 0,2545 | 0,2059 | 0,3333 |
+| TF-IDF + LinearSVC | **0,7271** | **0,7283** | **0,7288** |
+
+Vencedor: `C=0.1`, `ngram_range=(1,2)`, `class_weight=balanced`. A classe neutra
+teve F1 de 0,4154 e permanece o principal limite. A busca completa levou cerca de
+65 segundos neste computador. São resultados de validação usada na seleção;
+não constituem uma avaliação final independente.
+
+O [relatório da Fase 2](reports/validation_phase2.md) contém todas as configurações,
+métricas por classe, matrizes de confusão, hardware, tempos e verificações.
 
 ## Notebook local e alternativa no Google Colab
 
@@ -125,18 +165,26 @@ configs/data.json                   # Configuração executável dos splits
 configs/train.yaml                  # Reserva para fases futuras
 src/reviewsense/labels.py            # Contrato de classes
 src/reviewsense/data.py              # Download, validação, auditoria, limpeza, splits e CLI
-src/reviewsense/{baseline,train_transformer,evaluate,predict}.py
-                                    # Reservas documentadas, sem implementação de modelos
+src/reviewsense/frozen_data.py       # Leitura exclusiva e verificada de treino/validação
+src/reviewsense/baseline.py          # Dummy, grade pequena, seleção, tempos e persistência
+src/reviewsense/evaluate.py          # Métricas, benchmark e matriz de confusão
+src/reviewsense/{train_transformer,predict}.py
+                                    # Reservas para fases futuras
 notebooks/01_data_audit_eda.ipynb     # Auditoria e gráficos usando os módulos
+notebooks/02_tfidf_svm_baseline.ipynb  # Comparação dos modelos na validação
+configs/baseline.json                # Grade e condições de medição da Fase 2
+docs/FASE2_BASELINE.md                # Conceitos, funções e reprodução
 tests/                              # Testes offline com exemplos sintéticos
 app/                                # Reserva para Gradio, sem implementação nesta fase
 data/README.md                      # Proveniência, licença e artefatos locais
 reports/validation_phase1.md         # Evidências da validação executada
 reports/data_audit_summary.json      # Resumo agregado, sem textos ou IDs de avaliações
+reports/validation_phase2.md         # Comparação real, medições e limites da Fase 2
+reports/baseline_validation.json      # Métricas completas e proveniência do experimento
 reports/figures/                     # Destino de figuras agregadas
 ```
 
-Os notebooks 02/03 e o workflow de CI serão criados nas fases correspondentes.
+O notebook 03 e o workflow de CI serão criados nas fases correspondentes.
 A fase atual não instala PyTorch, Transformers ou Gradio.
 
 ## Fonte e licença

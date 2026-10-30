@@ -1,0 +1,1193 @@
+{
+  "schema_version": 1,
+  "phase": 2,
+  "started_at": "2026-10-30T10:45:15.052847-03:00",
+  "finished_at": "2026-10-30T10:46:20.239525-03:00",
+  "dataset_license": "CC-BY-NC-SA-4.0 (fonte original)",
+  "data": {
+    "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+    "source": {
+      "kind": "official_csv",
+      "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+      "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+    },
+    "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+    "splits": {
+      "train": {
+        "rows": 88684,
+        "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+        "class_distribution": {
+          "negativo": {
+            "count": 22818,
+            "fraction": 0.25729556628027606
+          },
+          "neutro": {
+            "count": 11089,
+            "fraction": 0.12503946596905868
+          },
+          "positivo": {
+            "count": 54777,
+            "fraction": 0.6176649677506653
+          }
+        }
+      },
+      "val": {
+        "rows": 19004,
+        "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+        "class_distribution": {
+          "negativo": {
+            "count": 4889,
+            "fraction": 0.2572616291307093
+          },
+          "neutro": {
+            "count": 2377,
+            "fraction": 0.12507893075142076
+          },
+          "positivo": {
+            "count": 11738,
+            "fraction": 0.6176594401178699
+          }
+        }
+      }
+    },
+    "test_csv_opened": false
+  },
+  "code": {
+    "git_commit": "fac70cc51ca6e70856fd1d5e27bb64a2ee56a931",
+    "working_tree_dirty": false,
+    "module_sha256": {
+      "baseline.py": "f5eade48e071901187b47f10df6038eefe366806d66e1a330b5a9c04061e9e9f",
+      "frozen_data.py": "e50b20bfa1ba9b976398fb70c4bacb258bcc561eb4b32d1207115f7dc9ec4d22",
+      "evaluate.py": "f593dc59e338278467229ea6c20583348a061e0427f9b55c100a05c3535542f1",
+      "data.py": "906ba34e293cfc73534d31f69d1043dbf0dfaadb5cd9c6a3b882eb9f3d865dd5",
+      "labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1"
+    }
+  },
+  "environment": {
+    "platform": "Linux-7.3.0-4-cachyos-x86_64-with-glibc2.44",
+    "python": "3.11.14",
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13450HX",
+    "logical_cpus": 16,
+    "available_cpu_affinity": 16,
+    "ram_bytes": 24859590656,
+    "device": "cpu",
+    "parallel_candidates": 1,
+    "threadpools": [
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "version": "0.3.31.188.0",
+        "architecture": "Haswell"
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "version": null,
+        "architecture": null
+      },
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 1,
+        "version": null,
+        "architecture": null
+      },
+      {
+        "user_api": "blas",
+        "internal_api": "openblas",
+        "num_threads": 1,
+        "version": "0.3.30",
+        "architecture": "Haswell"
+      }
+    ],
+    "versions": {
+      "reviewsense-ptbr": "0.1.0",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pandas": "3.1.0",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    }
+  },
+  "config": {
+    "seed": 42,
+    "thread_limit": 1,
+    "tfidf": {
+      "lowercase": true,
+      "strip_accents": null,
+      "stop_words": null,
+      "min_df": 2,
+      "max_df": 1.0,
+      "max_features": 80000,
+      "sublinear_tf": true,
+      "norm": "l2",
+      "token_pattern": "(?u)\\b\\w\\w+\\b"
+    },
+    "svm": {
+      "dual": false,
+      "max_iter": 5000,
+      "tol": 0.0001
+    },
+    "search": {
+      "C": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "ngram_range": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "class_weight": [
+        null,
+        "balanced"
+      ]
+    },
+    "inference": {
+      "batch_size": 256,
+      "repeats": 3,
+      "warmup_batches": 1
+    }
+  },
+  "config_sha256": "7b0198bcc63d827f846135f7fc96880cdcadc11ef92716a4107e6ac26e490651",
+  "dummy": {
+    "name": "dummy",
+    "strategy": "most_frequent",
+    "fit_seconds": 0.0027782419999766717,
+    "metrics": {
+      "f1_macro": 0.2545486088521675,
+      "precision_macro": 0.20588648003928997,
+      "recall_macro": 0.3333333333333333,
+      "accuracy": 0.6176594401178699,
+      "per_class": {
+        "negativo": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 4889.0
+        },
+        "neutro": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 2377.0
+        },
+        "positivo": {
+          "precision": 0.6176594401178699,
+          "recall": 1.0,
+          "f1-score": 0.7636458265565025,
+          "support": 11738.0
+        }
+      },
+      "label_order": [
+        0,
+        1,
+        2
+      ],
+      "label_names": [
+        "negativo",
+        "neutro",
+        "positivo"
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          0,
+          4889
+        ],
+        [
+          0,
+          0,
+          2377
+        ],
+        [
+          0,
+          0,
+          11738
+        ]
+      ],
+      "samples": 19004
+    },
+    "inference": {
+      "batch_size": 256,
+      "repeats": 3,
+      "warmup_batches": 1,
+      "samples_per_repeat": 19004,
+      "seconds_per_repeat": [
+        0.00866098200003762,
+        0.00852895200000603,
+        0.00850702400020964
+      ],
+      "median_seconds": 0.00852895200000603,
+      "milliseconds_per_text_amortized": 0.00044879772679467633,
+      "texts_per_second": 2228175.2787431055,
+      "includes_text_preprocessing": true,
+      "includes_disk_io": false
+    }
+  },
+  "candidates": [
+    {
+      "candidate_id": 1,
+      "params": {
+        "C": 0.1,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 1.6920398899999327,
+      "validation_predict_seconds_single_batch": 0.18896981299985782,
+      "metrics": {
+        "f1_macro": 0.653896629440233,
+        "precision_macro": 0.7402407564670913,
+        "recall_macro": 0.6558944600673539,
+        "accuracy": 0.8319827404756893,
+        "per_class": {
+          "negativo": {
+            "precision": 0.821537290715373,
+            "recall": 0.8832071998363673,
+            "f1-score": 0.851256776737309,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.5508771929824562,
+            "recall": 0.13209928481278924,
+            "f1-score": 0.2130980658296573,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8483077857034451,
+            "recall": 0.9523768955529051,
+            "f1-score": 0.8973350457537326,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4318,
+            83,
+            488
+          ],
+          [
+            552,
+            314,
+            1511
+          ],
+          [
+            386,
+            173,
+            11179
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 10,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 2,
+      "params": {
+        "C": 0.1,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 1.8018184439999914,
+      "validation_predict_seconds_single_batch": 0.19231200000012905,
+      "metrics": {
+        "f1_macro": 0.7123580369943534,
+        "precision_macro": 0.7101250127582762,
+        "recall_macro": 0.7161493217716765,
+        "accuracy": 0.8218796042938329,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8178564701450367,
+            "recall": 0.888116179177746,
+            "f1-score": 0.8515395175524613,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.4115207373271889,
+            "recall": 0.37568363483382416,
+            "f1-score": 0.39278645260611394,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.900997830802603,
+            "recall": 0.8846481513034589,
+            "f1-score": 0.8927481408244853,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4342,
+            355,
+            192
+          ],
+          [
+            535,
+            893,
+            949
+          ],
+          [
+            432,
+            922,
+            10384
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 12,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 3,
+      "params": {
+        "C": 1.0,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 2.7883167929999217,
+      "validation_predict_seconds_single_batch": 0.18705846499983636,
+      "metrics": {
+        "f1_macro": 0.6673641059805652,
+        "precision_macro": 0.7075817886310936,
+        "recall_macro": 0.6632601587987995,
+        "accuracy": 0.824405388339297,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8196657598134474,
+            "recall": 0.8627531192472898,
+            "f1-score": 0.8406576980568012,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.44708209693372897,
+            "recall": 0.19015565839293228,
+            "f1-score": 0.2668240850059032,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8559975091461042,
+            "recall": 0.9368716987561765,
+            "f1-score": 0.8946105348789912,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4218,
+            207,
+            464
+          ],
+          [
+            539,
+            452,
+            1386
+          ],
+          [
+            389,
+            352,
+            10997
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 17,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 4,
+      "params": {
+        "C": 1.0,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 2.9018679829998746,
+      "validation_predict_seconds_single_batch": 0.18986965399994915,
+      "metrics": {
+        "f1_macro": 0.6941398666297243,
+        "precision_macro": 0.6908809751109987,
+        "recall_macro": 0.697736070504742,
+        "accuracy": 0.8052515259945274,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8163863903011341,
+            "recall": 0.8539578645939865,
+            "f1-score": 0.8347495751274617,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.3650126156433978,
+            "recall": 0.3651661758519142,
+            "f1-score": 0.3650893796004206,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8912439193884643,
+            "recall": 0.8740841710683251,
+            "f1-score": 0.8825806451612903,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4175,
+            453,
+            261
+          ],
+          [
+            518,
+            868,
+            991
+          ],
+          [
+            421,
+            1057,
+            10260
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 18,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 5,
+      "params": {
+        "C": 10.0,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 5.558065209000006,
+      "validation_predict_seconds_single_batch": 0.18180095799993978,
+      "metrics": {
+        "f1_macro": 0.6495133363752205,
+        "precision_macro": 0.6643069465499686,
+        "recall_macro": 0.6453658765656402,
+        "accuracy": 0.796727004841086,
+        "per_class": {
+          "negativo": {
+            "precision": 0.7986738999397227,
+            "recall": 0.8130497034158315,
+            "f1-score": 0.8057976890330427,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.3447811447811448,
+            "recall": 0.2153975599495162,
+            "f1-score": 0.2651475919212843,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8494657949290384,
+            "recall": 0.9076503663315727,
+            "f1-score": 0.8775947281713344,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            3975,
+            349,
+            565
+          ],
+          [
+            542,
+            512,
+            1323
+          ],
+          [
+            460,
+            624,
+            10654
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 31,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 6,
+      "params": {
+        "C": 10.0,
+        "ngram_range": [
+          1,
+          1
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 6.3912497049998365,
+      "validation_predict_seconds_single_batch": 0.18054700399989088,
+      "metrics": {
+        "f1_macro": 0.6633361062855228,
+        "precision_macro": 0.6608684593872599,
+        "recall_macro": 0.6663551849823142,
+        "accuracy": 0.7757840454641128,
+        "per_class": {
+          "negativo": {
+            "precision": 0.7931735067045916,
+            "recall": 0.7985273061975864,
+            "f1-score": 0.7958414025073897,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.31683927886459534,
+            "recall": 0.3474968447623054,
+            "f1-score": 0.33146067415730335,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8725925925925926,
+            "recall": 0.8530414039870506,
+            "f1-score": 0.8627062421918752,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            3904,
+            560,
+            425
+          ],
+          [
+            514,
+            826,
+            1037
+          ],
+          [
+            504,
+            1221,
+            10013
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 20613,
+      "n_iter": 30,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 7,
+      "params": {
+        "C": 0.1,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 3.9691995289999795,
+      "validation_predict_seconds_single_batch": 0.33825206999995316,
+      "metrics": {
+        "f1_macro": 0.6778034237814229,
+        "precision_macro": 0.7638402652002528,
+        "recall_macro": 0.6751896259306557,
+        "accuracy": 0.8447169017049042,
+        "per_class": {
+          "negativo": {
+            "precision": 0.837160751565762,
+            "recall": 0.9022294947842094,
+            "f1-score": 0.868478046859618,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.593939393939394,
+            "recall": 0.16491375683634835,
+            "f1-score": 0.2581494896279223,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8604206500956023,
+            "recall": 0.9584256261714091,
+            "f1-score": 0.9067827348567283,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4411,
+            88,
+            390
+          ],
+          [
+            550,
+            392,
+            1435
+          ],
+          [
+            308,
+            180,
+            11250
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 11,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 8,
+      "params": {
+        "C": 0.1,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 3.8787205889998404,
+      "validation_predict_seconds_single_batch": 0.34449524100000417,
+      "metrics": {
+        "f1_macro": 0.727137205869873,
+        "precision_macro": 0.7282557775870497,
+        "recall_macro": 0.7287705070211393,
+        "accuracy": 0.8351925910334667,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8290758827948911,
+            "recall": 0.9028431172018818,
+            "f1-score": 0.8643885244296485,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.45056566650270535,
+            "recall": 0.3853596970971813,
+            "f1-score": 0.41541950113378684,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.9051257834635529,
+            "recall": 0.8981087067643551,
+            "f1-score": 0.9016035920461835,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4414,
+            310,
+            165
+          ],
+          [
+            521,
+            916,
+            940
+          ],
+          [
+            389,
+            807,
+            10542
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 12,
+      "converged": true,
+      "warning_categories": [],
+      "inference": {
+        "batch_size": 256,
+        "repeats": 3,
+        "warmup_batches": 1,
+        "samples_per_repeat": 19004,
+        "seconds_per_repeat": [
+          0.43499122599996554,
+          0.451021875999686,
+          0.42299151799988977
+        ],
+        "median_seconds": 0.43499122599996554,
+        "milliseconds_per_text_amortized": 0.022889456219741398,
+        "texts_per_second": 43688.23751861493,
+        "includes_text_preprocessing": true,
+        "includes_disk_io": false
+      }
+    },
+    {
+      "candidate_id": 9,
+      "params": {
+        "C": 1.0,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 5.524149067000053,
+      "validation_predict_seconds_single_batch": 0.3415468610000971,
+      "metrics": {
+        "f1_macro": 0.7001818957632908,
+        "precision_macro": 0.7298567698160744,
+        "recall_macro": 0.6934758627723084,
+        "accuracy": 0.8376131340770364,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8414445731942835,
+            "recall": 0.8911842912661075,
+            "f1-score": 0.8656004768054038,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.4750390015600624,
+            "recall": 0.2562053007993269,
+            "f1-score": 0.33287783547417327,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8730867346938775,
+            "recall": 0.9330379962514909,
+            "f1-score": 0.9020673750102957,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4357,
+            201,
+            331
+          ],
+          [
+            507,
+            609,
+            1261
+          ],
+          [
+            314,
+            472,
+            10952
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 18,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 10,
+      "params": {
+        "C": 1.0,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 5.593970566000053,
+      "validation_predict_seconds_single_batch": 0.3515151110000261,
+      "metrics": {
+        "f1_macro": 0.7106730596637615,
+        "precision_macro": 0.7104013990745189,
+        "recall_macro": 0.7122018517811041,
+        "accuracy": 0.8235634603241423,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8366441658630666,
+            "recall": 0.8872980159541829,
+            "f1-score": 0.8612269207861822,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.3995305164319249,
+            "recall": 0.3580143037442154,
+            "f1-score": 0.3776347903261593,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8950295149285653,
+            "recall": 0.8912932356449139,
+            "f1-score": 0.8931574678789431,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4338,
+            337,
+            214
+          ],
+          [
+            513,
+            851,
+            1013
+          ],
+          [
+            334,
+            942,
+            10462
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 21,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 11,
+      "params": {
+        "C": 10.0,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": null
+      },
+      "fit_seconds": 8.630387652000081,
+      "validation_predict_seconds_single_batch": 0.3496809209998446,
+      "metrics": {
+        "f1_macro": 0.6801964035322722,
+        "precision_macro": 0.6851062086198807,
+        "recall_macro": 0.676704376531743,
+        "accuracy": 0.8038833929699011,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8375946001227245,
+            "recall": 0.8375946001227245,
+            "f1-score": 0.8375946001227245,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.3511787819253438,
+            "recall": 0.3007993268826252,
+            "f1-score": 0.32404260140493996,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8665452438115738,
+            "recall": 0.891719202589879,
+            "f1-score": 0.8789520090691523,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4095,
+            381,
+            413
+          ],
+          [
+            463,
+            715,
+            1199
+          ],
+          [
+            331,
+            940,
+            10467
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 38,
+      "converged": true,
+      "warning_categories": []
+    },
+    {
+      "candidate_id": 12,
+      "params": {
+        "C": 10.0,
+        "ngram_range": [
+          1,
+          2
+        ],
+        "class_weight": "balanced"
+      },
+      "fit_seconds": 9.124452794000035,
+      "validation_predict_seconds_single_batch": 0.39614106399994853,
+      "metrics": {
+        "f1_macro": 0.67969233905078,
+        "precision_macro": 0.6796384114309991,
+        "recall_macro": 0.6797463792709074,
+        "accuracy": 0.7956219743211955,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8375229920294298,
+            "recall": 0.8382082225403968,
+            "f1-score": 0.8378654671846248,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.3287037037037037,
+            "recall": 0.3285654185948675,
+            "f1-score": 0.328634546602146,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.8726885385598636,
+            "recall": 0.8724654966774579,
+            "f1-score": 0.872577003365569,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4098,
+            422,
+            369
+          ],
+          [
+            471,
+            781,
+            1125
+          ],
+          [
+            324,
+            1173,
+            10241
+          ]
+        ],
+        "samples": 19004
+      },
+      "vocabulary_size": 80000,
+      "n_iter": 31,
+      "converged": true,
+      "warning_categories": []
+    }
+  ],
+  "best_svm_candidate_id": 8,
+  "selected": {
+    "name": "svm",
+    "candidate_id": 8,
+    "metrics": {
+      "f1_macro": 0.727137205869873,
+      "precision_macro": 0.7282557775870497,
+      "recall_macro": 0.7287705070211393,
+      "accuracy": 0.8351925910334667,
+      "per_class": {
+        "negativo": {
+          "precision": 0.8290758827948911,
+          "recall": 0.9028431172018818,
+          "f1-score": 0.8643885244296485,
+          "support": 4889.0
+        },
+        "neutro": {
+          "precision": 0.45056566650270535,
+          "recall": 0.3853596970971813,
+          "f1-score": 0.41541950113378684,
+          "support": 2377.0
+        },
+        "positivo": {
+          "precision": 0.9051257834635529,
+          "recall": 0.8981087067643551,
+          "f1-score": 0.9016035920461835,
+          "support": 11738.0
+        }
+      },
+      "label_order": [
+        0,
+        1,
+        2
+      ],
+      "label_names": [
+        "negativo",
+        "neutro",
+        "positivo"
+      ],
+      "confusion_matrix": [
+        [
+          4414,
+          310,
+          165
+        ],
+        [
+          521,
+          916,
+          940
+        ],
+        [
+          389,
+          807,
+          10542
+        ]
+      ],
+      "samples": 19004
+    },
+    "selection_metric": "validation_f1_macro",
+    "tie_break": "first_grid_candidate; dummy_on_global_tie",
+    "refit_on_train_plus_val": false
+  },
+  "timing": {
+    "search_and_validation_seconds": 62.630196078999916,
+    "experiment_seconds_before_report_write": 65.18982604500002,
+    "fit_includes": "TF-IDF fit_transform + LinearSVC fit; Dummy fit ignores text",
+    "inference_conditions": "sequential CPU; no GPU; warmed in-memory batches; wall clock",
+    "thread_limit": 1,
+    "process_peak_rss_bytes": 489947136,
+    "peak_rss_scope": "whole process, including loading/search/serialization; not per model"
+  },
+  "model_artifact": {
+    "file": "selected_model.joblib",
+    "sha256": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623",
+    "bytes": 2772715,
+    "validation_roundtrip_verified": true
+  },
+  "limitations": [
+    "Validation used for selection; not an unbiased final performance estimate.",
+    "Star-derived labels; commerce domain from 2018.",
+    "Near-duplicates/authors/products may overlap; exact duplicate texts removed.",
+    "Word TF-IDF ignores most punctuation/emojis and one-character tokens.",
+    "LinearSVC margins are not calibrated probabilities.",
+    "Times depend on host load/hardware; throughput is not request latency."
+  ]
+}

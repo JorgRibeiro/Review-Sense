@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.1
+# ReviewSense PT-BR — Plano técnico v1.2
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 28/10/2026. **Estado:** Fase 1 implementada e validada localmente; modelos ainda não treinados, avaliados ou publicados.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Teste final reservado; BERTimbau e publicação ainda não iniciados.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -104,10 +104,10 @@ reviewsense-ptbr/
 ## 6. MVP e critérios de aceite
 
 **MVP 1 — Pesquisa e modelo (prioridade máxima):**
-- [ ] Script que baixa os dados, verifica o esquema e constrói as classes
+- [x] Script que baixa os dados, verifica o esquema e constrói as classes
 - [ ] EDA com distribuição de classes, nulos, duplicados e exemplos auditados
-- [ ] Splits reproduzíveis e ausência de vazamento por textos idênticos
-- [ ] Baseline TF-IDF + LinearSVC treinado e avaliado
+- [x] Splits reproduzíveis e ausência de vazamento por textos idênticos
+- [x] Baseline TF-IDF + LinearSVC treinado e avaliado na validação; teste reservado
 - [ ] BERTimbau Base fine-tuned com PyTorch/Transformers e checkpoint salvo
 - [ ] Comparativo real usando F1 macro, métricas por classe e matriz de confusão
 - [ ] Modelo e tokenizer publicados no HF Hub com Model Card (dados, método, limitações, avaliação)
@@ -134,3 +134,15 @@ Concluir o MVP apenas com links verificáveis de GitHub e HF Hub, resultados rea
 ## 8. Primeira etapa da implementação
 
 Criar repositório local, ambiente/dependências, `src/reviewsense/labels.py`, `src/reviewsense/data.py`, `tests/test_labels.py` e `notebooks/01_data_audit_eda.ipynb`. Validar o dataset e congelar o protocolo de splits antes de treinar os modelos.
+
+## 9. Fase 2 — Baseline clássico implementado
+
+Branch: `feat/phase2-classical-baseline`. Usar os artefatos congelados da Fase 1,
+com leitura exclusiva de treino e validação. Comparar DummyClassifier e 12
+configurações de TF-IDF + LinearSVC em CPU, conforme `configs/baseline.json`.
+Selecionar por F1 macro de validação, sem refit em treino+validação. Não abrir o
+CSV de teste, alterar splits, treinar BERTimbau ou usar GPU nesta fase.
+
+Protocolo, conceitos e funções: `docs/FASE2_BASELINE.md`. Resultados reais,
+condições de medição e evidências: `reports/validation_phase2.md`. Os pesos e o
+vocabulário do modelo permanecem locais; somente métricas agregadas são versionadas.

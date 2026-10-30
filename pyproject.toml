@@ -13,6 +13,8 @@ dependencies = [
     "numpy>=1.26,<3",
     "pandas>=2.2,<4",
     "scikit-learn>=1.5,<2",
+    "joblib>=1.4,<2",
+    "threadpoolctl>=3.5,<4",
     "matplotlib>=3.8,<4",
 ]
 
@@ -21,6 +23,7 @@ dev = ["pytest>=8,<10", "ruff>=0.9,<1", "nbformat>=5.10,<6", "nbclient>=0.10,<1"
 
 [project.scripts]
 reviewsense-data = "reviewsense.data:main"
+reviewsense-baseline = "reviewsense.baseline:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
