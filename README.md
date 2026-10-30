@@ -5,7 +5,8 @@ seguindo [o plano técnico](ReviewSense_PTBR_PLANO.md). A Fase 1 prepara os dado
 a **Fase 2** compara DummyClassifier e TF-IDF + LinearSVC em CPU local, usando
 apenas treino e validação. A **Fase 3A** executa um smoke de BERTimbau em GPU local,
 limitado a 256/96 exemplos. A **Fase 3B** concluiu três épocas nos 88.684 textos
-de treino, após piloto de GPU e prova de retomada. **O teste final fica reservado.**
+de treino, após piloto de GPU e prova de retomada. A **Fase 3C** concluiu a avaliação
+independente no teste, com protocolo congelado e uma passagem por modelo.
 
 As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (1),
 4–5 → positivo (2)**. Isso é uma proxy de sentimento, não uma anotação direta.
@@ -148,6 +149,38 @@ piloto e checkpoints completos. Consulte os resultados sem repetir o treino em
 Pesos, tokens individuais e estados de otimização permanecem locais e fora do Git.
 Não houve uso de Colab nem publicação no Hub.
 
+## Fase 3C — Avaliação final independente concluída
+
+O protocolo e o código foram congelados no commit `90893aa` antes da abertura do
+teste. O preflight validou modelos offline e GPU com zero acessos ao teste. A
+execução definitiva fez **uma leitura do CSV e uma passagem por modelo** nos
+mesmos **19.004 textos**, sem treino, refit, calibração ou nova seleção.
+
+| Modelo | F1 Macro de teste | Accuracy de teste |
+| --- | ---: | ---: |
+| TF-IDF + LinearSVC | 0,723094 | 0,832509 |
+| BERTimbau época 1/update 5543 | 0,754461 | 0,863397 |
+
+Diferença absoluta de F1 Macro (BERT−SVM): **0,031367**.
+O candidato principal continua sendo o BERTimbau, definido antes do teste.
+A comparação é descritiva, sem alegação de superioridade estatística.
+Resultados de validação das fases anteriores permanecem preservados.
+
+Consulte o [relatório final](reports/validation_phase3c.md), as
+[métricas estruturadas](reports/phase3c_final_metrics.json), o
+[protocolo congelado](docs/FASE3C_PROTOCOL.md) e o
+[guia técnico](docs/FASE3C_FINAL_EVALUATION.md). O
+[notebook 04](notebooks/04_final_model_comparison.ipynb) só inspeciona agregados.
+Para regenerar tabelas/figuras a partir da execução salva, sem nova inferência:
+
+```bash
+.venv/bin/python -m reviewsense.final_evaluation --render-saved
+```
+
+A execução final está encerrada; o marcador local impede repetição, inclusive
+após falha. O teste agora é informação observada e não deve orientar ajustes neste
+experimento. A Fase 4 (Model Card, publicação e Gradio) continua pendente.
+
 ## Notebook local e alternativa no Google Colab
 
 Abra [`notebooks/01_data_audit_eda.ipynb`](notebooks/01_data_audit_eda.ipynb).
@@ -224,6 +257,8 @@ src/reviewsense/phase3b_data.py       # Comprimentos, cache e escolha computacio
 src/reviewsense/gpu_benchmark.py      # Benchmark controlado e monitor NVML
 src/reviewsense/train_bertimbau.py    # Treino completo, seleção e estado retomável
 src/reviewsense/phase3b.py            # CLI de preparação, piloto e gates
+src/reviewsense/final_evaluation.py   # Preflight e avaliação única, sem ajuste
+src/reviewsense/final_reporting.py    # Relatório e figuras a partir de agregados
 src/reviewsense/predict.py           # Reserva para inferência pública futura
 notebooks/01_data_audit_eda.ipynb     # Auditoria e gráficos usando os módulos
 notebooks/02_tfidf_svm_baseline.ipynb  # Comparação dos modelos na validação
@@ -243,6 +278,9 @@ reports/bertimbau_smoke_metrics.json  # Métricas agregadas, VRAM e verificaçã
 notebooks/03_bertimbau_finetune.ipynb # Inspeção dos resultados, sem treinar
 reports/validation_phase3b.md         # Piloto, três épocas, memória e retomada
 reports/bertimbau_phase3b_metrics.json # Métricas agregadas e verificações finais
+notebooks/04_final_model_comparison.ipynb # Comparação final sem repetir inferência
+reports/validation_phase3c.md         # Avaliação final independente
+reports/phase3c_final_metrics.json    # Métricas definitivas e condições de execução
 reports/figures/                     # Destino de figuras agregadas
 ```
 

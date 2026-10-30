@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.4
+# ReviewSense PT-BR — Plano técnico v1.5
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Teste final e publicação continuam pendentes.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Fase 3C concluída com avaliação independente de teste; publicação continua pendente.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -109,7 +109,7 @@ reviewsense-ptbr/
 - [x] Splits reproduzíveis e ausência de vazamento por textos idênticos
 - [x] Baseline TF-IDF + LinearSVC treinado e avaliado na validação; teste reservado
 - [x] BERTimbau Base fine-tuned nos 88.684 textos de treino, checkpoint e estado retomável salvos (Fase 3B)
-- [x] Comparativo de validação usando F1 macro, métricas por classe e matriz de confusão; teste final pendente
+- [x] Comparativo independente no teste usando F1 macro, métricas por classe, matrizes e concordância pareada (Fase 3C)
 - [ ] Modelo e tokenizer publicados no HF Hub com Model Card (dados, método, limitações, avaliação)
 - [x] README com instruções para reproduzir e links dos resultados de validação
 
@@ -182,3 +182,25 @@ Resultados completos, medições de GPU, incidentes numéricos e limitações:
 [FASE3B_BERTIMBAU.md](docs/FASE3B_BERTIMBAU.md). O notebook 03 apenas inspeciona
 resultados salvos. O teste final não foi aberto; publicação e demonstração continuam
 pendentes. A comparação de validação com SVM não constitui avaliação independente.
+
+
+## 12. Fase 3C — Avaliação final independente concluída
+
+Branch `feat/phase3c-final-evaluation`, a partir da main 5d18377. Código/configuração
+com protocolo imutável congelados em `90893aa` antes da abertura do teste. Preflight
+com zero acessos, modelos offline e benchmark na validação. Uma execução definitiva
+com uma leitura de test.csv e uma passagem por modelo nos mesmos 19.004 exemplos.
+Sem treinamento, refit, calibração, tuning ou seleção orientada pelo teste.
+
+F1 Macro de teste: **SVM 0,723094; BERTimbau 0,754461**.
+BERTimbau da época 1/update 5543 permanece o candidato definido anteriormente.
+Comparação descritiva, sem afirmação de superioridade estatística. Relatório e
+métricas: [validation_phase3c.md](reports/validation_phase3c.md) e
+[phase3c_final_metrics.json](reports/phase3c_final_metrics.json). O notebook 04
+reabre somente agregados e não executa inferência. Os relatórios e artefatos
+anteriores foram preservados. O teste não deve orientar novos ajustes no experimento.
+
+A parte de treinamento e avaliação planejada está encerrada. Fase 4 (publicação,
+Model Card e Gradio) permanece pendente; não houve publicação, push ou merge
+nesta entrega. Limitações de domínio, proxy por estrelas e neutralidade continuam
+explicitadas nos relatórios.

@@ -1,0 +1,623 @@
+{
+  "models": {
+    "svm": {
+      "metrics": {
+        "f1_macro": 0.7230938667235973,
+        "precision_macro": 0.7228302528752341,
+        "recall_macro": 0.7262901588268904,
+        "accuracy": 0.832508945485161,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8191922934420156,
+            "recall": 0.9042944785276074,
+            "f1-score": 0.859642301710731,
+            "support": 4890.0
+          },
+          "neutro": {
+            "precision": 0.44119082479258176,
+            "recall": 0.38047138047138046,
+            "f1-score": 0.40858757062146894,
+            "support": 2376.0
+          },
+          "positivo": {
+            "precision": 0.9081076403911049,
+            "recall": 0.8941046174816835,
+            "f1-score": 0.901051727838592,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4422,
+            330,
+            138
+          ],
+          [
+            548,
+            904,
+            924
+          ],
+          [
+            428,
+            815,
+            10495
+          ]
+        ],
+        "samples": 19004
+      },
+      "errors": 3183,
+      "error_fraction": 0.16749105451483898,
+      "inference": {
+        "samples": 19004,
+        "seconds": 0.41263643999991473,
+        "texts_per_second": 46055.06968798957,
+        "milliseconds_per_text_amortized": 0.021713136181851965,
+        "process_rss_peak_sampled_bytes": 1677828096,
+        "rss_sampling_interval_seconds": 0.01,
+        "rss_scope": "whole process including both loaded models; not incremental model memory",
+        "pytorch": null,
+        "driver": null,
+        "includes_preprocessing_transfers_prediction": true,
+        "includes_model_loading_disk_io_metrics_warmup": false,
+        "request_latency_measured": false
+      }
+    },
+    "bertimbau": {
+      "metrics": {
+        "f1_macro": 0.7544611794363947,
+        "precision_macro": 0.7704919166001464,
+        "recall_macro": 0.7462112828169135,
+        "accuracy": 0.8633971795411493,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8795749704840614,
+            "recall": 0.9141104294478528,
+            "f1-score": 0.8965102286401926,
+            "support": 4890.0
+          },
+          "neutro": {
+            "precision": 0.5273459988485896,
+            "recall": 0.38552188552188554,
+            "f1-score": 0.44541697058108437,
+            "support": 2376.0
+          },
+          "positivo": {
+            "precision": 0.9045547804677883,
+            "recall": 0.9390015334810019,
+            "f1-score": 0.921456339087907,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4470,
+            292,
+            128
+          ],
+          [
+            425,
+            916,
+            1035
+          ],
+          [
+            187,
+            529,
+            11022
+          ]
+        ],
+        "samples": 19004
+      },
+      "errors": 2596,
+      "error_fraction": 0.13660282045885078,
+      "inference": {
+        "samples": 19004,
+        "seconds": 97.38775104999877,
+        "texts_per_second": 195.13747668578327,
+        "milliseconds_per_text_amortized": 5.1245922463691205,
+        "process_rss_peak_sampled_bytes": 1949188096,
+        "rss_sampling_interval_seconds": 0.01,
+        "rss_scope": "whole process including both loaded models; not incremental model memory",
+        "pytorch": {
+          "allocated_bytes": 470536704,
+          "reserved_bytes": 694157312,
+          "peak_allocated_bytes": 492313088,
+          "peak_reserved_bytes": 694157312,
+          "device_free_bytes": 4335337472,
+          "device_visible_total_bytes": 6132858880
+        },
+        "driver": {
+          "source": "NVML",
+          "sampling_interval_seconds": 0.05,
+          "samples": 1938,
+          "total_bytes": 6442450944,
+          "peak_used_bytes_sampled": 2129395712,
+          "min_free_bytes": 4313055232,
+          "peak_utilization_percent_sampled": 89,
+          "errors": [],
+          "includes_other_processes_and_driver": true
+        },
+        "includes_preprocessing_transfers_prediction": true,
+        "includes_model_loading_disk_io_metrics_warmup": false,
+        "request_latency_measured": false
+      }
+    }
+  },
+  "paired_agreement": {
+    "both_correct": 15290,
+    "both_wrong": 2065,
+    "only_svm_correct": 531,
+    "only_bertimbau_correct": 1118,
+    "samples": 19004
+  },
+  "comparison": {
+    "f1_macro_difference_absolute": 0.03136731271279736,
+    "f1_macro_difference_relative": 0.04337930959769503
+  },
+  "schema_version": 1,
+  "phase": "3C",
+  "status": "completed",
+  "started_at": "2026-10-30T15:52:19.791050-03:00",
+  "finished_at": "2026-10-30T15:53:58.752652-03:00",
+  "git": {
+    "commit": "90893aa3fe3053433e3e72a22977fc40747bed5f",
+    "branch": "feat/phase3c-final-evaluation",
+    "clean": true
+  },
+  "software": {
+    "python": "3.11.14",
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "accelerate": "1.15.0"
+  },
+  "gpu": {
+    "device": "cuda:0",
+    "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+    "compute_capability": [
+      8,
+      6
+    ],
+    "total_memory_bytes_torch": 6132858880,
+    "free_memory_bytes_at_diagnosis": 5002231808,
+    "visible_memory_bytes": 6132858880,
+    "fp16_operation_supported": true,
+    "torch": "2.14.1+cu132",
+    "cuda_build": "13.2",
+    "cudnn": 92400,
+    "nvidia_smi": [
+      {
+        "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+        "driver_version": "615.78.08",
+        "memory.total": "6144",
+        "memory.used": "1079",
+        "utilization.gpu": "18"
+      }
+    ]
+  },
+  "inventory": {
+    "configs/phase3c_final.json": "3c98596d536ea5409136be285247c0d0ab8449bffb28c8a6fab13f2c7af2319b",
+    "docs/FASE3C_PROTOCOL.md": "a664dabc140d9bb05dce9ee58ecb48f73d6f81aeef8711618247cdb6a2a2b45e",
+    "reports/data_audit_summary.json": "8b02a1e3584c361bdbf57e7fc5ffa1904daaa7448a6aa80a9563f1eec42ebade",
+    "reports/baseline_validation.json": "aba24f67a633d052ace94b7d7db4dfefc1b03885b696af4094f58bd5847bc8f6",
+    "reports/bertimbau_phase3b_metrics.json": "5b231d9b67bd2572cea0e7446f10bdd590099803700ba7808b6a5fd62728248c",
+    "data/processed/phase1-final/manifest.json": "6469cafdd878deeadfd9ac20083ce6b3d5ec6856a1c6478716589a4978fa8bcd",
+    "data/processed/phase1-final/train.csv": "d6508aa963d2877398501d4b8b7f9ba17653fed8fed12ad26b7d00af31aca52c",
+    "data/processed/phase1-final/val.csv": "e743636fe5aad8c3a71c0625e5f5585bbd318e11812f4cfcc1cd371b7ad6daed",
+    "models/baseline/phase2-v1/selected_model.joblib": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623",
+    "models/baseline/phase2-v1/results.json": "aba24f67a633d052ace94b7d7db4dfefc1b03885b696af4094f58bd5847bc8f6",
+    "models/baseline/phase2-v1/config.json": "568c26d6b8ddc2297a56c5d8144688f2a0f5f0d41e33addec1230f57de45138c",
+    "models/bertimbau/phase3b-full-v3/best_model/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "models/bertimbau/phase3b-full-v3/checkpoint-5543/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "models/bertimbau/phase3b-full-v3/best_model/config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+    "models/bertimbau/phase3b-full-v3/best_model/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+    "models/bertimbau/phase3b-full-v3/best_model/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a",
+    "models/bertimbau/phase3b-full-v3/checkpoint-5543/config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+    "models/bertimbau/phase3b-full-v3/checkpoint-5543/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+    "models/bertimbau/phase3b-full-v3/checkpoint-5543/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a",
+    "src/reviewsense/__init__.py": "dba8fd99295b2efd2109db101eee1bf5434749e98e71c9d59af0c7e378c6ac6c",
+    "src/reviewsense/labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1",
+    "src/reviewsense/predict.py": "7c622e107dd451aaebb636ba45b8116c22f571748ebacf337c65bdce5ae4136a",
+    "src/reviewsense/data.py": "906ba34e293cfc73534d31f69d1043dbf0dfaadb5cd9c6a3b882eb9f3d865dd5",
+    "src/reviewsense/baseline.py": "f5eade48e071901187b47f10df6038eefe366806d66e1a330b5a9c04061e9e9f",
+    "src/reviewsense/evaluate.py": "f593dc59e338278467229ea6c20583348a061e0427f9b55c100a05c3535542f1",
+    "src/reviewsense/frozen_data.py": "e50b20bfa1ba9b976398fb70c4bacb258bcc561eb4b32d1207115f7dc9ec4d22",
+    "src/reviewsense/gpu_benchmark.py": "799c4317597c77fc94b534f6dbab11d9e118e69b89f941aa4d027ddbd7940afc",
+    "src/reviewsense/phase3b.py": "361d7fc559093078ab10bb058c0fadc0bbf05ffebaa228422482093ede077294",
+    "src/reviewsense/phase3b_data.py": "4112b58a61d9f0b066f9cbc301820b793f5333898b909d08568505d2c295995b",
+    "src/reviewsense/train_bertimbau.py": "3209e9b5a13f2aea79a8a3c7ac6e52d4f38b0fbb7fe6ab746773e32c27dfacb8",
+    "src/reviewsense/train_transformer.py": "602b53cf7a6ea3153186bea3872b6064909bc735091e17dccb5553ff8ed47609",
+    "src/reviewsense/transformer_data.py": "f704a4c19d4d029dd81fccf7bc0e0900fb672125dce3ac3c99273938da936ea0",
+    "src/reviewsense/final_evaluation.py": "16ca66878ed610a62cca869b2754c814822b4caaac358dc8fe8d5125175d3c72",
+    "src/reviewsense/final_reporting.py": "cfc0e1c13f9d5c15370cfc47c7522484d7009e61361085c1516cba361d0b349c"
+  },
+  "preflight": {
+    "status": "approved",
+    "created_at": "2026-10-30T15:51:59.085908-03:00",
+    "git": {
+      "commit": "90893aa3fe3053433e3e72a22977fc40747bed5f",
+      "branch": "feat/phase3c-final-evaluation",
+      "clean": true
+    },
+    "inventory": {
+      "configs/phase3c_final.json": "3c98596d536ea5409136be285247c0d0ab8449bffb28c8a6fab13f2c7af2319b",
+      "docs/FASE3C_PROTOCOL.md": "a664dabc140d9bb05dce9ee58ecb48f73d6f81aeef8711618247cdb6a2a2b45e",
+      "reports/data_audit_summary.json": "8b02a1e3584c361bdbf57e7fc5ffa1904daaa7448a6aa80a9563f1eec42ebade",
+      "reports/baseline_validation.json": "aba24f67a633d052ace94b7d7db4dfefc1b03885b696af4094f58bd5847bc8f6",
+      "reports/bertimbau_phase3b_metrics.json": "5b231d9b67bd2572cea0e7446f10bdd590099803700ba7808b6a5fd62728248c",
+      "data/processed/phase1-final/manifest.json": "6469cafdd878deeadfd9ac20083ce6b3d5ec6856a1c6478716589a4978fa8bcd",
+      "data/processed/phase1-final/train.csv": "d6508aa963d2877398501d4b8b7f9ba17653fed8fed12ad26b7d00af31aca52c",
+      "data/processed/phase1-final/val.csv": "e743636fe5aad8c3a71c0625e5f5585bbd318e11812f4cfcc1cd371b7ad6daed",
+      "models/baseline/phase2-v1/selected_model.joblib": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623",
+      "models/baseline/phase2-v1/results.json": "aba24f67a633d052ace94b7d7db4dfefc1b03885b696af4094f58bd5847bc8f6",
+      "models/baseline/phase2-v1/config.json": "568c26d6b8ddc2297a56c5d8144688f2a0f5f0d41e33addec1230f57de45138c",
+      "models/bertimbau/phase3b-full-v3/best_model/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+      "models/bertimbau/phase3b-full-v3/checkpoint-5543/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+      "models/bertimbau/phase3b-full-v3/best_model/config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+      "models/bertimbau/phase3b-full-v3/best_model/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+      "models/bertimbau/phase3b-full-v3/best_model/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a",
+      "models/bertimbau/phase3b-full-v3/checkpoint-5543/config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+      "models/bertimbau/phase3b-full-v3/checkpoint-5543/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+      "models/bertimbau/phase3b-full-v3/checkpoint-5543/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a",
+      "src/reviewsense/__init__.py": "dba8fd99295b2efd2109db101eee1bf5434749e98e71c9d59af0c7e378c6ac6c",
+      "src/reviewsense/labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1",
+      "src/reviewsense/predict.py": "7c622e107dd451aaebb636ba45b8116c22f571748ebacf337c65bdce5ae4136a",
+      "src/reviewsense/data.py": "906ba34e293cfc73534d31f69d1043dbf0dfaadb5cd9c6a3b882eb9f3d865dd5",
+      "src/reviewsense/baseline.py": "f5eade48e071901187b47f10df6038eefe366806d66e1a330b5a9c04061e9e9f",
+      "src/reviewsense/evaluate.py": "f593dc59e338278467229ea6c20583348a061e0427f9b55c100a05c3535542f1",
+      "src/reviewsense/frozen_data.py": "e50b20bfa1ba9b976398fb70c4bacb258bcc561eb4b32d1207115f7dc9ec4d22",
+      "src/reviewsense/gpu_benchmark.py": "799c4317597c77fc94b534f6dbab11d9e118e69b89f941aa4d027ddbd7940afc",
+      "src/reviewsense/phase3b.py": "361d7fc559093078ab10bb058c0fadc0bbf05ffebaa228422482093ede077294",
+      "src/reviewsense/phase3b_data.py": "4112b58a61d9f0b066f9cbc301820b793f5333898b909d08568505d2c295995b",
+      "src/reviewsense/train_bertimbau.py": "3209e9b5a13f2aea79a8a3c7ac6e52d4f38b0fbb7fe6ab746773e32c27dfacb8",
+      "src/reviewsense/train_transformer.py": "602b53cf7a6ea3153186bea3872b6064909bc735091e17dccb5553ff8ed47609",
+      "src/reviewsense/transformer_data.py": "f704a4c19d4d029dd81fccf7bc0e0900fb672125dce3ac3c99273938da936ea0",
+      "src/reviewsense/final_evaluation.py": "16ca66878ed610a62cca869b2754c814822b4caaac358dc8fe8d5125175d3c72",
+      "src/reviewsense/final_reporting.py": "cfc0e1c13f9d5c15370cfc47c7522484d7009e61361085c1516cba361d0b349c"
+    },
+    "software": {
+      "python": "3.11.14",
+      "torch": "2.14.1+cu132",
+      "transformers": "5.22.1",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.4.6",
+      "pandas": "3.1.0",
+      "accelerate": "1.15.0"
+    },
+    "gpu": {
+      "device": "cuda:0",
+      "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+      "compute_capability": [
+        8,
+        6
+      ],
+      "total_memory_bytes_torch": 6132858880,
+      "free_memory_bytes_at_diagnosis": 5011537920,
+      "visible_memory_bytes": 6132858880,
+      "fp16_operation_supported": true,
+      "torch": "2.14.1+cu132",
+      "cuda_build": "13.2",
+      "cudnn": 92400,
+      "nvidia_smi": [
+        {
+          "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+          "driver_version": "615.78.08",
+          "memory.total": "6144",
+          "memory.used": "1070",
+          "utilization.gpu": "1"
+        }
+      ]
+    },
+    "data": {
+      "preprocessing": "nfc-whitespace-deduplicate-drop-label-conflicts-v1",
+      "source": {
+        "kind": "official_csv",
+        "url": "https://raw.githubusercontent.com/americanas-tech/b2w-reviews01/4639429ec698d7821fc99a0bc665fa213d9fcd5a/B2W-Reviews01.csv",
+        "revision": "4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+        "sha256": "821fb0bf9f7230b0fba4e4f9fadd75a66d1a9ff0b1657810791d33007eb2ab38"
+      },
+      "prepared_fingerprint": "d3a10093139aba35805224ccc041bab5a9b51314791dfcb6f94186e908b10801",
+      "splits": {
+        "train": {
+          "rows": 88684,
+          "fingerprint": "66f2b9b2ab223f3b278353b0183e6f4f8613a19ac044bd230a7060453609d20b",
+          "class_distribution": {
+            "negativo": {
+              "count": 22818,
+              "fraction": 0.25729556628027606
+            },
+            "neutro": {
+              "count": 11089,
+              "fraction": 0.12503946596905868
+            },
+            "positivo": {
+              "count": 54777,
+              "fraction": 0.6176649677506653
+            }
+          }
+        },
+        "val": {
+          "rows": 19004,
+          "fingerprint": "b7652df0debf1b4f982caac96a621bf4c79d9f081edfe0a0d0db1af0310fe4bb",
+          "class_distribution": {
+            "negativo": {
+              "count": 4889,
+              "fraction": 0.2572616291307093
+            },
+            "neutro": {
+              "count": 2377,
+              "fraction": 0.12507893075142076
+            },
+            "positivo": {
+              "count": 11738,
+              "fraction": 0.6176594401178699
+            }
+          }
+        }
+      },
+      "test_csv_opened": false
+    },
+    "benchmark": {
+      "svm": {
+        "runs": [
+          {
+            "samples": 1024,
+            "seconds": 0.027170633999048732,
+            "texts_per_second": 37687.747736613404,
+            "milliseconds_per_text_amortized": 0.026533822264696028,
+            "process_rss_peak_sampled_bytes": 1966419968,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": null,
+            "driver": null,
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          },
+          {
+            "samples": 1024,
+            "seconds": 0.02696718100196449,
+            "texts_per_second": 37972.08169164601,
+            "milliseconds_per_text_amortized": 0.026335137697230948,
+            "process_rss_peak_sampled_bytes": 1966424064,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": null,
+            "driver": null,
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          },
+          {
+            "samples": 1024,
+            "seconds": 0.026430717000039294,
+            "texts_per_second": 38742.80065873649,
+            "milliseconds_per_text_amortized": 0.025811247070350873,
+            "process_rss_peak_sampled_bytes": 1966432256,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": null,
+            "driver": null,
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          }
+        ],
+        "median_seconds": 0.02696718100196449,
+        "texts_per_second": 37972.08169164601,
+        "milliseconds_per_text_amortized": 0.026335137697230948,
+        "samples_per_repeat": 1024,
+        "batch_size": 256
+      },
+      "bertimbau": {
+        "runs": [
+          {
+            "samples": 1024,
+            "seconds": 5.178623564999725,
+            "texts_per_second": 197.73594028359432,
+            "milliseconds_per_text_amortized": 5.057249575195044,
+            "process_rss_peak_sampled_bytes": 1988689920,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": {
+              "allocated_bytes": 470536704,
+              "reserved_bytes": 694157312,
+              "peak_allocated_bytes": 492313088,
+              "peak_reserved_bytes": 694157312,
+              "device_free_bytes": 4354801664,
+              "device_visible_total_bytes": 6132858880
+            },
+            "driver": {
+              "source": "NVML",
+              "sampling_interval_seconds": 0.05,
+              "samples": 105,
+              "total_bytes": 6442450944,
+              "peak_used_bytes_sampled": 2087649280,
+              "min_free_bytes": 4354801664,
+              "peak_utilization_percent_sampled": 88,
+              "errors": [],
+              "includes_other_processes_and_driver": true
+            },
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          },
+          {
+            "samples": 1024,
+            "seconds": 5.077349651000986,
+            "texts_per_second": 201.6800241043319,
+            "milliseconds_per_text_amortized": 4.958349268555651,
+            "process_rss_peak_sampled_bytes": 1988816896,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": {
+              "allocated_bytes": 470536704,
+              "reserved_bytes": 694157312,
+              "peak_allocated_bytes": 492313088,
+              "peak_reserved_bytes": 694157312,
+              "device_free_bytes": 4342480896,
+              "device_visible_total_bytes": 6132858880
+            },
+            "driver": {
+              "source": "NVML",
+              "sampling_interval_seconds": 0.05,
+              "samples": 102,
+              "total_bytes": 6442450944,
+              "peak_used_bytes_sampled": 2110521344,
+              "min_free_bytes": 4331929600,
+              "peak_utilization_percent_sampled": 88,
+              "errors": [],
+              "includes_other_processes_and_driver": true
+            },
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          },
+          {
+            "samples": 1024,
+            "seconds": 5.036101207002503,
+            "texts_per_second": 203.33189463630475,
+            "milliseconds_per_text_amortized": 4.9180675849633815,
+            "process_rss_peak_sampled_bytes": 1988890624,
+            "rss_sampling_interval_seconds": 0.01,
+            "rss_scope": "whole process including both loaded models; not incremental model memory",
+            "pytorch": {
+              "allocated_bytes": 470536704,
+              "reserved_bytes": 694157312,
+              "peak_allocated_bytes": 492313088,
+              "peak_reserved_bytes": 694157312,
+              "device_free_bytes": 4346675200,
+              "device_visible_total_bytes": 6132858880
+            },
+            "driver": {
+              "source": "NVML",
+              "sampling_interval_seconds": 0.05,
+              "samples": 102,
+              "total_bytes": 6442450944,
+              "peak_used_bytes_sampled": 2099970048,
+              "min_free_bytes": 4342480896,
+              "peak_utilization_percent_sampled": 90,
+              "errors": [],
+              "includes_other_processes_and_driver": true
+            },
+            "includes_preprocessing_transfers_prediction": true,
+            "includes_model_loading_disk_io_metrics_warmup": false,
+            "request_latency_measured": false
+          }
+        ],
+        "median_seconds": 5.077349651000986,
+        "texts_per_second": 201.6800241043319,
+        "milliseconds_per_text_amortized": 4.958349268555651,
+        "samples_per_repeat": 1024,
+        "batch_size": 2
+      }
+    },
+    "test_access": {
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "synthetic_inference_and_report_validated": true
+  },
+  "test": {
+    "rows": 19004,
+    "fingerprint": "3c2c5d9cf600821a8fdf7be5fc630c621bb4453616fdffc5d45d69baf40a5a57",
+    "class_distribution": {
+      "negativo": {
+        "count": 4890,
+        "fraction": 0.2573142496316565
+      },
+      "neutro": {
+        "count": 2376,
+        "fraction": 0.1250263102504736
+      },
+      "positivo": {
+        "count": 11738,
+        "fraction": 0.6176594401178699
+      }
+    },
+    "csv_sha256": "8d895cf230ad142755e6c3f39bf3269cfc5eabd8db3c6df0377dd3124eb187db",
+    "read_opens": 1,
+    "blocked_opens": 0,
+    "preparation_read_opens": 0,
+    "original_stat_unchanged": true,
+    "overlap_ids": 0,
+    "same_order_and_labels_for_both_models": true,
+    "single_inference_passes": {
+      "svm": 1,
+      "bertimbau": 1
+    },
+    "bert_logits_finite_three_classes": true
+  },
+  "config": {
+    "schema_version": 1,
+    "data_dir": "data/processed/phase1-final",
+    "reference": "reports/data_audit_summary.json",
+    "svm_dir": "models/baseline/phase2-v1",
+    "bert_dir": "models/bertimbau/phase3b-full-v3/best_model",
+    "bert_checkpoint": "models/bertimbau/phase3b-full-v3/checkpoint-5543",
+    "svm_reference": "reports/baseline_validation.json",
+    "bert_reference": "reports/bertimbau_phase3b_metrics.json",
+    "protocol": "docs/FASE3C_PROTOCOL.md",
+    "run_dir": "outputs/phase3c-final-v1",
+    "max_length": 256,
+    "bert_batch_size": 2,
+    "svm_batch_size": 256,
+    "torch_threads": 2,
+    "svm_threads": 1,
+    "benchmark_samples": 1024,
+    "benchmark_repeats": 3,
+    "warmup_samples": 32,
+    "seed": 42,
+    "min_free_gpu_bytes": 1073741824,
+    "selected_bert_epoch": 1,
+    "selected_bert_step": 5543,
+    "svm_sha256": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623",
+    "bert_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "bert_file_sha256": {
+      "config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+      "tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+      "tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+    },
+    "expected_versions": {
+      "torch": "2.14.1+cu132",
+      "transformers": "5.22.1",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.4.6"
+    },
+    "bootstrap": null
+  },
+  "historical_training": {
+    "svm_fit_seconds": 3.8787205889998404,
+    "svm_search_validation_seconds": 62.630196078999916,
+    "bert_three_epochs_validation_checkpoints_seconds": 6344.631124032001,
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13450HX",
+    "logical_cpus": 16,
+    "artifact_bytes": {
+      "svm_joblib": 2772715,
+      "bert_weights": 435725300,
+      "bert_tokenizer": 678376
+    }
+  },
+  "principal_candidate_preselected": "bertimbau"
+}
