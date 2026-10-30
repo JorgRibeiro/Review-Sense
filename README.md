@@ -4,8 +4,8 @@ Pipeline reprodutível de dados e classificação de polaridade de avaliações 
 seguindo [o plano técnico](ReviewSense_PTBR_PLANO.md). A Fase 1 prepara os dados;
 a **Fase 2** compara DummyClassifier e TF-IDF + LinearSVC em CPU local, usando
 apenas treino e validação. A **Fase 3A** executa um smoke de BERTimbau em GPU local,
-limitado a 256/96 exemplos. **O teste final fica reservado; o treino completo do
-Transformer ainda não foi iniciado.**
+limitado a 256/96 exemplos. A **Fase 3B** concluiu três épocas nos 88.684 textos
+de treino, após piloto de GPU e prova de retomada. **O teste final fica reservado.**
 
 As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (1),
 4–5 → positivo (2)**. Isso é uma proxy de sentimento, não uma anotação direta.
@@ -15,7 +15,7 @@ no domínio do corpus; não comprovam generalização para delivery ou outros se
 ## Ambiente principal
 
 O desenvolvimento e as execuções usam o computador do desenvolvedor. As Fases 1/2
-rodam em CPU; a Fase 3A validou a RTX 3050 Laptop de 6 GB com PyTorch CUDA e FP16.
+rodam em CPU; as Fases 3A/3B utilizam a RTX 3050 Laptop de 6 GB com PyTorch CUDA e FP16.
 CPU e GPU podem ser usadas no mesmo ambiente
 virtual. Não há uso de TPU previsto. Colab ou outra infraestrutura externa ficam
 como alternativas se memória ou tempo de execução se tornarem limitantes.
@@ -126,6 +126,28 @@ versões, VRAM, métricas por classe e próximos passos. O
 [guia do smoke](docs/FASE3A_BERTIMBAU_SMOKE.md) explica as funções, amostragem,
 precisão mista, acumulação, proteção do Torch e a única alternativa em caso de OOM.
 
+## Fase 3B — Fine-tuning completo local
+
+O piloto comparou 128/batch 2, 256/batch 2 e 256/batch 4 usando os mesmos textos,
+incluindo avaliações longas. Batch 4 coube, mas apresentou overflow de gradientes;
+a escolha conservadora foi **256 tokens, batch 2, acumulação 8 (efetivo 16)**,
+FP16 e LR 2e-5. A decisão usou estabilidade e memória, sem consultar F1.
+
+Após comprovar retomada em processos CUDA separados, o treino completou três épocas
+com os splits congelados. O F1 Macro de validação foi **0,7555 / 0,7412 / 0,7497**;
+o melhor checkpoint é o da **época 1, update 5543**, salvo também em
+`models/bertimbau/phase3b-full-v3/best_model/`. As épocas seguintes não melhoraram
+a métrica de seleção. O baseline SVM obteve 0,7271 nos mesmos splits; ambos usaram
+a validação para seleção, portanto essa comparação não substitui o teste final.
+
+O [relatório da Fase 3B](reports/validation_phase3b.md) contém métricas por classe,
+matriz de confusão, duração, VRAM e incidentes AMP. O
+[guia de reprodução](docs/FASE3B_BERTIMBAU.md) documenta funções, configuração,
+piloto e checkpoints completos. Consulte os resultados sem repetir o treino em
+[`notebooks/03_bertimbau_finetune.ipynb`](notebooks/03_bertimbau_finetune.ipynb).
+Pesos, tokens individuais e estados de otimização permanecem locais e fora do Git.
+Não houve uso de Colab nem publicação no Hub.
+
 ## Notebook local e alternativa no Google Colab
 
 Abra [`notebooks/01_data_audit_eda.ipynb`](notebooks/01_data_audit_eda.ipynb).
@@ -198,11 +220,16 @@ src/reviewsense/baseline.py          # Dummy, grade pequena, seleção, tempos e
 src/reviewsense/evaluate.py          # Métricas, benchmark e matriz de confusão
 src/reviewsense/transformer_data.py  # Configuração e amostras limitadas do smoke
 src/reviewsense/train_transformer.py # Fine-tuning diagnóstico em CUDA, métricas e recarga
+src/reviewsense/phase3b_data.py       # Comprimentos, cache e escolha computacional
+src/reviewsense/gpu_benchmark.py      # Benchmark controlado e monitor NVML
+src/reviewsense/train_bertimbau.py    # Treino completo, seleção e estado retomável
+src/reviewsense/phase3b.py            # CLI de preparação, piloto e gates
 src/reviewsense/predict.py           # Reserva para inferência pública futura
 notebooks/01_data_audit_eda.ipynb     # Auditoria e gráficos usando os módulos
 notebooks/02_tfidf_svm_baseline.ipynb  # Comparação dos modelos na validação
 configs/baseline.json                # Grade e condições de medição da Fase 2
 configs/bertimbau_smoke.json          # Orçamento e configuração da Fase 3A
+configs/bertimbau_phase3b.json        # Configuração do treino completo
 docs/FASE2_BASELINE.md                # Conceitos, funções e reprodução
 tests/                              # Testes offline com exemplos sintéticos
 app/                                # Reserva para Gradio, sem implementação nesta fase
@@ -213,10 +240,13 @@ reports/validation_phase2.md         # Comparação real, medições e limites d
 reports/baseline_validation.json      # Métricas completas e proveniência do experimento
 reports/validation_phase3a.md         # Diagnóstico e evidências do smoke em GPU
 reports/bertimbau_smoke_metrics.json  # Métricas agregadas, VRAM e verificação de recarga
+notebooks/03_bertimbau_finetune.ipynb # Inspeção dos resultados, sem treinar
+reports/validation_phase3b.md         # Piloto, três épocas, memória e retomada
+reports/bertimbau_phase3b_metrics.json # Métricas agregadas e verificações finais
 reports/figures/                     # Destino de figuras agregadas
 ```
 
-O notebook 03 e o workflow de CI serão criados nas fases correspondentes.
+O workflow de CI continua reservado a uma etapa posterior.
 O extra Transformer é opcional e preserva o PyTorch CUDA já instalado. Gradio
 continua reservado à fase de demonstração. Os testes comuns não baixam pesos nem
 exigem GPU; testes opcionais usam um BERT minúsculo criado localmente em CPU.

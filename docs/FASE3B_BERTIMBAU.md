@@ -4,6 +4,33 @@ Esta fase mantém os splits da Fase 1 e utiliza somente treino/validação. O te
 final não é aberto nem para checksum. Os arquivos das fases anteriores não são
 alterados. Modelos, tokens individuais, logs de processo e checkpoints ficam locais.
 
+## Resultado consolidado
+
+A execução `models/bertimbau/phase3b-full-v3/` terminou em 30/10/2026. Não é
+necessário retomá-la ou treinar novamente. F1 Macro de validação por época:
+**0,755522 / 0,741218 / 0,749669**. Foi selecionado `checkpoint-5543`, da primeira
+época; `best_model/` contém a cópia para inferência. O checkpoint completo mais
+recente é `checkpoint-16629`, ao final da terceira época. Ambos foram preservados.
+
+Treino com validações e checkpoints: **6.344,631 s (105,74 min)**. Pico PyTorch:
+**2,232 GiB alocados / 2,287 GiB reservados**. Pico amostrado pelo driver:
+**4,118 GiB**, com mínimo **1,882 GiB livres**. Houve três overflows isolados
+recuperados (16.626 updates efetivos), sem losses/pesos não finitos ou OOM.
+A escala final foi 2.048. A recarga offline do melhor modelo em CPU confirmou
+mapeamentos, pesos finitos e inferência finita em texto sintético; os pesos salvos
+correspondem ao checkpoint selecionado por SHA-256.
+
+O F1 da classe neutra foi **0,447957**, com recall **0,387463**: essa classe continua
+sendo a principal limitação. As épocas adicionais não melhoraram F1 Macro; preservar
+a primeira época segue a regra prévia de seleção, sem novo tuning. O SVM teve
+F1 Macro 0,727137 na mesma validação; a diferença descritiva é 0,028385. A validação
+usada para selecionar ambos não mede generalização independente.
+
+Veja [o relatório final](../reports/validation_phase3b.md) e
+[as métricas agregadas](../reports/bertimbau_phase3b_metrics.json). O notebook 03
+foi executado localmente com esses relatórios, sem iniciar treino, e está versionado
+sem outputs. Não há etapa pendente de execução no Colab.
+
 ## Etapas e barreiras de execução
 
 Instalação no ambiente CUDA já funcional:
