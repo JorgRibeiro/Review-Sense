@@ -1,0 +1,306 @@
+{
+  "phase": "4C-readiness",
+  "status": "preparation_engineering_complete_publication_blocked_rights_review",
+  "phase4c_complete": false,
+  "recorded_at_utc": "2026-10-30T22:40:50.050993+00:00",
+  "branch": "feat/phase4c-release-readiness",
+  "base_main_commit": "562e0fb",
+  "preflight_code_commit": "77755f92fd2474de718ce33e4a74418f80c45054",
+  "final_tests_code_commit": "d618d931a3efc1a10be5237f5e62ccb839a02e02",
+  "TECHNICALLY_READY": true,
+  "LEGAL_REVIEW_REQUIRED": true,
+  "DESTINATION_UNCONFIRMED": true,
+  "PUBLISH_AUTHORIZATION_REQUIRED": true,
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "huggingface_repo_id": null,
+  "phase4b_manifest_sha256": "836f5745422f2e58dcf2f4ee8f7e5b02fedc5f1d77d95e223a1683bb6e64eb6e",
+  "descriptor_sha256": "bb51b7f6a0f774871975d744d0c7d582fd6301a324deb72951ec906e1a4aa117",
+  "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471",
+  "original_weight_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+  "verification": {
+    "cpu_fp32": {
+      "phase": "4C-readiness",
+      "TECHNICALLY_READY": true,
+      "LEGAL_REVIEW_REQUIRED": true,
+      "DESTINATION_UNCONFIRMED": true,
+      "PUBLISH_AUTHORIZATION_REQUIRED": true,
+      "integrity_and_metadata_valid": true,
+      "links": {
+        "external_links": 13,
+        "local_references": 2,
+        "network_performed_by_preflight": false,
+        "http_receipt_checked_at_utc": "2026-10-30T22:31:09.034437+00:00",
+        "limitations": "Âncoras não verificadas; HTTP prévio não garante disponibilidade futura."
+      },
+      "license_status": "REQUIRES_REVIEW",
+      "upload_authorized": false,
+      "remote_execution_allowed": false,
+      "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471",
+      "test_metrics_recomputed": false,
+      "equivalence": {
+        "status": "technically_verified",
+        "upload_authorized": false,
+        "license_status": "REQUIRES_REVIEW",
+        "artifact_bytes_identical": true,
+        "original_files_unchanged": true,
+        "comparison": {
+          "same_predicted_classes": true,
+          "logits_allclose": true,
+          "normalized_scores_allclose": true,
+          "atol": 1e-06,
+          "rtol": 1e-05,
+          "max_absolute_logit_difference": 0.0,
+          "max_absolute_score_difference": 0.0,
+          "samples": 5,
+          "device": "cpu",
+          "precision": "fp32"
+        },
+        "configuration_and_tokenization": {
+          "maximum_padded_tokens": 256,
+          "id2label_verified": true,
+          "tokenizer_cased_verified": true,
+          "eval_and_inference_mode": true
+        },
+        "independent_loading": {
+          "literal_model_card_example_executed": true,
+          "outside_repository": true,
+          "empty_hf_cache": true,
+          "isolated_python": true,
+          "device": "cpu",
+          "precision": "fp32",
+          "original_models_reports_data_accesses": 0,
+          "network_connections": 0,
+          "reviewsense_module_not_imported": true,
+          "finite_three_class_scores": true
+        },
+        "network_connections": 0,
+        "test_metrics_recomputed": false
+      },
+      "inference_service": {
+        "synthetic_samples": 5,
+        "finite_three_class_scores": true,
+        "preload_and_cache_verified": true,
+        "source": "local_package_and_public_descriptor",
+        "internal_training_reports_required_by_service": false,
+        "device": "cpu",
+        "precision": "fp32"
+      },
+      "network_connections": 0,
+      "test_csv_read_opens": 0,
+      "blocked_test_csv_opens": 0,
+      "code_commit": "77755f92fd2474de718ce33e4a74418f80c45054",
+      "software": {
+        "torch": "2.14.1+cu132",
+        "transformers": "5.22.1",
+        "gradio": "6.31.0",
+        "huggingface-hub": "2.4.0",
+        "tokenizers": "0.23.3"
+      }
+    },
+    "cuda_fp16": {
+      "phase": "4C-readiness",
+      "TECHNICALLY_READY": true,
+      "LEGAL_REVIEW_REQUIRED": true,
+      "DESTINATION_UNCONFIRMED": true,
+      "PUBLISH_AUTHORIZATION_REQUIRED": true,
+      "integrity_and_metadata_valid": true,
+      "links": {
+        "external_links": 13,
+        "local_references": 2,
+        "network_performed_by_preflight": false,
+        "http_receipt_checked_at_utc": "2026-10-30T22:31:09.034437+00:00",
+        "limitations": "Âncoras não verificadas; HTTP prévio não garante disponibilidade futura."
+      },
+      "license_status": "REQUIRES_REVIEW",
+      "upload_authorized": false,
+      "remote_execution_allowed": false,
+      "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471",
+      "test_metrics_recomputed": false,
+      "equivalence": {
+        "status": "technically_verified",
+        "upload_authorized": false,
+        "license_status": "REQUIRES_REVIEW",
+        "artifact_bytes_identical": true,
+        "original_files_unchanged": true,
+        "comparison": {
+          "same_predicted_classes": true,
+          "logits_allclose": true,
+          "normalized_scores_allclose": true,
+          "atol": 0.001,
+          "rtol": 0.001,
+          "max_absolute_logit_difference": 0.0,
+          "max_absolute_score_difference": 0.0,
+          "samples": 5,
+          "device": "cuda",
+          "precision": "fp16"
+        },
+        "configuration_and_tokenization": {
+          "maximum_padded_tokens": 256,
+          "id2label_verified": true,
+          "tokenizer_cased_verified": true,
+          "eval_and_inference_mode": true
+        },
+        "independent_loading": {
+          "literal_model_card_example_executed": true,
+          "outside_repository": true,
+          "empty_hf_cache": true,
+          "isolated_python": true,
+          "device": "cpu",
+          "precision": "fp32",
+          "original_models_reports_data_accesses": 0,
+          "network_connections": 0,
+          "reviewsense_module_not_imported": true,
+          "finite_three_class_scores": true
+        },
+        "network_connections": 0,
+        "test_metrics_recomputed": false
+      },
+      "inference_service": {
+        "synthetic_samples": 5,
+        "finite_three_class_scores": true,
+        "preload_and_cache_verified": true,
+        "source": "local_package_and_public_descriptor",
+        "internal_training_reports_required_by_service": false,
+        "device": "cuda:0",
+        "precision": "fp16"
+      },
+      "network_connections": 0,
+      "test_csv_read_opens": 0,
+      "blocked_test_csv_opens": 0,
+      "code_commit": "77755f92fd2474de718ce33e4a74418f80c45054",
+      "software": {
+        "torch": "2.14.1+cu132",
+        "transformers": "5.22.1",
+        "gradio": "6.31.0",
+        "huggingface-hub": "2.4.0",
+        "tokenizers": "0.23.3"
+      }
+    }
+  },
+  "application": {
+    "local_loopback_only": true,
+    "share": false,
+    "bert_cpu_http": true,
+    "svm_http": true,
+    "empty_input_public_error": true,
+    "browser": {
+      "320": {
+        "no_horizontal_overflow": true
+      },
+      "390": {
+        "no_horizontal_overflow": true
+      },
+      "768": {
+        "no_horizontal_overflow": true
+      },
+      "1440": {
+        "no_horizontal_overflow": true
+      },
+      "native_synthetic_button": true,
+      "browser_inference": true,
+      "javascript_errors": 0,
+      "external_requests": 0
+    },
+    "test_csv_read_opens": 0,
+    "blocked_test_csv_opens": 0
+  },
+  "quality": {
+    "tests_passed": 320,
+    "previous_tests_preserved": 253,
+    "new_tests": 67,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 13.15,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "pip_check": true,
+    "test_csv_read_opens": 0,
+    "blocked_test_csv_opens": 0
+  },
+  "preservation": {
+    "all_previous_snapshot_hashes_unchanged": true,
+    "files_hashed": 62,
+    "phase4b_package_and_manifest_unchanged": true,
+    "previous_reports_and_frozen_metrics_unchanged": true,
+    "final_evaluation_marker_and_result_unchanged": true,
+    "split_inode_size_mtime_unchanged": true,
+    "csv_content_read": false
+  },
+  "research": {
+    "package_links_receipt": "publishing/readiness_links.json",
+    "package_links_http_200": 13,
+    "source_checks": [
+      {
+        "url": "https://ri.americanas.io/informacoes-aos-investidores/fale-com-o-ri/",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      {
+        "url": "https://ri.americanas.io/aviso-de-privacidade-2/",
+        "error": "HTTP Error 403: Forbidden"
+      },
+      {
+        "url": "https://github.com/americanas-tech/b2w-reviews01/blob/main/b2wreviews01_stil2019.pdf",
+        "status": 200,
+        "resolved_url": "https://github.com/americanas-tech/b2w-reviews01/blob/main/b2wreviews01_stil2019.pdf",
+        "body_sha256": "1934c163bacaaaa89c6819a272dbf44a1cad34f79d5babf6ee4e3219d95d504b"
+      },
+      {
+        "url": "https://huggingface.co/docs/hub/spaces-overview",
+        "status": 200,
+        "resolved_url": "https://huggingface.co/docs/hub/spaces-overview",
+        "body_sha256": "79a305c65cfea8e701ba4eb7cd1a748f5098a41987381baf3e3a52c117a30848"
+      },
+      {
+        "url": "https://huggingface.co/docs/hub/spaces-gpus",
+        "status": 200,
+        "resolved_url": "https://huggingface.co/docs/hub/spaces-gpus",
+        "body_sha256": "283172e5321a9eb06f3cc8a4ef4eb6fa04792b4e5bd6947245851d898deaf5a8"
+      },
+      {
+        "url": "https://huggingface.co/docs/hub/spaces-zerogpu",
+        "status": 200,
+        "resolved_url": "https://huggingface.co/docs/hub/spaces-zerogpu",
+        "body_sha256": "03fc4552d06a46d20ffdf7794319902453d52c28530fbef2997c5eaee5717949"
+      },
+      {
+        "url": "https://huggingface.co/docs/huggingface_hub/guides/manage-spaces",
+        "status": 200,
+        "resolved_url": "https://huggingface.co/docs/huggingface_hub/guides/manage-spaces",
+        "body_sha256": "ac79ba14c8445e13fb6f8019cc737b1ac5750fc550a043249901774da8cc7d5a"
+      }
+    ],
+    "institutional_contacts_primary_reader_verified": true,
+    "institutional_contacts_direct_http_403": true,
+    "hf_document_connector_available": false,
+    "fallback": "public official web pages; no authentication"
+  },
+  "remote_operations": {
+    "model_downloads": 0,
+    "uploads": 0,
+    "repository_or_space_creations": 0,
+    "authentication_or_token_access": 0,
+    "paid_resources_contracted": 0,
+    "deployments": 0,
+    "pushes_merges_tags_releases": 0,
+    "outreach_messages_sent": 0,
+    "linkedin_drafted_or_published": false,
+    "public_research_get_requests_only": true
+  },
+  "limitations": [
+    "Hub adapter exercised only with mocks and local synthetic snapshots; cached regular files required, no symlinks.",
+    "Hosted hardware eligibility and runtime performance unverified; no Space created.",
+    "Rights, destination and human authorization unresolved.",
+    "Secret/header scan is not an exhaustive audit of memorization or PII.",
+    "Link receipt is point-in-time HTTP evidence; anchors and future availability not guaranteed.",
+    "Preflight currently validates the unchanged Phase 4B candidate; resolved rights require a newly reviewed candidate and metadata."
+  ],
+  "source_sha256": {
+    "src/reviewsense/model_resolution.py": "25978ecbd6d26b69ade0b825355d66c467cde3f810ba654487c55c58e839769c",
+    "src/reviewsense/release_readiness.py": "ef42476454a442f73f08451acf024af7ea5e778addf89a75cb67ae817fff3725",
+    "src/reviewsense/predict.py": "1c664c347e5b837c3f4a84fc3e43ca3891419d84e43c5d11ab8b5d52d5735460",
+    "scripts/verify_phase4c_readiness.py": "9d711f08b7c2a13a8f256339a724c1b89daab186f9c10e142da98e70285a9787",
+    "app/app.py": "8d2fc1f49e0baa40f5fc24e654fecd71727bdabf5a9bdb48d61d6c2d091cf71f",
+    "app/config.py": "d64d267282f8c49d23b1a6b0c684ea3538b3df2a120b5cc3c9ad144c6600bb45"
+  }
+}
