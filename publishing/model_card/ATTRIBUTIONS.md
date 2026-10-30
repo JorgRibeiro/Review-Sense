@@ -6,7 +6,7 @@
   O aviso MIT completo está em BASE_MODEL_LICENSE.txt, preservado de
   https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE.
 - Fine-tuning, documentação e exemplo de inferência: contribuidores ReviewSense PT-BR.
-  Fonte: https://github.com/JorgRibeiro/Review-Sense.
+  Fonte: https://github.com/jorgeribeiru/Review-Sense.
   PROJECT_CODE_LICENSE.txt cobre o código, inclusive o exemplo de inferência;
   não concede automaticamente licença dos pesos ajustados.
 - Dados: B2W Digital/Americanas Tech, B2W-Reviews01,

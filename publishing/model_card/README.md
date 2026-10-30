@@ -40,7 +40,7 @@ model-index:
       value: 0.8633971795411493
     source:
       name: ReviewSense Phase 3C — independent final evaluation
-      url: https://github.com/JorgRibeiro/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json
+      url: https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json
 ---
 
 # ReviewSense PT-BR — BERTimbau para polaridade de avaliações
@@ -147,9 +147,9 @@ de superioridade estatística. Baseline: C=0,1, ngrams=(1,2), class_weight=balan
 80.000 features. A classe neutra segue limitante: Recall 0.38552188552188554.
 Não houve validação em datasets de delivery/restaurantes ou de outros domínios.
 
-Fonte da verdade: [JSON imutável da Fase 3C](https://github.com/JorgRibeiro/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json),
+Fonte da verdade: [JSON imutável da Fase 3C](https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json),
 SHA-256 `8f32d5fa4dccd74b47f2b6c26455372bf7d50415390548eaa2085ed9e21bf302`.
-[Relatório técnico](https://github.com/JorgRibeiro/Review-Sense/blob/5441d02/reports/validation_phase3c.md).
+[Relatório técnico](https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md).
 
 ## Desempenho computacional
 
@@ -165,7 +165,7 @@ HTTP, renderização e carga (medida separadamente). A medição CPU veio depois
 GPU e reutilizou bibliotecas já importadas. Não houve isolamento térmico/de carga.
 
 São latências individuais, distintas do throughput em batch da Fase 3C. Não são
-SLAs ou garantias de produção. [Condições e valores completos da Fase 4A](https://github.com/JorgRibeiro/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json).
+SLAs ou garantias de produção. [Condições e valores completos da Fase 4A](https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json).
 
 ## Limitações
 
@@ -247,5 +247,5 @@ pacote isolado na verificação da Fase 4B; os scores produzidos não são calib
 - Fábio Souza, Rodrigo Nogueira e Roberto Lotufo (2020), *BERTimbau: Pretrained BERT Models for Brazilian Portuguese*. [Repositório NeuralMind e citação](https://github.com/neuralmind-ai/portuguese-bert).
 - B2W Digital/Americanas Tech, [B2W-Reviews01](https://github.com/americanas-tech/b2w-reviews01), fonte de dados e declaração de licença original.
 - [Transformers: classificação de sequências](https://huggingface.co/docs/transformers/tasks/sequence_classification).
-- [ReviewSense no GitHub](https://github.com/JorgRibeiro/Review-Sense), código de inferência, treinamento e protocolos.
+- [ReviewSense no GitHub](https://github.com/jorgeribeiru/Review-Sense), código de inferência, treinamento e protocolos.
 - [Model Card do base na revisão usada](https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md).

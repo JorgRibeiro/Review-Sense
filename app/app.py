@@ -163,9 +163,9 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
           não foi específico para restaurantes ou delivery.</p></section>
           <footer class="technical-footer"><span>Feito para explorar NLP com transparência.</span>
           <nav aria-label="Recursos técnicos">
-          <a href="https://github.com/JorgRibeiro/Review-Sense"
+          <a href="https://github.com/jorgeribeiru/Review-Sense"
           target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-          <a href="https://github.com/JorgRibeiro/Review-Sense/blob/main/reports/validation_phase3c.md"
+          <a href="https://github.com/jorgeribeiru/Review-Sense/blob/main/reports/validation_phase3c.md"
           target="_blank" rel="noopener noreferrer">Método e resultados ↗</a></nav></footer>""")
         button.click(
             analyze,
