@@ -196,3 +196,20 @@ descalar novamente ao receber norma ausente. A integração agora impede essa se
 chamada. Um teste CUDA dentro do Trainer, com overflow intencional, completou quatro
 grupos (três updates válidos e um skip protegido), sem pesos não finitos. O checkpoint
 e o scaler foram salvos e a prova de retomada BERTimbau foi repetida antes do reinício.
+
+## Funções principais
+
+| Função | Propósito |
+| --- | --- |
+| `length_statistics` | Medir percentis e percentuais acima dos limites antes do truncamento |
+| `prepare_phase3b` | Verificar os dados congelados e criar cache local de tokens, sem recriar splits |
+| `benchmark_variant` | Medir treino em lotes representativos/longos, throughput, memória e estabilidade |
+| `choose_gpu_configuration` | Aplicar a prioridade computacional e a margem de memória, sem consultar F1 |
+| `run_resume_proof` | Comparar updates contínuos com interrupção/retomada em processos separados |
+| `build_gate` | Exigir aprovação do piloto, estado retomável, configuração/dados/código consistentes |
+| `normalized_classification_loss` | Normalizar corretamente cada grupo acumulado, inclusive o último parcial |
+| `verify_amp_recovery` | Confirmar skip de overflow, pesos finitos e ausência de falha persistente |
+| `run_training` | Executar as épocas, selecionar por F1 macro e salvar modelo/estado retomável |
+
+O notebook `03_bertimbau_finetune.ipynb` apenas lê relatórios salvos. Não repete o
+piloto, não inicia treinamento nem abre dados de teste.

@@ -1,0 +1,91 @@
+{
+  "snapshot_at": "2026-10-30T13:50:39.128899-03:00",
+  "status": "training_in_progress_not_final",
+  "run_directory": "models/bertimbau/phase3b-full-v3",
+  "progress": {
+    "global_step": 7500,
+    "epoch": 1.3530738351901133,
+    "max_steps": 16629,
+    "elapsed_seconds": 2853.8848052819994,
+    "latest_log": {
+      "loss": 0.3290102767944336,
+      "grad_norm": 8.590700149536133,
+      "learning_rate": 1.0983222081905106e-05,
+      "epoch": 1.3530738351901133
+    },
+    "numerical": {
+      "nonfinite_losses": 0,
+      "nonfinite_gradient_norms": 2,
+      "skipped_updates": 2,
+      "consecutive_skips": 0,
+      "nonfinite_weights": 0,
+      "recovered_amp_overflows": 2
+    },
+    "loss_scale": 4096.0
+  },
+  "validation_history": [
+    {
+      "epoch": 1.0,
+      "global_step": 5543,
+      "metrics": {
+        "f1_macro": 0.755522497920137,
+        "precision_macro": 0.771570507308812,
+        "recall_macro": 0.7473980979030346,
+        "accuracy": 0.8636602820458851,
+        "per_class": {
+          "negativo": {
+            "precision": 0.8793407886992348,
+            "recall": 0.9167518920024544,
+            "f1-score": 0.8976567194071701,
+            "support": 4889.0
+          },
+          "neutro": {
+            "precision": 0.530835734870317,
+            "recall": 0.3874631888935633,
+            "f1-score": 0.4479571984435798,
+            "support": 2377.0
+          },
+          "positivo": {
+            "precision": 0.9045349983568847,
+            "recall": 0.9379792128130857,
+            "f1-score": 0.9209535759096612,
+            "support": 11738.0
+          }
+        },
+        "label_order": [
+          0,
+          1,
+          2
+        ],
+        "label_names": [
+          "negativo",
+          "neutro",
+          "positivo"
+        ],
+        "confusion_matrix": [
+          [
+            4482,
+            280,
+            127
+          ],
+          [
+            421,
+            921,
+            1035
+          ],
+          [
+            194,
+            534,
+            11010
+          ]
+        ],
+        "samples": 19004
+      },
+      "eval_runtime": 100.4761
+    }
+  ],
+  "checkpoints_at_snapshot": [
+    "checkpoint-5543",
+    "checkpoint-7500"
+  ]
+}
