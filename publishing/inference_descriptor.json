@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "artifact_identity": "reviewsense-ptbr-bertimbau-v1",
+  "package_version": "1.0.0-rc.1",
+  "architecture": "BertForSequenceClassification",
+  "max_length": 256,
+  "labels": {
+    "0": "negativo",
+    "1": "neutro",
+    "2": "positivo"
+  },
+  "files": {
+    "ATTRIBUTIONS.md": {
+      "bytes": 1689,
+      "sha256": "761c4f1c432c6832b1fa0d215d769902df9350ecf178939eefd6376c9455c602"
+    },
+    "BASE_MODEL_LICENSE.txt": {
+      "bytes": 1138,
+      "sha256": "f52509e0695fdc19752f725f3d58ba06cc7842d5dc8d828b8d821c8ee2c92e67"
+    },
+    "DISTRIBUTION_STATUS.md": {
+      "bytes": 976,
+      "sha256": "7203975b2d30cbd1cd2e62bf10cdae2df742636da3ca0209990223a410bf86f8"
+    },
+    "PROJECT_CODE_LICENSE.txt": {
+      "bytes": 1233,
+      "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+    },
+    "README.md": {
+      "bytes": 12912,
+      "sha256": "40f5d938039c09328d4de37410e636929561579ca18d9f8a10ea0a97bf90bfcb"
+    },
+    "config.json": {
+      "bytes": 1061,
+      "sha256": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223"
+    },
+    "model.safetensors": {
+      "bytes": 435725300,
+      "sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+    },
+    "tokenizer.json": {
+      "bytes": 677889,
+      "sha256": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb"
+    },
+    "tokenizer_config.json": {
+      "bytes": 487,
+      "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+    }
+  },
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "model_card": "README.md",
+  "license": "unknown",
+  "reference": {
+    "base_revision": "94d69c95f98f7d5b2a8700c420230ae10def0baa",
+    "package_content_sha256": "dc7a58eee7919923f396eef80098e6abf1f86e4727649888b2aadec6a4fe5471"
+  }
+}

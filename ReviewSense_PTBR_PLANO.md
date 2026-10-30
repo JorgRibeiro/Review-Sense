@@ -1,4 +1,4 @@
-# ReviewSense PT-BR — Plano técnico v1.7
+# ReviewSense PT-BR — Plano técnico v1.8
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
@@ -253,7 +253,7 @@ Referências: [auditoria](docs/FASE4B_LICENSE_REVIEW.md),
 [guia](docs/FASE4B_MODEL_PACKAGING.md) e
 [relatório](reports/validation_phase4b.md).
 
-## 15. Fase 4C — Lançamento e encerramento planejados, não executados
+## 15. Fase 4C — Engenharia de preparação local; lançamento bloqueado
 
 [FASE4C_RELEASE_PLAN.md](docs/FASE4C_RELEASE_PLAN.md) organiza resolução dos direitos,
 autorização explícita e confirmação do destino, publicação da allowlist aprovada,
@@ -266,3 +266,22 @@ no LinkedIn, com métricas reais, treinamento local, engenharia, limites, visual
 autorizado e links verificáveis. Não haverá publicação automática nem alegação
 de parceria ou de rotulagem manual. Se direitos relevantes não forem esclarecidos,
 o gate de publicação permanece fechado e o lançamento precisa de nova decisão.
+
+
+### Preparação local da primeira execução 4C
+
+Branch `feat/phase4c-release-readiness`, a partir da main 562e0fb (Fases 1–4B).
+Descritor mínimo separado do pacote 4B, resolvedor local independente de relatórios,
+adaptador HF somente cache offline/mock por SHA imutável e preflight com gates
+independentes. Não alterar allowlist/candidato original nem pesos/datasets.
+
+Direitos `REQUIRES_REVIEW`, upload false, destino e autorização pendentes.
+Comunicação formal preparada, sem envio. CPU Basic condicionado a plano/elegibilidade;
+ZeroGPU exige adaptação e confirmação, sem compra. UI distingue local/hospedado,
+mantém limites, erros seguros e privacidade sem promessas absolutas.
+
+[Guia 4C](docs/FASE4C_RELEASE_READINESS.md),
+[direitos](docs/FASE4C_RIGHTS_OUTREACH.md),
+[hospedagem](docs/FASE4C_HOSTING_DECISION.md) e
+[evidências](reports/validation_phase4c_readiness.md).
+O lançamento público e o post definitivo de LinkedIn continuam pendentes.

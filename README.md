@@ -355,3 +355,32 @@ Americanas.com, janeiro–maio de 2018. O original declara **CC BY-NC-SA 4.0**;
 o espelho no Hugging Face informa uma licença divergente. Usamos a declaração
 original como referência. Consulte [data/README.md](data/README.md) para atribuição,
 revisão e checksum. A [licença MIT](LICENSE) cobre somente o código do projeto.
+
+
+## Fase 4C — Preparação local; lançamento pendente
+
+A engenharia de preparação usa o pacote 4B com um
+[descritor público separado](publishing/inference_descriptor.json), resolvedor
+local verificado e adaptador de cache HF opcional por revisão imutável. O padrão
+continua offline/local; não há downloads, upload ou autenticação automáticos.
+`ArtifactPaths` explícito preserva a resolução histórica da aplicação.
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python \
+  -m scripts.verify_phase4c_readiness --dry-run --device cpu
+.venv/bin/python -m app.app --device cpu --preload
+```
+
+O dry-run executa inferência sintética local e separa prontidão técnica, revisão
+jurídica, destino e autorização. Direitos **REQUIRES_REVIEW**, upload **false**:
+a Fase 4C não está encerrada e a inferência pública permanece bloqueada.
+
+- [Arquitetura, funções, comandos e cenários de encerramento](docs/FASE4C_RELEASE_READINESS.md)
+- [Pedido de esclarecimento de direitos, sem envio automático](docs/FASE4C_RIGHTS_OUTREACH.md)
+- [Hospedagem e elegibilidade, sem contratação](docs/FASE4C_HOSTING_DECISION.md)
+- [Evidências da preparação](reports/validation_phase4c_readiness.md)
+
+A aplicação não grava explicitamente entradas; serviços de hospedagem podem manter
+registros e controles próprios. Não enviar dados pessoais/sigilosos. Sem nova
+leitura do teste, treino ou alteração de pesos. Nenhum Space/release/post foi
+publicado por esta preparação; LinkedIn fica para depois da validação pública.

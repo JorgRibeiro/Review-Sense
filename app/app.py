@@ -12,6 +12,7 @@ os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
 
 import gradio as gr
 
+from app.config import AppSettings, check_hosting_authorization, service_from_settings
 from reviewsense.predict import (
     ArtifactError,
     DeviceError,
@@ -80,8 +81,18 @@ def make_analyzer(service: InferenceService):
     def analyze(text, model):
         try:
             return result_html(service.predict(text, model=model))
-        except (InputError, ArtifactError, DeviceError, InferenceError) as error:
-            message = str(error)
+        except InputError as error:
+            # Só mensagens do validador são públicas, mesmo para exceções tipadas.
+            allowed = {
+                "Insira uma avaliação em formato de texto.",
+                "Escreva uma avaliação antes de analisar.",
+                "A avaliação deve ter no máximo 8.000 caracteres.",
+                "Selecione BERTimbau ou SVM.",
+                "Envie de 1 a 16 avaliações por chamada.",
+            }
+            message = str(error) if str(error) in allowed else "Entrada inválida. Confira o texto."
+        except (ArtifactError, DeviceError, InferenceError):
+            message = "Modelo indisponível no momento. Confira a configuração da aplicação."
         except Exception:
             message = "Não foi possível concluir a análise. Tente novamente ou selecione o SVM."
         return (
@@ -94,15 +105,20 @@ def make_analyzer(service: InferenceService):
     return analyze
 
 
-def create_app(service: InferenceService | None = None) -> gr.Blocks:
+def create_app(
+    service: InferenceService | None = None, *, settings: AppSettings | None = None
+) -> gr.Blocks:
     """Constrói sem carregar modelos, abrir datasets ou executar exemplos."""
-    service = service if service is not None else InferenceService()
+    settings = settings or AppSettings()
+    check_hosting_authorization(settings)
+    service = service if service is not None else service_from_settings(settings)
     analyze = make_analyzer(service)
+    badge = "Demonstração hospedada" if settings.environment == "hosted" else "Demonstração local"
     with gr.Blocks(title="ReviewSense PT-BR", analytics_enabled=False, fill_width=True) as demo:
-        gr.HTML("""<header class="masthead"><a class="wordmark" href="#">
+        gr.HTML(f"""<header class="masthead"><a class="wordmark" href="#">
           <span class="brand-mark" aria-hidden="true">rs</span>
           <span>ReviewSense <b>PT-BR</b></span></a>
-          <span class="local-badge"><i></i> Demonstração local</span></header>
+          <span class="local-badge"><i></i> {badge}</span></header>
           <div class="intro"><p class="eyebrow">LINGUAGEM NATURAL, EM PORTUGUÊS</p>
           <h1>Entenda o tom<br>de uma avaliação.</h1>
           <p>Uma leitura de sentimento com modelos treinados
@@ -125,7 +141,8 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
                     "BERTimbau considera até 256 tokens.</p>"
                 )
                 selector = gr.Radio(
-                    choices=[("BERTimbau · principal", "bertimbau"), ("SVM · leve", "svm")],
+                    choices=[("BERTimbau · principal", "bertimbau")]
+                    + ([("SVM · leve", "svm")] if settings.enable_svm else []),
                     value="bertimbau",
                     label="Modelo de análise",
                     elem_id="model-selector",
@@ -134,8 +151,14 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
                     "Analisar sentimento  →", variant="primary", elem_id="analyze-button"
                 )
                 gr.HTML(
-                    '<p class="privacy-note">Seu texto não é salvo em arquivos ou logs. '
-                    "A primeira análise carrega o modelo e pode levar alguns segundos.</p>"
+                    '<p class="privacy-note">A aplicação não grava explicitamente seu texto '
+                    "em arquivos ou logs. Evite dados pessoais ou sigilosos. "
+                    + (
+                        "A plataforma de hospedagem pode manter registros e controles próprios. "
+                        if settings.environment == "hosted"
+                        else "O processamento é local. "
+                    )
+                    + "A primeira análise carrega o modelo e pode levar alguns segundos.</p>"
                 )
             with gr.Column(scale=5, min_width=300, elem_id="output-panel"):
                 output = gr.HTML(EMPTY_RESULT, elem_id="sentiment-result")
@@ -174,6 +197,8 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
             api_name="analyze",
             api_visibility="undocumented",
             show_progress="minimal",
+            concurrency_id="inference",
+            concurrency_limit=1,
         )
         text.submit(
             analyze,
@@ -182,6 +207,8 @@ def create_app(service: InferenceService | None = None) -> gr.Blocks:
             api_name="analyze_enter",
             api_visibility="undocumented",
             show_progress="minimal",
+            concurrency_id="inference",
+            concurrency_limit=1,
         )
     demo.queue(default_concurrency_limit=1, max_size=8, api_open=False)
     return demo
@@ -220,7 +247,18 @@ def launch_options(*, port: int = 7860, public_network: bool = False) -> dict:
         "footer_links": [],
         "allowed_paths": [],
         "blocked_paths": [
-            str(ROOT / name) for name in ("models", "data", "cache", ".git", ".venv", ".env")
+            str(ROOT / name)
+            for name in (
+                "models",
+                "data",
+                "cache",
+                "outputs",
+                "reports",
+                "publishing",
+                ".git",
+                ".venv",
+                ".env",
+            )
         ],
         "css": CSS,
         "theme": theme,
@@ -231,14 +269,53 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="ReviewSense PT-BR — demonstração local")
     parser.add_argument("--device", choices=["auto", "cpu", "cuda"], default="auto")
     parser.add_argument("--port", type=int, default=7860)
+    parser.add_argument("--environment", choices=["local", "hosted"], default="local")
+    parser.add_argument("--model-origin", choices=["local", "hub-cache"], default="local")
+    parser.add_argument("--model-dir", type=Path, default=AppSettings.model_dir)
+    parser.add_argument("--descriptor", type=Path, default=AppSettings.descriptor)
+    parser.add_argument("--allowed-root", type=Path, default=AppSettings.allowed_root)
+    parser.add_argument("--repo-id")
+    parser.add_argument("--revision")
+    parser.add_argument("--approval-root", type=Path)
+    parser.add_argument("--cache-root", type=Path, default=AppSettings.cache_root)
+    parser.add_argument("--preload", action="store_true", help="Carrega BERT antes de servir.")
+    parser.add_argument("--bert-only", action="store_true", help="Oculta o baseline local.")
     parser.add_argument(
         "--public-network",
         action="store_true",
         help="Permite acesso pela rede local (0.0.0.0), sem share/túnel.",
     )
     args = parser.parse_args()
+    settings = AppSettings(
+        environment=args.environment,
+        origin=args.model_origin,
+        model_dir=args.model_dir,
+        descriptor=args.descriptor,
+        allowed_root=args.allowed_root,
+        repo_id=args.repo_id,
+        revision=args.revision,
+        approval_root=args.approval_root,
+        cache_root=args.cache_root,
+        enable_svm=not args.bert_only and args.environment == "local",
+    )
     options = launch_options(port=args.port, public_network=args.public_network)
-    create_app(InferenceService(device=args.device)).launch(**options)
+    options["blocked_paths"].extend(
+        str(path.absolute())
+        for path in (
+            settings.model_dir,
+            settings.descriptor,
+            settings.cache_root,
+            settings.approval_root,
+        )
+        if path is not None
+    )
+    try:
+        service = service_from_settings(settings, device=args.device)
+        if args.preload or args.environment == "hosted":
+            service.prepare()
+    except Exception:
+        parser.exit(2, "Configuração/modelo indisponível ou lançamento não autorizado.\n")
+    create_app(service, settings=settings).launch(**options)
 
 
 if __name__ == "__main__":
