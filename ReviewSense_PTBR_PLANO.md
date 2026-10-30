@@ -1,4 +1,4 @@
-# ReviewSense PT-BR — Plano técnico v1.8
+# ReviewSense PT-BR — Plano técnico v1.9
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
@@ -288,3 +288,22 @@ mantém limites, erros seguros e privacidade sem promessas absolutas.
 [hospedagem](docs/FASE4C_HOSTING_DECISION.md) e
 [evidências](reports/validation_phase4c_readiness.md).
 O lançamento público e o post definitivo de LinkedIn continuam pendentes.
+
+
+### Preparação ZeroGPU, posterior ao merge da primeira preparação 4C
+
+Base main `c977087`, branch `feat/phase4c-zerogpu-readiness`. ZeroGPU utiliza
+adaptador isolado com carga única e colocação CUDA emulada antes do callback GPU;
+o backend local preserva lazy load e recuperação CPU. UI compartilhada e BERT-only,
+bundle mínimo por allowlist, nenhuma dependência de datasets/relatórios/treinamento.
+
+Conta confirmada pelo usuário: `JorgeRibeiru`. Modelo candidato
+`JorgeRibeiru/reviewsense-ptbr-bertimbau`, Space candidato
+`JorgeRibeiru/reviewsense-ptbr`, sem consulta/criação/publicação. Preservados
+REQUIRES_REVIEW e upload false; não solicitar autorizações por e-mail.
+Matriz alvo Python 3.12.12, PyTorch 2.13.0 e dependências separadas do ambiente local,
+verificação estática e testes sintéticos; hardware ZeroGPU e build real não validados.
+
+Guia: [FASE4C_ZEROGPU.md](docs/FASE4C_ZEROGPU.md).
+Evidências: [validation_phase4c_zerogpu.md](reports/validation_phase4c_zerogpu.md).
+Deploy, distribuição dos pesos e encerramento da Fase 4C permanecem pendentes.

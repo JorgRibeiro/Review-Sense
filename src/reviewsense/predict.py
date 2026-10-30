@@ -11,10 +11,8 @@ from time import perf_counter
 from typing import Any, Literal
 
 import numpy as np
-from threadpoolctl import threadpool_limits
 
-from reviewsense.baseline import load_experiment
-from reviewsense.data import file_sha256
+from reviewsense.artifacts import file_sha256
 from reviewsense.labels import LABEL_NAMES
 from reviewsense.model_resolution import LocalPackage, ModelSource
 
@@ -23,7 +21,15 @@ DevicePreference = Literal["auto", "cpu", "cuda"]
 MAX_INPUT_CHARACTERS = 8000
 MAX_BATCH_ITEMS = 16
 MAX_LENGTH = 256
-MODEL_PREFIX = "models/bertimbau/phase3b-full-v3/best_model"
+
+
+def __getattr__(name):
+    # Compatibilidade da constante pública, sem importar caminhos locais no BERT-only.
+    if name == "MODEL_PREFIX":
+        from reviewsense.local_inference import MODEL_PREFIX
+
+        return MODEL_PREFIX
+    raise AttributeError(name)
 
 
 class InputError(ValueError):
@@ -54,13 +60,9 @@ class ArtifactPaths:
 
     @classmethod
     def from_repository(cls, root: Path) -> ArtifactPaths:
-        return cls(
-            root / MODEL_PREFIX,
-            root / "models/baseline/phase2-v1",
-            root / "reports/bertimbau_phase3b_metrics.json",
-            root / "reports/baseline_validation.json",
-            root / "reports/phase3c_final_metrics.json",
-        )
+        from reviewsense.local_inference import repository_paths
+
+        return cls(**repository_paths(root))
 
 
 @dataclass(frozen=True)
@@ -156,6 +158,33 @@ def _is_cuda_error(error: Exception, torch: Any) -> bool:
     )
 
 
+def load_bert_cpu(directory: Path) -> tuple[Any, Any]:
+    """Carrega/verifica o checkpoint local em CPU; transferência pertence ao backend."""
+    import torch
+    from transformers import AutoModelForSequenceClassification, AutoTokenizer
+
+    tokenizer = AutoTokenizer.from_pretrained(
+        directory, local_files_only=True, trust_remote_code=False, token=False
+    )
+    model = AutoModelForSequenceClassification.from_pretrained(
+        directory,
+        local_files_only=True,
+        trust_remote_code=False,
+        token=False,
+        attn_implementation="eager",
+    )
+    if (
+        model.config.id2label != LABEL_NAMES
+        or model.config.label2id != {name: label for label, name in LABEL_NAMES.items()}
+        or model.config.num_labels != 3
+        or tokenizer.do_lower_case
+    ):
+        raise ArtifactError("Esperado tokenizer cased e mapeamento negativo/neutro/positivo.")
+    if not all(torch.isfinite(parameter).all() for parameter in model.parameters()):
+        raise ArtifactError("O modelo salvo contém pesos não finitos.")
+    return model, tokenizer
+
+
 class InferenceService:
     """Cache por processo e execução serializada; inicializar não lê artefatos ou dados.
 
@@ -174,7 +203,9 @@ class InferenceService:
         if device not in {"auto", "cpu", "cuda"}:
             raise ValueError("Dispositivo esperado: auto, cpu ou cuda.")
         root = Path(__file__).resolve().parents[2]
-        self.paths = paths or ArtifactPaths.from_repository(root)
+        self.paths = paths
+        if self.paths is None and model_source is None:
+            self.paths = ArtifactPaths.from_repository(root)
         self.model_source = model_source
         if paths is None and model_source is None:
             self.model_source = LocalPackage(
@@ -182,7 +213,7 @@ class InferenceService:
                 root / "publishing/inference_descriptor.json",
                 root / "outputs/phase4b",
             )
-        self._bert_directory = self.paths.bert_dir
+        self._bert_directory = self.paths.bert_dir if self.paths is not None else None
         self.device_preference = device
         self._lock = threading.RLock()
         self._svm = None
@@ -197,23 +228,11 @@ class InferenceService:
         )
 
     def _load_svm(self):
-        record = _record(self.paths.svm_record)
-        final = _record(self.paths.final_record)
-        try:
-            expected = record["model_artifact"]["sha256"]
-            if final["inventory"]["models/baseline/phase2-v1/selected_model.joblib"] != expected:
-                raise ArtifactError("O baseline diverge dos registros de integridade.")
-            _check_hash(self.paths.svm_dir / "selected_model.joblib", expected)
-            model, local_record = load_experiment(self.paths.svm_dir)
-            if local_record["model_artifact"]["sha256"] != expected:
-                raise ArtifactError("O baseline diverge do registro da Fase 2.")
-            if not np.array_equal(model.classes_, [0, 1, 2]):
-                raise ArtifactError("As classes do baseline devem ser negativo, neutro e positivo.")
-            return model
-        except ArtifactError:
-            raise
-        except Exception:
-            raise ArtifactError("Não foi possível carregar o baseline local verificado.") from None
+        if self.paths is None:
+            raise ArtifactError("Baseline indisponível neste pacote BERT-only.")
+        from reviewsense.local_inference import load_svm
+
+        return load_svm(self.paths)
 
     def _verify_bert(self) -> None:
         if self.model_source is not None:
@@ -225,49 +244,14 @@ class InferenceService:
                     "Pacote de inferência indisponível ou não autorizado. "
                     "Confira a configuração conforme o README."
                 ) from None
-        record = _record(self.paths.bert_record)
-        final = _record(self.paths.final_record)
-        try:
-            expected = final["inventory"]
-            if expected[f"{MODEL_PREFIX}/model.safetensors"] != record["saved_model_sha256"]:
-                raise ArtifactError("O BERTimbau diverge do registro da Fase 3B.")
-            if not record["best_checkpoint"].endswith("checkpoint-5543"):
-                raise ArtifactError("Esperado BERTimbau selecionado na época 1, update 5543.")
-            for name in (
-                "model.safetensors",
-                "config.json",
-                "tokenizer.json",
-                "tokenizer_config.json",
-            ):
-                _check_hash(self.paths.bert_dir / name, expected[f"{MODEL_PREFIX}/{name}"])
-        except ArtifactError:
-            raise
-        except (KeyError, TypeError):
-            raise ArtifactError("Registro de integridade do BERTimbau incompatível.") from None
+        from reviewsense.local_inference import verify_bert
+
+        verify_bert(self.paths)
 
     def _create_bert(self, device: str, *, notes: tuple[str, ...] = ()) -> _BertBackend:
         import torch
-        from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-        tokenizer = AutoTokenizer.from_pretrained(
-            self._bert_directory, local_files_only=True, trust_remote_code=False, token=False
-        )
-        model = AutoModelForSequenceClassification.from_pretrained(
-            self._bert_directory,
-            local_files_only=True,
-            trust_remote_code=False,
-            token=False,
-            attn_implementation="eager",
-        )
-        if (
-            model.config.id2label != LABEL_NAMES
-            or model.config.label2id != {name: label for label, name in LABEL_NAMES.items()}
-            or model.config.num_labels != 3
-            or tokenizer.do_lower_case
-        ):
-            raise ArtifactError("Esperado tokenizer cased e mapeamento negativo/neutro/positivo.")
-        if not all(torch.isfinite(parameter).all() for parameter in model.parameters()):
-            raise ArtifactError("O modelo salvo contém pesos não finitos.")
+        model, tokenizer = load_bert_cpu(self._bert_directory)
         model = model.to(device).eval()
         fp16 = device.startswith("cuda") and torch.cuda.get_device_capability(0)[0] >= 7
         return _BertBackend(model, tokenizer, device, fp16, notes)
@@ -371,6 +355,8 @@ class InferenceService:
                 cold_start = perf_counter() - loading
             start = perf_counter()
             if model == "svm":
+                from threadpoolctl import threadpool_limits
+
                 try:
                     with threadpool_limits(limits=1):
                         ids = np.asarray(self._svm.predict(values))

@@ -384,3 +384,25 @@ A aplicação não grava explicitamente entradas; serviços de hospedagem podem 
 registros e controles próprios. Não enviar dados pessoais/sigilosos. Sem nova
 leitura do teste, treino ou alteração de pesos. Nenhum Space/release/post foi
 publicado por esta preparação; LinkedIn fica para depois da validação pública.
+
+
+## ZeroGPU — adaptação local preparada, sem deploy
+
+Na branch `feat/phase4c-zerogpu-readiness`, entrada dedicada em
+[deploy/zerogpu](deploy/zerogpu/README.md), adaptador eager separado do backend
+local e bundle de código por allowlist, sem pesos/datasets/relatórios. A UI é
+reutilizada, com BERTimbau apenas, concorrência limitada e erros sanitizados.
+
+```bash
+HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python \
+  -m reviewsense.space_bundle --destination outputs/phase4c-zerogpu/reproduction
+```
+
+Conta informada: `JorgeRibeiru`; os nomes de modelo/Space continuam candidatos.
+Alvo Python 3.12.12/PyTorch 2.13.0, sem alterar o ambiente CUDA local. A matriz foi
+conferida por documentação/metadata; testes usam CPU/modelos minúsculos e emulação
+de controle de fluxo, sem validar o hardware compartilhado real.
+**REQUIRES_REVIEW; upload_authorized=false.** Nenhum Space foi criado, autenticado
+ou publicado, nem houve download de pesos. A política de não solicitar autorizações
+por e-mail permanece. Veja [arquitetura e pendências](docs/FASE4C_ZEROGPU.md) e
+[evidências](reports/validation_phase4c_zerogpu.md).

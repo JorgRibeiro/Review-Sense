@@ -10,7 +10,7 @@ import tempfile
 from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
-from reviewsense.model_packaging import PACKAGE_FILES, _no_symlink_ancestors
+from reviewsense.artifacts import PACKAGE_FILES, _no_symlink_ancestors
 from reviewsense.model_resolution import (
     REPO_ID,
     REVISION,

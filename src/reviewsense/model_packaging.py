@@ -9,28 +9,32 @@ import json
 import os
 import re
 import shutil
-import stat
 import subprocess
 import tempfile
 from pathlib import Path
 
 import numpy as np
 
-from reviewsense.data import file_sha256
+from reviewsense.artifacts import (
+    ARTIFACT_FILES,
+    BASE_MODEL,
+    BASE_REVISION,
+    DOCUMENT_FILES,
+    PACKAGE_FILES,
+    _metadata_hygiene,
+    _no_symlink_ancestors,
+    file_inventory,
+    inspect_directory,
+    read_json,
+    safe_file,
+    validate_configuration,
+)
+from reviewsense.artifacts import (
+    file_sha256 as file_sha256,
+)
 from reviewsense.labels import LABEL_NAMES
 
-ARTIFACT_FILES = ("model.safetensors", "config.json", "tokenizer.json", "tokenizer_config.json")
-DOCUMENT_FILES = (
-    "README.md",
-    "BASE_MODEL_LICENSE.txt",
-    "PROJECT_CODE_LICENSE.txt",
-    "ATTRIBUTIONS.md",
-    "DISTRIBUTION_STATUS.md",
-)
-PACKAGE_FILES = tuple(sorted(ARTIFACT_FILES + DOCUMENT_FILES))
 SOURCE_ONLY_FILES = {"training_args.bin"}
-BASE_MODEL = "neuralmind/bert-base-portuguese-cased"
-BASE_REVISION = "94d69c95f98f7d5b2a8700c420230ae10def0baa"
 SOURCE_PREFIX = "models/bertimbau/phase3b-full-v3/best_model"
 PACKAGE_VERSION = "1.0.0-rc.1"
 LICENSE_STATUS = "REQUIRES_REVIEW"
@@ -42,65 +46,6 @@ METRIC_NAMES = {
     "Recall Macro": "recall_macro",
     "Accuracy": "accuracy",
 }
-
-
-def read_json(path: Path) -> dict:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _no_symlink_ancestors(path: Path) -> None:
-    if ".." in path.parts:
-        raise ValueError("Caminho com travessia de diretórios rejeitado.")
-    for item in (path.absolute(), *path.absolute().parents):
-        if item.is_symlink():
-            raise ValueError("Links simbólicos não são permitidos.")
-
-
-def safe_file(directory: Path, name: str) -> Path:
-    _no_symlink_ancestors(directory)
-    if not name or Path(name).name != name or name in {".", ".."} or "\\" in name:
-        raise ValueError("Nome de arquivo inseguro.")
-    path = directory / name
-    if path.is_symlink():
-        raise ValueError("Link simbólico rejeitado.")
-    if not path.is_file() or not stat.S_ISREG(path.stat().st_mode):
-        raise ValueError(f"Arquivo necessário ausente ou não regular: {name}.")
-    return path
-
-
-def inspect_directory(
-    directory: Path, required: tuple[str, ...], *, ignored: set[str] | None = None
-):
-    _no_symlink_ancestors(directory)
-    actual = {item.name for item in directory.iterdir()}
-    if set(required) - actual or actual - set(required) - (ignored or set()):
-        raise ValueError("Diretório incompleto ou com arquivos inesperados.")
-    # Mesmo arquivos explicitamente excluídos não podem ser links ou diretórios.
-    for name in actual:
-        safe_file(directory, name)
-
-
-def _metadata_hygiene(text: str) -> None:
-    if re.search(r"/home/|/Users/|[A-Za-z]:[\\/]Users[\\/]|\bhf_[A-Za-z0-9]{20,}", text):
-        raise ValueError("Caminho pessoal ou possível credencial nos metadados.")
-
-
-def validate_configuration(directory: Path) -> None:
-    config = read_json(safe_file(directory, "config.json"))
-    tokenizer = read_json(safe_file(directory, "tokenizer_config.json"))
-    if (
-        config.get("model_type") != "bert"
-        or config.get("architectures") != ["BertForSequenceClassification"]
-        or config.get("id2label") != {str(k): v for k, v in LABEL_NAMES.items()}
-        or config.get("label2id") != {v: k for k, v in LABEL_NAMES.items()}
-        or tokenizer.get("do_lower_case") is not False
-        or tokenizer.get("strip_accents") is True
-        or config.get("auto_map")
-        or tokenizer.get("auto_map")
-    ):
-        raise ValueError("Arquitetura, tokenizer ou mapeamento incompatível com o modelo aprovado.")
-    for name in ("config.json", "tokenizer_config.json"):
-        _metadata_hygiene((directory / name).read_text())
 
 
 def card_example(content: str) -> str:
@@ -168,16 +113,6 @@ def validate_model_card(content: str, expected: dict | None = None) -> dict:
                 raise ValueError("Métricas por classe divergentes do registro congelado.")
     card_example(content)
     return metadata
-
-
-def file_inventory(directory: Path, names: tuple[str, ...]) -> dict:
-    return {
-        name: {
-            "bytes": safe_file(directory, name).stat().st_size,
-            "sha256": file_sha256(safe_file(directory, name)),
-        }
-        for name in sorted(names)
-    }
 
 
 def validate_manifest(manifest: dict) -> None:

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Literal
 
 from reviewsense.model_resolution import HubSnapshot, LocalPackage, read_json, release_gates
-from reviewsense.predict import InferenceService
+from reviewsense.predict import ArtifactPaths, InferenceService
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -56,4 +56,8 @@ def service_from_settings(settings: AppSettings, *, device: str = "auto") -> Inf
         )
     else:
         source = LocalPackage(settings.model_dir, settings.descriptor, settings.allowed_root)
-    return InferenceService(device=device, model_source=source)
+    return InferenceService(
+        ArtifactPaths.from_repository(ROOT) if settings.environment == "local" else None,
+        device=device,
+        model_source=source,
+    )

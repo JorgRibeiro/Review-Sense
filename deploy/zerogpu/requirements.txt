@@ -1,0 +1,7 @@
+# Instalação exclusiva do futuro Space; nunca aplicar à .venv local.
+# Gradio: sdk_version no README. torch/spaces/huggingface-hub: geridos pelo ZeroGPU.
+# A combinação alvo é conferida no startup contra runtime.json.
+transformers==5.22.1
+tokenizers==0.23.3
+safetensors==0.8.0
+numpy==2.4.6

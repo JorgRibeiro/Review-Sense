@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import os
+from collections.abc import Callable
 from html import escape
 from pathlib import Path
 
@@ -75,7 +76,16 @@ def result_html(result) -> str:
     </section>"""
 
 
-def make_analyzer(service: InferenceService):
+def public_error_html(message: str) -> str:
+    return (
+        '<section class="result-card error" role="alert">'
+        '<span class="section-kicker">ANÁLISE NÃO CONCLUÍDA</span>'
+        "<h2>Vamos tentar de novo.</h2>"
+        f"<p>{escape(message)}</p></section>"
+    )
+
+
+def make_analyzer(service: InferenceService, *, enable_svm: bool = True):
     """Callback fino; erros recebem mensagens públicas, sem exceções/logs de entradas."""
 
     def analyze(text, model):
@@ -94,25 +104,29 @@ def make_analyzer(service: InferenceService):
         except (ArtifactError, DeviceError, InferenceError):
             message = "Modelo indisponível no momento. Confira a configuração da aplicação."
         except Exception:
-            message = "Não foi possível concluir a análise. Tente novamente ou selecione o SVM."
-        return (
-            '<section class="result-card error" role="alert">'
-            '<span class="section-kicker">ANÁLISE NÃO CONCLUÍDA</span>'
-            "<h2>Vamos tentar de novo.</h2>"
-            f"<p>{escape(message)}</p></section>"
-        )
+            message = "Não foi possível concluir a análise. " + (
+                "Tente novamente ou selecione o SVM."
+                if enable_svm
+                else "Tente novamente mais tarde."
+            )
+        return public_error_html(message)
 
     return analyze
 
 
 def create_app(
-    service: InferenceService | None = None, *, settings: AppSettings | None = None
+    service: InferenceService | None = None,
+    *,
+    settings: AppSettings | None = None,
+    callback_transform: Callable | None = None,
 ) -> gr.Blocks:
     """Constrói sem carregar modelos, abrir datasets ou executar exemplos."""
     settings = settings or AppSettings()
     check_hosting_authorization(settings)
     service = service if service is not None else service_from_settings(settings)
-    analyze = make_analyzer(service)
+    analyze = make_analyzer(service, enable_svm=settings.enable_svm)
+    if callback_transform is not None:
+        analyze = callback_transform(analyze)
     badge = "Demonstração hospedada" if settings.environment == "hosted" else "Demonstração local"
     with gr.Blocks(title="ReviewSense PT-BR", analytics_enabled=False, fill_width=True) as demo:
         gr.HTML(f"""<header class="masthead"><a class="wordmark" href="#">

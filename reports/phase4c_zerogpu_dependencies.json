@@ -1,0 +1,139 @@
+{
+  "target": {
+    "python_version": "3.12.12",
+    "packages": {
+      "torch": "2.13.0",
+      "spaces": "0.51.3",
+      "gradio": "6.31.0",
+      "huggingface-hub": "2.4.0",
+      "transformers": "5.22.1",
+      "tokenizers": "0.23.3",
+      "safetensors": "0.8.0",
+      "numpy": "2.4.6"
+    },
+    "managed_by_platform": [
+      "torch",
+      "spaces",
+      "gradio",
+      "huggingface-hub"
+    ],
+    "validation": "STATIC_METADATA_ONLY_REAL_ZEROGPU_REQUIRED",
+    "candidate_model_repo": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "candidate_space_repo": "JorgeRibeiru/reviewsense-ptbr",
+    "license_status": "REQUIRES_REVIEW",
+    "upload_authorized": false
+  },
+  "static_metadata_checks": [
+    {
+      "name": "spaces",
+      "version": "0.51.3",
+      "requires_python": "<3.15,>=3.10",
+      "target_python_satisfies": true,
+      "known_target_edges": [
+        {
+          "requirement": "gradio",
+          "target": "6.31.0",
+          "satisfied": true
+        }
+      ],
+      "source": "https://pypi.org/pypi/spaces/0.51.3/json"
+    },
+    {
+      "name": "transformers",
+      "version": "5.22.1",
+      "requires_python": ">=3.11.0",
+      "target_python_satisfies": true,
+      "known_target_edges": [
+        {
+          "requirement": "huggingface-hub<3.0,>=1.31.0",
+          "target": "2.4.0",
+          "satisfied": true
+        },
+        {
+          "requirement": "numpy>=1.17",
+          "target": "2.4.6",
+          "satisfied": true
+        },
+        {
+          "requirement": "tokenizers<0.24.0,>=0.23.1",
+          "target": "0.23.3",
+          "satisfied": true
+        },
+        {
+          "requirement": "safetensors>=0.8.0",
+          "target": "0.8.0",
+          "satisfied": true
+        }
+      ],
+      "source": "https://pypi.org/pypi/transformers/5.22.1/json"
+    },
+    {
+      "name": "tokenizers",
+      "version": "0.23.3",
+      "requires_python": ">=3.10",
+      "target_python_satisfies": true,
+      "known_target_edges": [
+        {
+          "requirement": "huggingface-hub<3.0,>=0.16.4",
+          "target": "2.4.0",
+          "satisfied": true
+        }
+      ],
+      "source": "https://pypi.org/pypi/tokenizers/0.23.3/json"
+    },
+    {
+      "name": "safetensors",
+      "version": "0.8.0",
+      "requires_python": ">=3.10",
+      "target_python_satisfies": true,
+      "known_target_edges": [],
+      "source": "https://pypi.org/pypi/safetensors/0.8.0/json"
+    },
+    {
+      "name": "gradio",
+      "version": "6.31.0",
+      "requires_python": ">=3.10",
+      "target_python_satisfies": true,
+      "known_target_edges": [
+        {
+          "requirement": "huggingface-hub<3.0,>=1.16.0",
+          "target": "2.4.0",
+          "satisfied": true
+        },
+        {
+          "requirement": "numpy<3.0,>=1.0",
+          "target": "2.4.6",
+          "satisfied": true
+        }
+      ],
+      "source": "https://pypi.org/pypi/gradio/6.31.0/json"
+    },
+    {
+      "name": "torch",
+      "version": "2.13.0",
+      "requires_python": ">=3.10",
+      "target_python_satisfies": true,
+      "known_target_edges": [],
+      "source": "https://pypi.org/pypi/torch/2.13.0/json"
+    },
+    {
+      "name": "numpy",
+      "version": "2.4.6",
+      "requires_python": ">=3.11",
+      "target_python_satisfies": true,
+      "known_target_edges": [],
+      "source": "https://pypi.org/pypi/numpy/2.4.6/json"
+    },
+    {
+      "name": "huggingface-hub",
+      "version": "2.4.0",
+      "requires_python": ">=3.10.0",
+      "target_python_satisfies": true,
+      "known_target_edges": [],
+      "source": "https://pypi.org/pypi/huggingface-hub/2.4.0/json"
+    }
+  ],
+  "full_resolver_or_runtime_install_performed": false,
+  "local_environment_modified": false,
+  "limitations": "Only Python constraints and dependency edges among selected packages checked; transitive solver, ABI, managed image and real ZeroGPU remain unvalidated."
+}
