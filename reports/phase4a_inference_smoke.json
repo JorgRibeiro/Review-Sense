@@ -1,0 +1,260 @@
+{
+  "phase": "4A",
+  "purpose": "synthetic_inference_smoke_not_dataset_evaluation",
+  "executed_at": "2026-10-30T17:15:22.093576-03:00",
+  "code_commit": "03d372bb5d83d5491806483f4dfb416094d37586",
+  "git_clean": true,
+  "source_sha256": {
+    "src/reviewsense/predict.py": "56e5acdb1729b68504d9e227421989fe4cc26f42056a4d8b3249fc1136717d31",
+    "app/app.py": "d6a535b81f968829643c207b1026a334bfe46bdbec4010e03bf065b091fddb31",
+    "app/style.css": "d635e0f0d8f22a2a51145cd77f495151e678715537e53212f139fc5448254d6c",
+    "scripts/verify_phase4a_local.py": "eb0c8aa221bcdd6b2c4206d04eb78c3f98ae7e4952f264588439b32304d090f0"
+  },
+  "software": {
+    "python": "3.11.14",
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "gradio": "6.31.0",
+    "gradio-client": "2.7.2",
+    "pillow": "12.3.0",
+    "fastapi": "0.162.0",
+    "pydantic": "2.14.2",
+    "starlette": "1.10.0"
+  },
+  "conditions": {
+    "requests": "one warmup then 3 passes over 4 fixed synthetic examples",
+    "includes": "tokenization/TF-IDF, transfers, forward, normalized scores",
+    "excludes": "cold loading, queue wait, HTTP roundtrip, rendering",
+    "model_loading_measured_separately": true,
+    "loading_scope": "lazy backend initialization; CPU follows GPU and reuses imports",
+    "measurement_order": [
+      "bert_auto",
+      "svm_cpu",
+      "bert_cpu"
+    ],
+    "torch_intraop_threads": 2,
+    "svm_threadpool_limit": 1,
+    "isolated_host_or_thermal_control": false,
+    "max_length": 256,
+    "max_input_characters": 8000
+  },
+  "measurements": {
+    "bert_auto": {
+      "device": "cuda:0",
+      "precision": "fp16",
+      "cold_start_seconds": 3.4010798589988553,
+      "first_inference_seconds": 0.16289551500085508,
+      "warm_median_seconds": 0.0068092074998276075,
+      "warm_min_seconds": 0.006722838999849046,
+      "warm_max_seconds": 0.007297478001419222,
+      "requests_measured": 12,
+      "batch_size": 1,
+      "synthetic_case_predictions": {
+        "positive": {
+          "class_id": 2,
+          "label": "positivo"
+        },
+        "negative": {
+          "class_id": 0,
+          "label": "negativo"
+        },
+        "neutral": {
+          "class_id": 1,
+          "label": "neutro"
+        },
+        "ambiguous": {
+          "class_id": 1,
+          "label": "neutro"
+        }
+      },
+      "bounded_input_check": {
+        "characters": 8000,
+        "result_valid": true,
+        "inference_seconds": 0.015298253001674311
+      }
+    },
+    "svm_cpu": {
+      "device": "cpu",
+      "precision": "sklearn_native",
+      "cold_start_seconds": 0.24415904999841587,
+      "first_inference_seconds": 0.017147362003015587,
+      "warm_median_seconds": 0.004292287499993108,
+      "warm_min_seconds": 0.004163034998782678,
+      "warm_max_seconds": 0.004566444000374759,
+      "requests_measured": 12,
+      "batch_size": 1,
+      "synthetic_case_predictions": {
+        "positive": {
+          "class_id": 2,
+          "label": "positivo"
+        },
+        "negative": {
+          "class_id": 0,
+          "label": "negativo"
+        },
+        "neutral": {
+          "class_id": 1,
+          "label": "neutro"
+        },
+        "ambiguous": {
+          "class_id": 1,
+          "label": "neutro"
+        }
+      },
+      "bounded_input_check": {
+        "characters": 8000,
+        "result_valid": true,
+        "inference_seconds": 0.004841971000132617
+      }
+    },
+    "bert_cpu": {
+      "device": "cpu",
+      "precision": "fp32",
+      "cold_start_seconds": 0.43442644999959157,
+      "first_inference_seconds": 0.034678427000471856,
+      "warm_median_seconds": 0.03157073599868454,
+      "warm_min_seconds": 0.03072101200086763,
+      "warm_max_seconds": 0.036923801999364514,
+      "requests_measured": 12,
+      "batch_size": 1,
+      "synthetic_case_predictions": {
+        "positive": {
+          "class_id": 2,
+          "label": "positivo"
+        },
+        "negative": {
+          "class_id": 0,
+          "label": "negativo"
+        },
+        "neutral": {
+          "class_id": 1,
+          "label": "neutro"
+        },
+        "ambiguous": {
+          "class_id": 1,
+          "label": "neutro"
+        }
+      },
+      "bounded_input_check": {
+        "characters": 8000,
+        "result_valid": true,
+        "inference_seconds": 0.2095192839988158
+      }
+    }
+  },
+  "checks": {
+    "weights_and_tokenizers_unchanged": true,
+    "artifact_sha256": {
+      "models/bertimbau/phase3b-full-v3/best_model/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+      "models/bertimbau/phase3b-full-v3/best_model/config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+      "models/bertimbau/phase3b-full-v3/best_model/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+      "models/bertimbau/phase3b-full-v3/best_model/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a",
+      "models/baseline/phase2-v1/selected_model.joblib": "9b9d5465583c836bc5ecafb50e1407b20992a5b1adf3e4986878914718583623"
+    },
+    "cpu_gradio_http_bert": true,
+    "cpu_gradio_http_svm": true,
+    "test_read_opens": 0,
+    "blocked_test_opens": 0,
+    "previous_models_and_reports_unchanged": true,
+    "post_smoke_integrity_test_read_opens": 0,
+    "post_smoke_integrity_blocked_opens": 0,
+    "temporary_servers_stopped": {
+      "7860": true,
+      "7861": true
+    }
+  },
+  "dependency_changes": {
+    "changed_existing": {
+      "pillow": {
+        "before": "13.0.0",
+        "after": "12.3.0"
+      }
+    },
+    "added": {
+      "pytz": "2026.6",
+      "pydub": "0.25.1",
+      "brotli": "1.2.1",
+      "uvicorn": "0.54.0",
+      "typing-inspection": "0.4.4",
+      "tomlkit": "0.14.0",
+      "semantic-version": "2.10.0",
+      "python-multipart": "0.0.32",
+      "pydantic_core": "2.50.2",
+      "orjson": "3.13.0",
+      "opentelemetry-api": "1.45.2",
+      "groovy": "0.1.2",
+      "certifi": "2026.10.23",
+      "annotated-types": "0.8.0",
+      "starlette": "1.10.0",
+      "pydantic": "2.14.2",
+      "httpcore": "1.0.9",
+      "httpx": "0.28.1",
+      "fastapi": "0.162.0",
+      "safehttpx": "0.1.7",
+      "gradio_client": "2.7.2",
+      "hf-gradio": "0.4.1",
+      "gradio": "6.31.0"
+    }
+  },
+  "browser_validation": {
+    "title": "ReviewSense PT-BR",
+    "default_bert_selected": true,
+    "initial_result_visible": true,
+    "bert_scores_visible": true,
+    "svm_has_no_score_bars": true,
+    "empty_input_error_visible": true,
+    "no_stale_sentiment_on_error": true,
+    "mobile_no_horizontal_overflow": true,
+    "mobile_textbox_visible": true,
+    "responsive_widths": {
+      "320": true,
+      "390": true,
+      "768": true,
+      "1440": true
+    },
+    "dark_preference_loads": true,
+    "external_requests": [],
+    "page_errors": [],
+    "engine": "Brave/Chromium headless; perfil temporário",
+    "screenshots": [
+      "reports/figures/phase4a_desktop.png",
+      "reports/figures/phase4a_mobile.png"
+    ],
+    "real_models_and_local_http": true,
+    "server_guard": {
+      "test_read_opens": 0,
+      "blocked_test_opens": 0,
+      "models_loaded": [
+        "bertimbau",
+        "svm"
+      ]
+    }
+  },
+  "quality_checks": {
+    "offline_tests_passed": 217,
+    "new_tests": 44,
+    "previous_tests": 173,
+    "skipped": 0,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "pip_check": true,
+    "full_suite_real_test_guard": {
+      "read_opens": 0,
+      "blocked_opens": 0
+    }
+  },
+  "hardware": {
+    "cpu_model": "13th Gen Intel(R) Core(TM) i5-13450HX",
+    "logical_cpus": 16,
+    "gpus": [
+      {
+        "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+        "driver_version": "615.78.08",
+        "memory.total": "6144"
+      }
+    ]
+  },
+  "status": "local_demo_verified_not_published"
+}

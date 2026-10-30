@@ -1,8 +1,8 @@
-# ReviewSense PT-BR — Plano técnico v1.5
+# ReviewSense PT-BR — Plano técnico v1.6
 
 **Objetivo:** projeto reprodutível de classificação de sentimentos em avaliações brasileiras, com baseline TF-IDF + LinearSVC, fine-tuning de BERTimbau, avaliação rigorosa, modelo publicado no Hugging Face Hub e demonstração via Gradio.
 
-**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Fase 3C concluída com avaliação independente de teste; publicação continua pendente.
+**Data de referência:** 30/10/2026. **Estado:** Fase 1 validada localmente; Fase 2 com Dummy e SVM treinados apenas no treino e avaliados na validação. Fase 3A concluída com smoke BERTimbau 256/96 na GPU local. Fase 3B concluída com três épocas e seleção pela validação. Fase 3C concluída com avaliação independente de teste. Fase 4A concluída com inferência reutilizável e Gradio local em GPU/CPU; publicação continua pendente na Fase 4B.
 
 **Adendo de ambiente:** o computador do desenvolvedor é o ambiente principal, usando CPU e GPU local conforme a tarefa e o suporte do hardware. Usar Colab ou outra infraestrutura externa apenas se memória ou tempo de execução se tornarem limitantes. A validação no Colab é opcional e não bloqueia a conclusão da Fase 1. Não é necessário manter ambientes separados de CPU, GPU e TPU; não há uso de TPU previsto.
 
@@ -76,7 +76,7 @@ reviewsense-ptbr/
 │       ├── baseline.py            # Pipeline TF-IDF + LinearSVC
 │       ├── train_transformer.py   # Fine-tuning
 │       ├── evaluate.py            # Métricas e comparação
-│       └── predict.py             # Inferência carregando modelo do Hub
+│       └── predict.py             # Inferência local verificada; futuro resolvedor do Hub
 ├── app/
 │   ├── app.py                     # Gradio
 │   └── requirements.txt
@@ -114,9 +114,9 @@ reviewsense-ptbr/
 - [x] README com instruções para reproduzir e links dos resultados de validação
 
 **MVP 2 — Produto demonstrável:**
-- [ ] Gradio local com textarea, classe prevista e probabilidades se devidamente calibradas
+- [x] Gradio local com textarea, classe/ID e scores normalizados não calibrados no BERT; SVM sem probabilidades (Fase 4A)
 - [ ] Space publicado se o plano/permissões permitirem; alternativa: demo local e vídeo/GIF no README
-- [ ] Testes mínimos de mapeamento de classes e pré-processamento
+- [x] Testes de classes, validação, cache, integridade, CPU/GPU e interface; 217 testes offline aprovados
 
 **Posterior ao MVP:** experimentos em dados completos, análise temporal e por categorias, calibração, CI, simplificação/quantização de inferência se necessária, comparação com modelo menor.
 
@@ -204,3 +204,26 @@ A parte de treinamento e avaliação planejada está encerrada. Fase 4 (publica�
 Model Card e Gradio) permanece pendente; não houve publicação, push ou merge
 nesta entrega. Limitações de domínio, proxy por estrelas e neutralidade continuam
 explicitadas nos relatórios.
+
+
+## 13. Fase 4A — Inferência e Gradio local concluídos
+
+Branch `feat/phase4a-inference-gradio`, baseada na main da340b8 após merge da Fase 3C.
+Serviço em `src/reviewsense/predict.py`, Gradio em `app/app.py`, pesos originais
+validados por SHA-256 e carregados sob demanda. BERT cased, max_length 256,
+FP16/CUDA quando compatível e FP32/CPU funcional. SVM reutiliza o TF-IDF salvo.
+Sem treino, refit, calibração, seleção ou nova avaliação do teste.
+
+BERT é o padrão e exibe scores normalizados não calibrados; SVM retorna apenas a
+classe. Até 8.000 caracteres por texto, microbatches BERT de 2, API reutilizável,
+cache/lock, erros públicos seguros e CPU como alternativa. Gradio é local em
+127.0.0.1:7860, share/analytics/histórico desligados, sem logging de entradas.
+
+Modelos reais validados na interface e no serviço em GPU/CPU, exemplos sintéticos,
+layout de 320 a 1440 px, 217 testes offline e verificações de integridade aprovados.
+Evidências e medições em `reports/phase4a_inference_smoke.json`; decisões e comandos
+em [FASE4A_INFERENCE_GRADIO.md](docs/FASE4A_INFERENCE_GRADIO.md).
+Os artefatos e resultados anteriores continuam preservados, sem acesso ao teste.
+
+Não houve publicação, push ou merge nesta entrega. A Fase 4B tratará Model Card,
+licenciamento e preparação da publicação. O projeto ainda não está publicado.

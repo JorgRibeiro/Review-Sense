@@ -6,12 +6,43 @@ a **Fase 2** compara DummyClassifier e TF-IDF + LinearSVC em CPU local, usando
 apenas treino e validação. A **Fase 3A** executa um smoke de BERTimbau em GPU local,
 limitado a 256/96 exemplos. A **Fase 3B** concluiu três épocas nos 88.684 textos
 de treino, após piloto de GPU e prova de retomada. A **Fase 3C** concluiu a avaliação
-independente no teste, com protocolo congelado e uma passagem por modelo.
+independente no teste, com protocolo congelado e uma passagem por modelo. A **Fase 4A**
+implementa o serviço de inferência reutilizável e a demonstração Gradio local.
 
 As classes são derivadas das estrelas: **1–2 → negativo (0), 3 → neutro (1),
 4–5 → positivo (2)**. Isso é uma proxy de sentimento, não uma anotação direta.
 Os resultados futuros estarão inicialmente limitados a avaliações de produtos
 no domínio do corpus; não comprovam generalização para delivery ou outros setores.
+
+## Demonstração local — Fase 4A
+
+Com a `.venv` CUDA existente e os modelos aprovados disponíveis:
+
+```bash
+.venv/bin/python -m pip install -r app/requirements.txt
+.venv/bin/python -m app.app
+```
+
+Abra **http://127.0.0.1:7860**. BERTimbau é o padrão; o SVM é a alternativa leve.
+O modo automático usa GPU quando disponível e permite CPU; para forçar CPU, use
+`--device cpu`. Os modelos são carregados sob demanda e reutilizados.
+**Pesos não estão no Git**: veja os arquivos necessários no
+[guia da Fase 4A](docs/FASE4A_INFERENCE_GRADIO.md). Nenhum dataset é necessário.
+
+A interface aceita até 8.000 caracteres e usa exemplos sintéticos. BERT exibe
+scores normalizados **não calibrados**; SVM exibe apenas a classe. Textos não são
+salvos em arquivos/logs; analytics, histórico, cache de exemplos e share estão
+desativados. A aplicação não foi publicada externamente.
+
+![ReviewSense PT-BR — demonstração com exemplo sintético](reports/figures/phase4a_desktop.png)
+
+Validação local: **217 testes aprovados**, BERT/GPU, BERT/CPU, SVM e interface em
+320–1440 px. Medianas de inferência aquecida, 12 requisições sintéticas por cenário:
+**BERT/GPU 6.81 ms**, **BERT/CPU 31.57 ms**,
+**SVM 4.29 ms**. Excluem carga, fila, HTTP e renderização;
+não substituem os benchmarks de dataset da Fase 3C. Condições e evidências:
+[phase4a_inference_smoke.json](reports/phase4a_inference_smoke.json).
+A Fase 4B tratará Model Card, licenciamento e preparação da publicação.
 
 ## Ambiente principal
 
@@ -179,7 +210,8 @@ Para regenerar tabelas/figuras a partir da execução salva, sem nova inferênci
 
 A execução final está encerrada; o marcador local impede repetição, inclusive
 após falha. O teste agora é informação observada e não deve orientar ajustes neste
-experimento. A Fase 4 (Model Card, publicação e Gradio) continua pendente.
+experimento. A Fase 4A implementa a demonstração local; Model Card, licenciamento
+e preparação da publicação permanecem para a Fase 4B.
 
 ## Notebook local e alternativa no Google Colab
 
@@ -259,7 +291,7 @@ src/reviewsense/train_bertimbau.py    # Treino completo, seleção e estado reto
 src/reviewsense/phase3b.py            # CLI de preparação, piloto e gates
 src/reviewsense/final_evaluation.py   # Preflight e avaliação única, sem ajuste
 src/reviewsense/final_reporting.py    # Relatório e figuras a partir de agregados
-src/reviewsense/predict.py           # Reserva para inferência pública futura
+src/reviewsense/predict.py           # Serviço local: cache, integridade, CPU/GPU e scores
 notebooks/01_data_audit_eda.ipynb     # Auditoria e gráficos usando os módulos
 notebooks/02_tfidf_svm_baseline.ipynb  # Comparação dos modelos na validação
 configs/baseline.json                # Grade e condições de medição da Fase 2
@@ -267,7 +299,8 @@ configs/bertimbau_smoke.json          # Orçamento e configuração da Fase 3A
 configs/bertimbau_phase3b.json        # Configuração do treino completo
 docs/FASE2_BASELINE.md                # Conceitos, funções e reprodução
 tests/                              # Testes offline com exemplos sintéticos
-app/                                # Reserva para Gradio, sem implementação nesta fase
+app/                                # Gradio local e estilos, sem lógica duplicada de modelos
+scripts/verify_phase4a_local.py      # Smoke sintético opcional com modelos originais
 data/README.md                      # Proveniência, licença e artefatos locais
 reports/validation_phase1.md         # Evidências da validação executada
 reports/data_audit_summary.json      # Resumo agregado, sem textos ou IDs de avaliações
@@ -285,8 +318,8 @@ reports/figures/                     # Destino de figuras agregadas
 ```
 
 O workflow de CI continua reservado a uma etapa posterior.
-O extra Transformer é opcional e preserva o PyTorch CUDA já instalado. Gradio
-continua reservado à fase de demonstração. Os testes comuns não baixam pesos nem
+O extra Transformer é opcional e preserva o PyTorch CUDA já instalado. A aplicação
+Gradio possui dependências próprias em app/requirements.txt. Os testes comuns não baixam pesos nem
 exigem GPU; testes opcionais usam um BERT minúsculo criado localmente em CPU.
 
 ## Fonte e licença
