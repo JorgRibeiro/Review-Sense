@@ -60,3 +60,35 @@ def candidate(tmp_path):
         "manifest": manifest,
         "source": source,
     }
+
+
+@pytest.fixture
+def hub_cache(tmp_path):
+    """Layout realista de cache Hub: snapshots/<sha>/arquivo -> ../../blobs/<etag>."""
+    from hashlib import sha1, sha256
+
+    from reviewsense.model_packaging import PACKAGE_FILES
+
+    def build(package):
+        cache = tmp_path / "hf-cache"
+        repo = cache / "models--example--model"
+        blobs = repo / "blobs"
+        snapshot = repo / "snapshots" / ("a" * 40)
+        blobs.mkdir(parents=True)
+        snapshot.mkdir(parents=True)
+        paths = {}
+        for name in PACKAGE_FILES:
+            data = (package / name).read_bytes()
+            # Cache pode usar etags Git de 40 caracteres ou SHA-256 de 64.
+            etag = sha256(data).hexdigest()
+            if name != "model.safetensors":
+                etag = sha1(
+                    b"blob " + str(len(data)).encode() + b"\0" + data, usedforsecurity=False
+                ).hexdigest()
+            paths[name] = blobs / etag
+            paths[name].write_bytes(data)
+            (snapshot / name).symlink_to(f"../../blobs/{etag}")
+        (snapshot / ".gitattributes").write_text("synthetic cached metadata")
+        return {"root": cache, "snapshot": snapshot, "blobs": blobs, "files": paths}
+
+    return build

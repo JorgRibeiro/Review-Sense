@@ -376,9 +376,9 @@ jurídica, destino e autorização. Direitos **REQUIRES_REVIEW**, upload **false
 a Fase 4C não está encerrada e a inferência pública permanece bloqueada.
 
 - [Arquitetura, funções, comandos e cenários de encerramento](docs/FASE4C_RELEASE_READINESS.md)
-- [Pedido de esclarecimento de direitos, sem envio automático](docs/FASE4C_RIGHTS_OUTREACH.md)
+- [Política de direitos e reclamações; sem solicitações por e-mail](docs/FASE4C_RIGHTS_OUTREACH.md)
 - [Hospedagem e elegibilidade, sem contratação](docs/FASE4C_HOSTING_DECISION.md)
-- [Evidências da preparação](reports/validation_phase4c_readiness.md)
+- [Evidências da preparação](reports/validation_phase4c_readiness.md) e [correções pré-merge](reports/phase4c_premerge_corrections.md)
 
 A aplicação não grava explicitamente entradas; serviços de hospedagem podem manter
 registros e controles próprios. Não enviar dados pessoais/sigilosos. Sem nova

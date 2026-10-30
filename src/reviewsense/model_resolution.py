@@ -257,18 +257,10 @@ class HubSnapshot:
         destination = read_json(safe_file(self.approval_root, "destination.json"))
         if (self.repo_id, self.revision) != (destination["repo_id"], destination["revision"]):
             raise PermissionError("Snapshot não corresponde ao destino autorizado.")
-        from huggingface_hub import snapshot_download
+        from reviewsense.hub_cache import materialize_hub_snapshot
 
-        # local_files_only e token=False são invariantes, não flags configuráveis.
-        directory = Path(
-            snapshot_download(
-                repo_id=self.repo_id,
-                revision=self.revision,
-                repo_type="model",
-                allow_patterns=list(PACKAGE_FILES),
-                cache_dir=self.cache_root,
-                local_files_only=True,
-                token=False,
-            )
+        # Lê diretamente o cache fixado: nenhuma API, autenticação ou consulta à rede.
+        directory = materialize_hub_snapshot(
+            self.cache_root, self.repo_id, self.revision, descriptor
         )
         return LocalPackage(directory, self.descriptor_path, self.cache_root).resolve()

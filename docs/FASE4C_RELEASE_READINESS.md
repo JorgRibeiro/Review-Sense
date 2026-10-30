@@ -31,7 +31,8 @@ manualmente todos os checksums de um pacote adulterado não o torna aprovado.
 | `descriptor_from_manifest` / `validate_descriptor` | Extrair o contrato mínimo e rejeitar campos extras/invariantes inválidas |
 | `validate_runtime_package` | Verificar allowlist, tamanhos/SHA, tokenizer cased, labels, metadata e status sem registros internos |
 | `LocalPackage.resolve` | Impedir saída da raiz permitida e rejeitar symlinks, inclusive em ancestrais |
-| `HubSnapshot.resolve` | Resolver snapshot **somente em cache offline**, por repo_id/SHA explícitos, após gates |
+| `HubSnapshot.resolve` | Resolver e materializar snapshot **somente em cache offline**, por repo_id/SHA explícitos, após gates |
+| `materialize_hub_snapshot` | Copiar somente arquivos aprovados do snapshot/blobs para diretório regular, conferindo bytes e SHA-256 |
 | `release_gates` | Separar direitos, destino e autorização vinculados ao candidato |
 | `InferenceService.prepare` | Pré-carregar opcionalmente antes de servir, mantendo lazy load por padrão |
 | `AppSettings` / `service_from_settings` | Configurar origem/ambiente explicitamente; bloquear hospedagem pendente |
@@ -42,6 +43,8 @@ manualmente todos os checksums de um pacote adulterado não o torna aprovado.
 BERT agora usa pacote local + descritor; instanciar o serviço não lê arquivos.
 `ArtifactPaths` explícito mantém o caminho histórico dos treinamentos. SVM segue
 local, conferido pelos registros das Fases 2/3C; não acompanha o pacote público.
+`AppSettings(environment="hosted")` sempre fixa `enable_svm=False`, inclusive se
+construído diretamente com True. O ambiente local mantém a escolha anterior.
 Cache por instância, lock, FP32/CPU, FP16/GPU compatível, recuperação CUDA limitada,
 scores não calibrados e ausência de persistência de entradas foram preservados.
 
@@ -75,15 +78,24 @@ service = InferenceService(ArtifactPaths.from_repository(Path.cwd()), device="cp
 O modo `--model-origin hub-cache` exige repo_id, revisão SHA de 40 caracteres,
 cache root, descritor e approval root explícitos. Não há valores de namespace
 padrão, download autorizado, leitura de token ou fallback para main/modelo base.
-`snapshot_download` é chamado com `local_files_only=True`, `token=False` e a
-allowlist exata. Com o candidato real, os gates recusam **antes da chamada**.
-Somente mocks/snapshots sintéticos exercitaram esse adaptador.
+O adaptador lê diretamente o layout local
+`models--<namespace>--<repo>/snapshots/<sha>/`, sem chamar `snapshot_download`,
+API, autenticação ou rede. Com o candidato real, os gates recusam antes de acessar
+o snapshot. A correção foi validada com caches sintéticos realistas, sem downloads.
 
-Snapshots precisam estar sob cache root e ter somente arquivos regulares da
-allowlist. Symlinks de caches HF antigos também são recusados: uma etapa posterior
-autorizada deverá materializar e verificar o pacote regular. Ausência de cache
-falha de forma segura. Provisionamento remoto, downloads autenticados e adaptação
-ZeroGPU **não estão habilitados/testados nesta entrega**.
+No cache são aceitos arquivos regulares ou links folha no formato exato
+`../../blobs/<etag>` (40 ou 64 hexadecimais), somente para blobs regulares do mesmo
+repo. Abertura POSIX por descritores de diretórios e O_NOFOLLOW rejeita symlinks
+nos ancestrais, nos blobs, links absolutos, encadeados ou fora da raiz. Extras
+pré-existentes do cache são ignorados, nunca abertos/copiados. Somente a allowlist
+é copiada e seu tamanho/SHA-256 conferidos durante a leitura. A cópia temporária é
+validada integralmente antes de promover o diretório regular, sob
+`cache_root/reviewsense-materialized/<repo>/<sha>/<digest-do-descritor>/`.
+Uma cópia existente só é reutilizada após validação; não é reparada/sobrescrita.
+`LocalPackage` permanece intacto e continua recusando todos os symlinks e extras.
+Ausência de cache ou de suporte POSIX a dir_fd/O_NOFOLLOW falha de forma segura.
+Provisionamento remoto, downloads autenticados e adaptação ZeroGPU
+**não estão habilitados/testados nesta entrega**.
 
 ## Preflight completamente offline
 
@@ -137,7 +149,7 @@ Para uma etapa futura revisada, os recibos locais privados em approval root ser�
 A licença do descritor também precisa estar APPROVED e identificada, e sua
 flag de upload aprovada. Alterar uma flag sem os demais recibos/evidências não
 satisfaz os gates. Esses JSONs são registros de confiança do operador: **não
-certificam juridicamente a resposta, não autenticam o signatário e não autorizam
+certificam a suficiência jurídica dos direitos, não autenticam o signatário e não autorizam
 publicação só por existirem**. Não foram produzidos recibos reais de aprovação.
 O candidato 4B não aceita troca de licença: resolver direitos implica novo
 candidato/metadata e revisão do protocolo de preflight antes de lançamento real.
@@ -160,6 +172,11 @@ CSS responsivo foi preservado. Custos/elegibilidade e limites estão na
 
 ## Encerramento posterior
 
+**Decisão de direitos atual:** o usuário não encaminhará solicitações por e-mail;
+o rascunho anterior não será enviado. A pendência é resolver materialmente os
+direitos e confirmar o canal de reclamações, sem presumir que finalidade educacional,
+não comercial ou retirada posterior autorizem a publicação. Nenhuma mensagem é enviada.
+
 **Cenário A — direitos resolvidos:** confirmar namespace/recursos, revisar novo
 candidato/avisos e autorização humana; publicar somente a allowlist aprovada,
 registrar SHA definitivo, verificar download/carregamento em ambiente limpo,
@@ -181,7 +198,7 @@ links definitivos verificados; não sugerir parceria, criar link HF fictício ou
 anunciar lançamento inexistente. O post é a última entrega, sujeita a revisão
 humana; publicação em rede social exige autorização específica.
 
-Ver [pedido de esclarecimento pronto para revisão](FASE4C_RIGHTS_OUTREACH.md),
+Ver [política de direitos, atribuição e reclamações](FASE4C_RIGHTS_OUTREACH.md),
 [plano de gates](FASE4C_RELEASE_PLAN.md) e
 [relatório da preparação](../reports/validation_phase4c_readiness.md).
 
@@ -200,3 +217,5 @@ Não produz aprovações reais e não depende de downloads, GPU ou checkpoint re
 O smoke opcional do CLI exige os artefatos locais legítimos. As medições e checks
 realmente executados, suas condições e limitações ficam no relatório estruturado
 e Markdown desta fase. Não reutilizar o teste final como rotina de verificação.
+
+Correções pré-merge e verificações adicionais: [phase4c_premerge_corrections.md](../reports/phase4c_premerge_corrections.md). Os relatórios anteriores permanecem como registros históricos da execução original.

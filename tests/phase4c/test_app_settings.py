@@ -17,6 +17,17 @@ def test_local_default_lazy_and_never_public():
     assert options["server_name"] == "127.0.0.1" and options["share"] is False
 
 
+@pytest.mark.parametrize("enabled", [True, False])
+def test_hosted_svm_disabled_even_with_direct_configuration(enabled):
+    assert AppSettings(environment="hosted", enable_svm=enabled).enable_svm is False
+    assert AppSettings(environment="local", enable_svm=enabled).enable_svm is enabled
+
+
+def test_hosted_default_disables_svm_while_local_default_keeps_it():
+    assert AppSettings(environment="hosted").enable_svm is False
+    assert AppSettings().enable_svm is True
+
+
 @pytest.mark.parametrize(
     "values", [dict(origin="hub-cache"), dict(environment="wrong"), dict(origin="other")]
 )
@@ -37,7 +48,7 @@ def test_hosted_preview_copy_limits_and_shared_queue(monkeypatch):
     monkeypatch.setattr("app.app.check_hosting_authorization", lambda settings: None)
     demo = create_app(
         SimpleNamespace(predict=lambda *a, **k: None),
-        settings=AppSettings(environment="hosted", enable_svm=False),
+        settings=AppSettings(environment="hosted", enable_svm=True),
     )
     try:
         config = repr(demo.config)

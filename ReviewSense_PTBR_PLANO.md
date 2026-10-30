@@ -276,7 +276,10 @@ adaptador HF somente cache offline/mock por SHA imutável e preflight com gates
 independentes. Não alterar allowlist/candidato original nem pesos/datasets.
 
 Direitos `REQUIRES_REVIEW`, upload false, destino e autorização pendentes.
-Comunicação formal preparada, sem envio. CPU Basic condicionado a plano/elegibilidade;
+O usuário não encaminhará solicitações por e-mail; o rascunho anterior não será
+enviado. Política de atribuição, finalidade educacional/não comercial, transparência,
+reclamações e suspensão/retirada preparada, sem remover o bloqueio de direitos.
+Confirmar canal e responsável antes de lançamento. CPU Basic condicionado a plano/elegibilidade;
 ZeroGPU exige adaptação e confirmação, sem compra. UI distingue local/hospedado,
 mantém limites, erros seguros e privacidade sem promessas absolutas.
 

@@ -26,6 +26,9 @@ class AppSettings:
     def __post_init__(self):
         if self.environment not in {"local", "hosted"} or self.origin not in {"local", "hub-cache"}:
             raise ValueError("Ambiente ou origem inválidos.")
+        if self.environment == "hosted":
+            # Invariante da configuração, inclusive para construção direta fora da CLI.
+            object.__setattr__(self, "enable_svm", False)
         if self.origin == "hub-cache" and not (
             self.repo_id and self.revision and self.approval_root
         ):

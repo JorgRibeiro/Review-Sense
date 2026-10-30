@@ -197,20 +197,24 @@ def approve_synthetic(candidate, tmp_path):
     return root
 
 
-def test_hub_mock_pins_revision_allowlist_no_auth_no_download(candidate, tmp_path, monkeypatch):
+def test_hub_cache_pins_revision_allowlist_no_auth_no_download(
+    candidate, tmp_path, monkeypatch, hub_cache
+):
     import huggingface_hub
 
     approvals = approve_synthetic(candidate, tmp_path)
-    spy = Mock(return_value=str(candidate["package"]))
+    cache = hub_cache(candidate["package"])
+    spy = Mock(side_effect=AssertionError("Hub call forbidden"))
     monkeypatch.setattr(huggingface_hub, "snapshot_download", spy)
     source = HubSnapshot(
-        "example/model", "a" * 40, candidate["descriptor_path"], approvals, tmp_path
+        "example/model", "a" * 40, candidate["descriptor_path"], approvals, cache["root"]
     )
-    assert source.resolve() == candidate["package"]
+    directory = source.resolve()
+    assert directory.is_relative_to(cache["root"])
+    assert file_inventory(directory, PACKAGE_FILES) == candidate["descriptor"]["files"]
+    assert directory.parts[-2] == "a" * 40
     assert not any(release_gates(candidate["descriptor"], approvals).values())
-    kwargs = spy.call_args.kwargs
-    assert kwargs["local_files_only"] is True and kwargs["token"] is False
-    assert kwargs["revision"] == "a" * 40 and set(kwargs["allow_patterns"]) == set(PACKAGE_FILES)
+    spy.assert_not_called()
 
 
 @pytest.mark.parametrize("receipt", ["rights", "destination", "human"])
@@ -317,16 +321,17 @@ def test_approved_mock_snapshot_still_fails_safely(candidate, tmp_path, monkeypa
     approvals = approve_synthetic(candidate, tmp_path)
     cache = tmp_path / "cache"
     cache.mkdir()
-    spy = Mock(return_value=str(candidate["package"]))
-    if failure == "missing_cache":
-        spy.side_effect = FileNotFoundError("synthetic cache miss")
+    if failure == "outside":
+        (cache / "models--example--model").symlink_to(
+            candidate["package"], target_is_directory=True
+        )
+    spy = Mock(side_effect=AssertionError("Hub call forbidden"))
     monkeypatch.setattr(huggingface_hub, "snapshot_download", spy)
     repo = "other/model" if failure == "wrong_destination" else "example/model"
     source = HubSnapshot(repo, "a" * 40, candidate["descriptor_path"], approvals, cache)
-    with pytest.raises((ValueError, FileNotFoundError, PermissionError)):
+    with pytest.raises((ValueError, OSError)):
         source.resolve()
-    if failure == "wrong_destination":
-        spy.assert_not_called()
+    spy.assert_not_called()
 
 
 def test_malformed_receipts_never_satisfy_gates(candidate, tmp_path):

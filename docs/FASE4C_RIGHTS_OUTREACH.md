@@ -1,105 +1,102 @@
-# Fase 4C — Esclarecimento de direitos e solicitação para revisão humana
+# Fase 4C — Política de direitos, atribuição e reclamações
 
-**REQUIRES_REVIEW; upload_authorized=false. Comunicação preparada, não enviada.**
-Consulta pública em 2026-10-30. Nenhum prazo ou silêncio constitui autorização.
+**REQUIRES_REVIEW; upload_authorized=false. Publicação continua bloqueada.**
 
-## Canais e autoridade
+## Decisão do responsável pelo projeto
 
-| Canal público | Evidência e finalidade | Limite |
-| --- | --- | --- |
-| Americanas RI: `ri@americanas.io` e formulário | [Fale com o RI](https://ri.americanas.io/informacoes-aos-investidores/fale-com-o-ri/) identifica o canal institucional | Solicitar encaminhamento ao jurídico/propriedade intelectual e responsável pelo corpus; RI não foi identificado como licenciador |
-| Privacidade: `privacidade@americanas.com` | [Aviso oficial, seção 10](https://ri.americanas.io/aviso-de-privacidade-2/) publica contato para direitos dos titulares | Perguntar sobre conteúdo de terceiros e encaminhamento; DPO não é automaticamente titular dos direitos autorais |
-| Repositório Americanas Tech | [B2W-Reviews01](https://github.com/americanas-tech/b2w-reviews01) está arquivado desde 31/05/2022 | Fonte histórica e licença; não depender da abertura de issue para obter resposta |
-| Autores acadêmicos: Livy Real, Marcio Oshiro, Alexandre Mafra | [Artigo disponibilizado pelo repositório original](https://github.com/americanas-tech/b2w-reviews01/blob/main/b2wreviews01_stil2019.pdf) | Podem esclarecer publicação/procedência e indicar responsáveis; autoria científica não prova titularidade ou poder para autorizar todos os usos |
-| Mantenedor do espelho `ruanchaves` | [Dataset card](https://huggingface.co/datasets/ruanchaves/b2w-reviews01/blob/main/README.md) declara CC BY 4.0 | Esclarecer procedência dessa declaração; não presumir poderes de relicenciamento sobre o original |
+O usuário decidiu **não encaminhar solicitações de autorização por e-mail**.
+O pedido redigido na primeira execução da 4C não será enviado; deixa de ser uma
+pendência operacional. Este documento substitui aquela orientação de contato.
+O rascunho e a pesquisa anteriores permanecem no histórico Git e nos relatórios
+da execução original, que não foram reescritos. Nenhuma mensagem foi enviada.
 
-Começar com um encaminhamento institucional, sem enviar simultaneamente a vários
-canais. Confirmar destinatário competente antes de anexar qualquer documento
-confidencial. Não foram inventados endereços pessoais dos autores. Algumas rotas
-antigas do site de RI retornaram 404; usar as páginas acima e reconfirmar no envio.
-Não usar canal de denúncias para uma solicitação de licença. As páginas de RI foram
-lidas pelo navegador de pesquisa em fonte oficial; consultas HTTP diretas do
-verificador receberam 403. Isso limita a checagem automatizada, sem provar que o
-canal foi desativado. Reconfirmar conteúdo/acesso manualmente antes de enviar.
+A decisão não concede direitos e não resolve a divergência de licenças. Não
+interpretar silêncio, ausência de reclamação ou existência desta política como
+consentimento. Não há envio automatizado de e-mail, formulário ou mensagem por
+outro canal. A revisão material de direitos permanece um bloqueio de lançamento.
 
-A fonte original declara CC BY-NC-SA 4.0, distinta da CC BY 4.0 do espelho. O
-[resumo da CC](https://creativecommons.org/licenses/by-nc-sa/4.0/) descreve atribuição,
-NC e SA, sem resolver a situação específica dos pesos ou todos os direitos de
-terceiros. Ver [auditoria anterior](FASE4B_LICENSE_REVIEW.md). Autores, organização
-publicadora, atuais titulares e autores das avaliações são posições diferentes.
-Uma autorização só alcança direitos que o remetente efetivamente detenha/represente.
+## Atribuição e transparência
 
-## Pedido em português — pronto para revisão humana
+- **Dataset:** atribuir B2W Digital/Americanas Tech, B2W-Reviews01, e os autores
+  Livy Real, Marcio Oshiro e Alexandre Mafra. Preservar a referência ao
+  [original fixado](https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a)
+  e ao [artigo](https://github.com/americanas-tech/b2w-reviews01/blob/main/b2wreviews01_stil2019.pdf).
+  Autoria acadêmica, publicação institucional e titularidade das avaliações de
+  consumidores são posições distintas; não se presume poder de autorização integral.
+- **Modelo base:** atribuir NeuralMind e Fábio Souza, Rodrigo Nogueira e Roberto
+  Lotufo, autores de BERTimbau (2020). Preservar a referência ao
+  [base e revisão utilizados](https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md),
+  a citação e o aviso MIT correspondente.
+- **Licenças separadas:** a MIT do código próprio e a MIT declarada do modelo base
+  não licenciam automaticamente os pesos ajustados. A fonte original do dataset
+  declara CC BY-NC-SA 4.0; o [espelho](https://huggingface.co/datasets/ruanchaves/b2w-reviews01)
+  declara CC BY 4.0, sem esclarecimento que resolva a divergência. Não adotar o
+  espelho como permissão adicional. Ver [auditoria da 4B](FASE4B_LICENSE_REVIEW.md).
+- **Alterações e limitações:** informar limpeza, rótulos por estrelas, fine-tuning,
+  seleção do checkpoint e limites do corpus/classe neutra, sem redistribuir dados
+  individuais. Não apresentar o projeto como parceiro/endossado por Americanas,
+  NeuralMind ou iFood. Pesos mantêm `license: unknown` e `REQUIRES_REVIEW`.
 
-**Assunto: B2W-Reviews01 — encaminhamento e esclarecimento de direitos para modelo educacional**
+## Finalidade prevista
 
-Prezada equipe,
+Estudo, aprendizado e demonstração educacional, com finalidade não comercial
+prevista: sem venda de pesos, cobrança de inferência ou publicidade na demonstração.
+Portfólio profissional pode envolver interesses indiretos; não é classificado
+automaticamente como NonCommercial. Uma futura mudança de finalidade, monetização,
+patrocínio ou uso comercial exige nova análise e autorização pertinente.
 
-Meu nome é Jorge, responsável pelo projeto independente ReviewSense PT-BR
-(https://github.com/jorgeribeiru/Review-Sense). Solicito encaminhamento ao responsável
-jurídico/propriedade intelectual e à equipe competente pelo corpus B2W-Reviews01,
-originalmente publicado pela B2W Digital e associado ao artigo de Livy Real,
-Marcio Oshiro e Alexandre Mafra.
+A intenção não comercial não elimina atribuição, outras condições potencialmente
+aplicáveis de NC/SA, direitos sobre avaliações de terceiros, privacidade ou obrigações
+legais. A incidência dessas condições sobre o modelo exige análise do caso; não se
+presume nem que todos os pesos sejam uma adaptação do corpus, nem que sejam livres
+de direitos. Não houve auditoria exaustiva de memorização. Não redistribuir corpus,
+splits, IDs, dados pessoais ou exemplos reais para divulgar o projeto.
 
-O projeto educacional classifica avaliações em português em negativo, neutro e
-positivo. Foi realizado fine-tuning do BERTimbau base, fornecido pela NeuralMind,
-com textos do corpus; o código e o modelo base têm avisos MIT próprios. A fonte
-original informa CC BY-NC-SA 4.0, enquanto um espelho no Hugging Face declara
-CC BY 4.0. Não interpretei essa divergência como permissão adicional.
+## Canal para reclamações fundamentadas
 
-Pretendo, se autorizado, disponibilizar gratuitamente os pesos ajustados
-(safetensors, aproximadamente 416 MiB com tokenizer/configuração e documentação)
-no Hugging Face, permitir seu download e manter uma demonstração Gradio pública
-que receba textos dos visitantes para inferência. Não pretendo redistribuir o
-corpus, splits, IDs, perfis de consumidores, exemplos reais, predições individuais
-ou estados de treinamento. A demonstração usaria exemplos sintéticos. Não houve
-auditoria exaustiva de memorização dos pesos.
+Canal definido para a política: [Issues do ReviewSense](https://github.com/jorgeribeiru/Review-Sense/issues),
+com assunto “Direitos — pedido de revisão”. Antes de qualquer lançamento, confirmar
+que Issues está habilitado e que há um responsável humano por monitorar e tratar
+as manifestações. A disponibilidade/monitoramento do canal ainda é uma pendência
+de pré-lançamento; nenhuma issue foi criada por esta correção.
 
-O objetivo é aprendizado e portfólio profissional, com divulgação do projeto e de
-seus resultados; mesmo sem cobrança ou anúncios, reconheço que essa finalidade
-pode exigir análise de NonCommercial. Não há parceria ou endosso da Americanas,
-NeuralMind ou iFood. Nenhum peso ou serviço de inferência foi publicado.
+Pedir somente identificação do material/revisão/link contestados, natureza do
+direito alegado, fundamento ou referência documental verificável, vínculo ou
+representação do titular e medida solicitada. Não exigir nem publicar documentos
+pessoais, credenciais, avaliações de consumidores ou informações confidenciais
+em uma issue pública. Se forem necessárias evidências reservadas, combinar um
+canal privado verificável por revisão humana antes de recebê-las; não há e-mail
+privado inventado nem formulário de coleta habilitado nesta entrega.
 
-Poderiam esclarecer por escrito:
+O responsável deverá registrar datas, evidências, escopo e decisão em armazenamento
+privado fora do Git; versionar, quando apropriado, somente resumo sem dados pessoais.
+Verificar identidade/representação e documentos de maneira proporcional. Não prometer
+prazo de resposta ou atendimento automático que não possa ser assegurado.
 
-1. Quem detém/representa os direitos necessários e qual é a origem da declaração
-   de licença do corpus? Há autorização que explique a licença divergente do espelho?
-2. A distribuição pública dos pesos ajustados e a inferência gratuita hospedada
-   estão permitidas neste escopo? Caso dependam de permissão adicional, seria
-   possível concedê-la expressamente e indicar seu alcance territorial e temporal?
-3. Há restrições para portfólio profissional, recrutamento, anúncios, patrocínio,
-   monetização, serviços comerciais ou reutilização dos pesos por terceiros?
-   Que licença e condições deveriam acompanhar os pesos e a demonstração?
-4. Quais atribuições, referências, avisos de alterações e obrigações SA/NC devem
-   ser preservados? Há texto de aviso ou restrição de marcas a adotar?
-5. A autorização alcança avaliações escritas por consumidores e eventuais direitos
-   de bases de dados? Existem direitos de terceiros, consentimentos, termos ou
-   medidas de privacidade/memorização que precisem de avaliação/autorização separada?
-6. Quem pode confirmar formalmente esses pontos e quais documentos podem ser
-   mantidos como evidência? Se não forem a equipe competente, poderiam indicar
-   um canal institucional para encaminhamento?
+## Suspensão, retirada e decisão
 
-Até resolver as pendências, manterei os pesos e a inferência restritos ao ambiente
-local, sem redistribuir dados. Agradeço a orientação; posso fornecer o Model Card,
-lista exata de arquivos e descrição técnica, sem encaminhar avaliações individuais.
+1. Fazer triagem humana da reclamação e identificar artefatos/uso/revisões envolvidos.
+2. Havendo indício fundamentado de infração ou risco relevante, suspender o acesso
+   público e a inferência afetados enquanto se avaliam os fatos, quando apropriado.
+   No estado atual nada está publicado: manter pesos e inferência sem acesso público.
+3. Se cabível, retirar os artefatos afetados, revisar avisos/documentação e registrar
+   a decisão e evidências. Medidas remotas e comunicações dependem de autorização
+   específica; esta política não dispara exclusões, publicações ou respostas.
+4. Resolver materialmente a pendência, com avaliação especializada quando necessária.
+   Retomar uma distribuição somente após decisão documentada, condições aplicáveis
+   atendidas e autorização humana para o escopo/candidato/destino exatos.
 
-Atenciosamente,
-Jorge — responsável pelo ReviewSense PT-BR
-Contato de resposta: utilizar o endereço do remetente, preenchido na revisão humana.
+Um aviso de retirada ou o procedimento de reclamações **não resolve automaticamente
+os direitos autorais**, não substitui permissões necessárias e não torna lícita uma
+publicação antecipada. Não depender de uma reclamação para examinar os direitos.
+A política não remove os gates: `LEGAL_REVIEW_REQUIRED`, destino e autorização
+continuam pendentes; `upload_authorized` não é alterado automaticamente.
 
-## Registro e decisão posterior
+## Pendências que permanecem
 
-Revisar destinatário, assinatura, escopo e contexto antes do envio manual.
-Guardar mensagem enviada, cabeçalhos, resposta integral, anexos, datas e protocolos
-em diretório privado fora do Git (por exemplo `outputs/phase4c/rights-private/`).
-Conferir identidade, vínculo e autoridade do respondente por canal institucional.
-Registrar finalidade, territórios, duração, limites comerciais, direitos de
-terceiros, condições de divulgação e atribuições. Resposta genérica ou de autor
-sem representação demonstrada não resolve automaticamente a pendência.
-
-Submeter dúvidas remanescentes a avaliação especializada pertinente. Produzir um
-resumo versionável sem contatos pessoais/documentos privados e um recibo interno
-com hash da evidência, vinculado ao candidato. Direitos, destino e autorização
-humana são registros separados. Não mudar o status automaticamente ao receber
-mensagem, nem interpretar ausência de resposta como consentimento. Se houver
-recusa/limite incompatível, bloquear o lançamento pretendido.
+Documentar uma base material suficiente para o uso/distribuição pretendidos e os
+direitos de terceiros, definir condições/atribuições e licença dos pesos após essa
+análise. Confirmar canal de reclamações e responsável, destino HF, infraestrutura
+e autorização humana. Sem resolução suficiente, não publicar pesos nem hospedar
+inferência pública, inclusive indiretamente. Manter código/documentação próprios
+nos limites dos direitos aplicáveis. Não há solicitação por e-mail a realizar.
