@@ -1,0 +1,38 @@
+{
+  "package": "spaces",
+  "version": "0.51.3",
+  "wheel": "https://files.pythonhosted.org/packages/f5/b3/f6c0dfa766e0fc5ae66466235c13be580e543d8d2d9023f678ba5859adca/spaces-0.51.3-py3-none-any.whl",
+  "wheel_sha256": "e588ce6b4301c566139d84bafb1c30b555967ce4ee2792be659ee5643f0f7eb1",
+  "declared_license": "Apache-2.0",
+  "source_credit": "Charles Bensimon",
+  "excerpts": {
+    "spaces__config.py.txt": {
+      "upstream_file": "spaces/config.py",
+      "upstream_file_sha256": "52527311710ee260dd13981cb6da2e594fcd64b27d2b6bbef263cc06dd52245f",
+      "selected_functions": [
+        "boolean"
+      ],
+      "fixture_sha256": "e61d9cdafeb893c2aad078f0a95793d5046695acd4b01dde8884109137ca058f"
+    },
+    "spaces__zero__decorator.py.txt": {
+      "upstream_file": "spaces/zero/decorator.py",
+      "upstream_file_sha256": "32309fe39075a7cd5facab06c5838471c28b4f13a65c329ed2e11bbdeb8bd910",
+      "selected_functions": [
+        "GPU",
+        "_GPU"
+      ],
+      "fixture_sha256": "e59957c970fb468628d01774a9a2d2f024327945be7cc506498892ae9049aee0"
+    },
+    "spaces__zero__wrappers.py.txt": {
+      "upstream_file": "spaces/zero/wrappers.py",
+      "upstream_file_sha256": "89772411118de5db9b3f77fc74c3431c090d92d40e55220ecb95edb120925cd1",
+      "selected_functions": [
+        "process_duration",
+        "static_duration",
+        "regular_function_wrapper"
+      ],
+      "fixture_sha256": "d09481d4103062397d26045883b2823bfb2b1d4a5ed59e6ecdca9750f76274af"
+    }
+  },
+  "policy": "Exact function source excerpts, not imported as a package. Tests supply imports/transport; no CUDA initialization."
+}

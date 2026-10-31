@@ -1,0 +1,2 @@
+def boolean(value: str | None) -> bool:
+    return value is not None and value.lower() in ("1", "t", "true")

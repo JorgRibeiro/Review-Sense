@@ -1,0 +1,19 @@
+{
+  "python_version": "3.12.12",
+  "packages": {
+    "torch": "2.13.0",
+    "spaces": "0.51.3",
+    "gradio": "6.31.0",
+    "huggingface-hub": "2.4.0",
+    "transformers": "5.22.1",
+    "tokenizers": "0.23.3",
+    "safetensors": "0.8.0",
+    "numpy": "2.4.6"
+  },
+  "managed_by_platform": ["torch", "spaces", "gradio", "huggingface-hub"],
+  "validation": "STATIC_METADATA_ONLY_REAL_ZEROGPU_REQUIRED",
+  "candidate_model_repo": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+  "candidate_space_repo": "JorgeRibeiru/reviewsense-ptbr",
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false
+}

@@ -1,0 +1,167 @@
+{
+  "phase": "4C-zerogpu-contract-corrections",
+  "base_commit": "2a4121d9274a71d36c6e211b9934f15409d9e8c9",
+  "branch": "feat/phase4c-zerogpu-readiness",
+  "verified_at_utc": "2026-10-31T00:04:30.997829+00:00",
+  "license_status": "REQUIRES_REVIEW",
+  "upload_authorized": false,
+  "phase4c_complete": false,
+  "sdk": {
+    "package": "spaces",
+    "version": "0.51.3",
+    "wheel": "https://files.pythonhosted.org/packages/f5/b3/f6c0dfa766e0fc5ae66466235c13be580e543d8d2d9023f678ba5859adca/spaces-0.51.3-py3-none-any.whl",
+    "wheel_sha256": "e588ce6b4301c566139d84bafb1c30b555967ce4ee2792be659ee5643f0f7eb1",
+    "declared_license": "Apache-2.0",
+    "source_credit": "Charles Bensimon",
+    "excerpts": {
+      "spaces__config.py.txt": {
+        "upstream_file": "spaces/config.py",
+        "upstream_file_sha256": "52527311710ee260dd13981cb6da2e594fcd64b27d2b6bbef263cc06dd52245f",
+        "selected_functions": [
+          "boolean"
+        ],
+        "fixture_sha256": "e61d9cdafeb893c2aad078f0a95793d5046695acd4b01dde8884109137ca058f"
+      },
+      "spaces__zero__decorator.py.txt": {
+        "upstream_file": "spaces/zero/decorator.py",
+        "upstream_file_sha256": "32309fe39075a7cd5facab06c5838471c28b4f13a65c329ed2e11bbdeb8bd910",
+        "selected_functions": [
+          "GPU",
+          "_GPU"
+        ],
+        "fixture_sha256": "e59957c970fb468628d01774a9a2d2f024327945be7cc506498892ae9049aee0"
+      },
+      "spaces__zero__wrappers.py.txt": {
+        "upstream_file": "spaces/zero/wrappers.py",
+        "upstream_file_sha256": "89772411118de5db9b3f77fc74c3431c090d92d40e55220ecb95edb120925cd1",
+        "selected_functions": [
+          "process_duration",
+          "static_duration",
+          "regular_function_wrapper"
+        ],
+        "fixture_sha256": "d09481d4103062397d26045883b2823bfb2b1d4a5ed59e6ecdca9750f76274af"
+      }
+    },
+    "policy": "Exact function source excerpts, not imported as a package. Tests supply imports/transport; no CUDA initialization."
+  },
+  "env_detection": {
+    "accepted_case_insensitive": [
+      "1",
+      "t",
+      "true"
+    ],
+    "strip_whitespace": false,
+    "loaded_Config_zero_gpu_still_required": true,
+    "missing_or_invalid_env_rejected_before_runtime_import": true
+  },
+  "callback_registration": {
+    "previous_wraps_only_not_in_upstream_registry": true,
+    "final_guard_registered_by_identity": true,
+    "GPU_final_guard_returns_same_object": true,
+    "Gradio_events_share_same_registered_function": true,
+    "scheduler_task_id_matches_original_callback": true,
+    "validated_flow": [
+      "schedule",
+      "worker",
+      "release"
+    ],
+    "allocation_denial_never_calls_inference": true,
+    "invalid_input_never_schedules": true,
+    "scheduler_error_sanitized": true,
+    "uses_private_SDK_contract": "spaces.zero.decorator.decorated_cache (0.51.3)",
+    "unsupported_contract_fails_startup": true
+  },
+  "upstream_tests": {
+    "exact_function_excerpts_executed": [
+      "boolean",
+      "GPU",
+      "_GPU",
+      "process_duration",
+      "static_duration",
+      "regular_function_wrapper"
+    ],
+    "package_initializer_executed": false,
+    "CUDA_emulation_or_real_CUDA_initialized": false,
+    "transport_and_workers": "substituted, CPU/in-memory",
+    "real_remote_scheduler_or_registration_verified": false,
+    "fixture_license": "Apache-2.0, tests only; not part of deploy bundle"
+  },
+  "quality": {
+    "tests_passed": 393,
+    "previous_tests": 370,
+    "new_tests": 23,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 13.97,
+    "ruff_check": true,
+    "ruff_format_check": true,
+    "pip_check": true,
+    "test_csv_read_opens": 0,
+    "blocked_test_csv_opens": 0
+  },
+  "bundle": {
+    "directory": "outputs/phase4c-zerogpu/space-candidate-v3",
+    "file_count": 17,
+    "total_bytes": 77551,
+    "inventory": {
+      "LICENSE": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499",
+      "README.md": "762d396dc967960e4b0b736ce012674b07a2b555858868261115cd2e0aa29bf4",
+      "app.py": "ae4902eb7cd0a5b9e9595b8d325cbc432d8772915e90fe24814e95ead607cad3",
+      "app/__init__.py": "958f55fb4956e523b20275b5bd0fb7c6d1a1dde8f47ce417b7e716635ce3abf4",
+      "app/app.py": "f4ec3b9fc3ba01d13d6bfa82f2180d51863e21dfa0c586ba7a3cee7205971b42",
+      "app/config.py": "27cfe5c8dda651ddae09b316e77f3b9a61f1187729bfda0ddf6d1608749ac080",
+      "app/style.css": "858de5a4d3b7ef431ed12a4d5912acd43ed7a50a00478056bb2c4a2771effb0d",
+      "model_descriptor.json": "bb51b7f6a0f774871975d744d0c7d582fd6301a324deb72951ec906e1a4aa117",
+      "requirements.txt": "1c4a97e71d235ad1c5e3c9b75da451a35cbfb30747617d91eecb0e6af61c9001",
+      "reviewsense/__init__.py": "dba8fd99295b2efd2109db101eee1bf5434749e98e71c9d59af0c7e378c6ac6c",
+      "reviewsense/artifacts.py": "70d9d2aa0c7ce02dac3a614520396f92497c9cbfa4ad331e8ddc760b79a5cac4",
+      "reviewsense/hub_cache.py": "7d4ceb323d244c8109db16f7aa3792dbb9af55e00e2497bb77f1b302cc50f2af",
+      "reviewsense/labels.py": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1",
+      "reviewsense/model_resolution.py": "5037bdbd52b48aff18de3a8dd66793cffeb1125d442dc7615efeb0eb54ac0dcf",
+      "reviewsense/predict.py": "b92c0512e0e52d0537539168cfdeeafe0e69bc1768eec85fc776841a99f94070",
+      "reviewsense/zerogpu.py": "f0bcafc242b53075e83039abef013cd400076a3331887b3e1910c972d6623420",
+      "runtime.json": "d223c90dbe707b7a6552974fdc5b909fcb53f25b2cbf2b2c739119714e31d681"
+    },
+    "inventory_sha256": "a6d002e7be372b4ed8db1f4bb61fa6468ebf0cf160068d06bc57d3f8fbc01304",
+    "weights_and_dataset_files": 0,
+    "upstream_sdk_fixtures_included": false,
+    "standalone_smoke": {
+      "network_connections": 0,
+      "repository_origin_opens": 0,
+      "standalone": true,
+      "rights_fail_closed_before_runtime": true,
+      "weights_loaded": false
+    },
+    "previous_candidates_preserved": true
+  },
+  "preservation": {
+    "historical_files_with_unchanged_sha256": 70,
+    "all_historical_reports_preserved": true,
+    "phase4b_model_package_and_descriptor_unchanged": true,
+    "split_metadata_unchanged": true,
+    "CSV_content_read": false,
+    "weights_tokenizer_or_classification_changed": false,
+    "previous_zerogpu_bundle_inventory_unchanged": true
+  },
+  "dependencies_installed_or_replaced": false,
+  "remote_operations": {
+    "spaces_created": 0,
+    "weights_downloads_or_uploads": 0,
+    "authentication_or_credentials": 0,
+    "deployments": 0,
+    "pushes_or_branch_merges": 0,
+    "authorization_email_or_messages_sent": 0,
+    "public_pypi_wheel_and_license_read_only_downloaded_for_inspection": true
+  },
+  "limitations": [
+    "Private SDK cache contract pinned to spaces 0.51.3; upgrade requires explicit review.",
+    "Exact local Python contract exercised with substituted I/O; no package startup, CUDA emulation, control plane, real discovery, workers or hardware validated.",
+    "Legal review, approved immutable revision/destinations and human authorization remain release blockers."
+  ],
+  "source_sha256": {
+    "src/reviewsense/zerogpu.py": "f0bcafc242b53075e83039abef013cd400076a3331887b3e1910c972d6623420",
+    "tests/phase4c/test_zerogpu.py": "be2d76092325a0aa272880bfb0fa647bb2b647be43077b7c47a9488d13037633",
+    "tests/phase4c/upstream_spaces.py": "5bd2b27a3c2fd4f6966d896e070ef380748921d5814375ea1f786a70a04b4fa0",
+    "tests/phase4c/test_spaces_0513_contract.py": "dcefc78c0765a66accbbfca3717f281724af34f1f44a8f3b3d2d1baa2b9c3bf8"
+  }
+}

@@ -9,8 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol
 
-from reviewsense.labels import LABEL_NAMES
-from reviewsense.model_packaging import (
+from reviewsense.artifacts import (
     BASE_REVISION,
     DOCUMENT_FILES,
     PACKAGE_FILES,
@@ -20,6 +19,7 @@ from reviewsense.model_packaging import (
     safe_file,
     validate_configuration,
 )
+from reviewsense.labels import LABEL_NAMES
 
 DESCRIPTOR_KEYS = {
     "schema_version",
