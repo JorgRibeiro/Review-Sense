@@ -1,5 +1,24 @@
 # Preparação imediata da publicação HF — ponto de confirmação operacional
 
+## Atualização — tentativa ZeroGPU recusada com HTTP 402
+
+Após validar o modelo por SHA e cinco inferências sintéticas independentes,
+a tentativa de **criar** o Space público gratuito `JorgeRibeiru/reviewsense-ptbr`
+foi recusada pelo Hugging Face com **HTTP 402**, por falta de elegibilidade da conta
+para ZeroGPU gratuito naquele momento. A plataforma indicou assinatura PRO ou
+pedido de grant comunitário; nenhuma opção foi contratada ou solicitada.
+A consulta posterior retornou 404 para o destino. Não houve Space, build,
+publicação dos 17 arquivos, Secret remoto ou inferência hospedada.
+
+O modelo permanece público e verificado na revisão
+`ae89cf168ffaa64115c097204e678ed513a54265`. O bloqueio é de elegibilidade
+para hospedagem, não evidencia falha de pesos ou do código. O bundle de 17 arquivos
+permanece intacto; a implantação depende de elegibilidade/grant e nova validação
+real de runtime antes de declarar uma demo pública. Nenhum custo foi autorizado.
+O registro é baseado no relato operacional do Codex, sem anexar o corpo bruto da
+resposta HTTP. Ver [relatório de status](../reports/validation_hf_zerogpu_402.md).
+REQUIRES_REVIEW / NOT_ESTABLISHED permanecem iguais.
+
 **Atualização de execução:** o responsável confirmou o plano canônico 4c9baf15fd7a.
 O modelo foi publicado na revisão ae89cf168ffaa64115c097204e678ed513a54265.
 A primeira verificação falhou em Errno 40; uma nova verificação, autorizada pelo
