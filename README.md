@@ -9,6 +9,12 @@ aplicação local. O clone **não contém os pesos treinados nem o dataset**.
 Não há pesos ajustados disponíveis para download ou inferência hospedada.
 A integração ZeroGPU está preparada para uma possível distribuição posterior.
 
+A [release v1.0.0](https://github.com/jorgeribeiru/Review-Sense/releases/tag/v1.0.0)
+está publicada no commit `98845aa`, com esse escopo. A
+[decisão de direitos](docs/RELEASE_RIGHTS_DECISION.md) mantém a distribuição dos
+pesos e o deploy pendentes. Os [materiais de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md)
+apresentam somente as entregas públicas e capturas históricas da demonstração local.
+
 [Guia da release](docs/RELEASE_v1.0.0.md) ·
 [Notas de lançamento](docs/RELEASE_NOTES_v1.0.0.md) ·
 [Changelog](CHANGELOG.md) ·
