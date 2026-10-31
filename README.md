@@ -12,7 +12,9 @@ A integração ZeroGPU está preparada para uma possível distribuição posteri
 A [release v1.0.0](https://github.com/jorgeribeiru/Review-Sense/releases/tag/v1.0.0)
 está publicada no commit `98845aa`, com esse escopo. A
 [decisão de direitos](docs/RELEASE_RIGHTS_DECISION.md) mantém a distribuição dos
-pesos e o deploy pendentes. Os [materiais de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md)
+pesos e o deploy pendentes de confirmação operacional específica, após autorização
+do responsável para [preparar o candidato e os destinos](docs/HF_PUBLIC_LAUNCH.md).
+Isso não representa aprovação jurídica. Os [materiais de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md)
 apresentam somente as entregas públicas e capturas históricas da demonstração local.
 
 [Guia da release](docs/RELEASE_v1.0.0.md) ·

@@ -1,5 +1,79 @@
 # Decisão de direitos — preflight do lançamento público
 
+## Atualização — preparação autorizada pelo responsável
+
+O responsável decidiu **prosseguir com a preparação da distribuição pública** dos
+pesos e da aplicação ZeroGPU, sob finalidade educacional, sem cobrança ou monetização
+prevista, com atribuição integral e compromisso de respeitar condições aplicáveis.
+Essa instrução sucede a recomendação operacional de manter somente código da
+primeira análise, preservada abaixo como histórico. Não altera os fatos ou as
+incertezas identificadas naquela análise, nem concede permissão de terceiros.
+
+| Dimensão | Situação atual |
+| --- | --- |
+| Intenção/autorização do responsável | Preparação local explicitamente autorizada; primeira escrita remota depende da confirmação final de arquivos/destinos |
+| Condições pretendidas | Educacional, sem monetização, atribuição a corpus/base/autores; CC BY-NC-SA 4.0 nos direitos controlados, se existentes |
+| Direitos demonstrados | Declaração CC BY-NC-SA da fonte original e MIT do base/código, com os alcances e limites já documentados |
+| Direitos não demonstrados | Não há nova permissão de Americanas, autores de comentários ou NeuralMind; não há parecer jurídico ou conclusão de titularidade integral |
+| Incerteza residual | REQUIRES_REVIEW / NOT_ESTABLISHED, inclusive direitos de terceiros e memorização; aceite de risco não é aprovação jurídica |
+
+O responsável tem ciência de que finalidade não comercial e atribuição não resolvem
+necessariamente direitos de terceiros. Não se afirma que ele controla direitos
+sobre todos os parâmetros, nem que todos os pesos sejam automaticamente obra
+derivada ou livres de obrigações. A escolha de licença não demonstra esses fatos.
+
+### Licença preparada e representação no Hub
+
+Adota-se a orientação conservadora da CC como **política pretendida**, sem transformá-la
+em conclusão obrigatória sobre a natureza dos pesos. Na medida em que existam direitos
+controlados pelo responsável sobre suas contribuições ao fine-tuning, ele os oferece
+sob CC BY-NC-SA 4.0. A concessão não alcança direitos de terceiros que ele não detenha.
+Preservam-se os avisos MIT do base e do código separadamente; não há MIT global dos pesos.
+Não se adicionam restrições research-only às condições da CC: a finalidade educacional
+é a intenção do responsável, enquanto a licença rege os direitos efetivamente oferecidos.
+
+Um único identificador cc-by-nc-sa-4.0 poderia ocultar o escopo limitado do pacote.
+Por isso, o Model Card usa **license: other**, license_name descritivo e
+license_link=LICENSE. O arquivo LICENSE explicita o escopo e incorpora o texto CC
+inalterado. Essa representação é prevista na
+[documentação de licenças do Hub](https://huggingface.co/docs/hub/repositories-licenses).
+Ela comunica condições, não atesta a suficiência jurídica do lançamento.
+
+O novo candidato 1.0.0-rc.2 tem dez arquivos, incluindo LICENSE. O pacote 4B de nove
+arquivos e seu manifest/descritor continuam intactos e bloqueados pelo contrato v1.
+Pesos, tokenizer, labels e métricas congeladas são preservados. Não são emitidos
+pareceres, permissões ou recibos de revisão fictícios.
+
+### Operação e confirmação que ainda falta
+
+O contrato antigo acoplava autorização operacional ao estado jurídico APPROVED.
+O descritor v2 separa essas dimensões explicitamente: mantém REQUIRES_REVIEW e
+NOT_ESTABLISHED e exige registros privados de ciência da incerteza, destino/revisão
+e autorização específica. Não declara LEGAL_APPROVED. A flag upload_authorized
+do v1 não foi ligada: ela não integra o esquema v2, cuja autorização permanece
+externa, requerida e vinculada aos bytes. Sem confirmação específica, o v2 também
+recusa operações. Os testes usam somente aprovações de modelos minúsculos sintéticos.
+
+Antes de qualquer escrita remota serão apresentados o plano/inventários exatos,
+os dois repositórios públicos, o diff dos gates e os resultados técnicos. A confirmação
+pedida será **operacional** para esses arquivos/destinos e para o uso gratuito ZeroGPU,
+condicionado à elegibilidade e ao teste real; não será novo aceite genérico de risco
+ou pedido de parecer. O commit SHA do Hub só existirá após o upload e será verificado
+antes de configurar o Space. Não se inventa SHA ou aprovação antecipada.
+
+Procedimento, diff e inventários: [HF_PUBLIC_LAUNCH.md](HF_PUBLIC_LAUNCH.md).
+Não houve upload/deploy, obtenção de credenciais, compra, e-mail ou postagem.
+A política de reclamações/suspensão/retirada permanece aplicável e não sana direitos.
+
+---
+
+## Histórico — análise anterior à nova decisão do responsável
+
+O registro abaixo conserva a conclusão da primeira Etapa A; sua recomendação de
+não iniciar B–D foi sucedida pela autorização de preparação local acima. As fontes
+e lacunas jurídicas continuam relevantes. Não reinterpretar o histórico como veto
+à preparação agora solicitada ou como autorização remota já concedida.
+
 Consulta em 31/10/2026 UTC (30/10/2026, America/Recife).
 Branch `feat/hf-public-launch`, base `98845aa323508aaa79b42d3fa9e547409a28558a`.
 

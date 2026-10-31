@@ -10,11 +10,12 @@ import tempfile
 from contextlib import ExitStack, contextmanager
 from pathlib import Path
 
-from reviewsense.artifacts import PACKAGE_FILES, _no_symlink_ancestors
+from reviewsense.artifacts import _no_symlink_ancestors
 from reviewsense.model_resolution import (
     REPO_ID,
     REVISION,
     canonical_digest,
+    package_files,
     validate_descriptor,
     validate_runtime_package,
 )
@@ -94,7 +95,7 @@ def materialize_hub_snapshot(
         with tempfile.TemporaryDirectory(prefix=".preparing-", dir=parent) as temporary:
             staging = Path(temporary) / "model"
             staging.mkdir()
-            for name in PACKAGE_FILES:
+            for name in package_files(descriptor):
                 _copy_approved_file(
                     snapshot_fd, blobs_fd, name, staging / name, descriptor["files"][name]
                 )

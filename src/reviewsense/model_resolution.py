@@ -13,6 +13,7 @@ from reviewsense.artifacts import (
     BASE_REVISION,
     DOCUMENT_FILES,
     PACKAGE_FILES,
+    _no_symlink_ancestors,
     file_inventory,
     inspect_directory,
     read_json,
@@ -35,6 +36,16 @@ DESCRIPTOR_KEYS = {
     "upload_authorized",
     "model_card",
 }
+SCOPED_TERMS = {
+    "license_name": "reviewsense-controlled-rights-cc-by-nc-sa-4.0",
+    "license_link": "LICENSE",
+    "controlled_rights_license": "cc-by-nc-sa-4.0",
+    "legal_clearance": "NOT_ESTABLISHED",
+    "operational_confirmation_required": True,
+    "model_repo_id": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "space_repo_id": "JorgeRibeiru/reviewsense-ptbr",
+}
+PUBLIC_PACKAGE_FILES = tuple(sorted((*PACKAGE_FILES, "LICENSE")))
 SHA256 = r"[a-f0-9]{64}"
 REVISION = r"[a-f0-9]{40}"
 REPO_ID = r"[A-Za-z0-9][A-Za-z0-9_-]*/[A-Za-z0-9][A-Za-z0-9_.-]*"
@@ -92,30 +103,44 @@ def validate_descriptor(value: dict) -> None:
 
 
 def _validate_descriptor(value: dict) -> None:
+    version = value["schema_version"]
+    expected_keys = DESCRIPTOR_KEYS
+    if version == 2:
+        expected_keys = (DESCRIPTOR_KEYS - {"upload_authorized"}) | {"distribution_terms"}
     if (
-        set(value) != DESCRIPTOR_KEYS
-        or value["schema_version"] != 1
+        set(value) != expected_keys
+        or type(version) is not int
+        or version not in {1, 2}
         or value["artifact_identity"] != "reviewsense-ptbr-bertimbau-v1"
         or not re.fullmatch(r"1\.0\.0(?:-rc\.[1-9][0-9]*)?", value["package_version"])
         or value["architecture"] != "BertForSequenceClassification"
         or value["max_length"] != 256
         or value["labels"] != {str(k): v for k, v in LABEL_NAMES.items()}
         or value["model_card"] != "README.md"
-        or set(value["files"]) != set(PACKAGE_FILES)
+        or set(value["files"]) != set(package_files(value))
         or value["license_status"] not in {"REQUIRES_REVIEW", "APPROVED", "BLOCKED"}
-        or type(value["upload_authorized"]) is not bool
         or not isinstance(value["license"], str)
         or not re.fullmatch(r"[a-z0-9.-]+", value["license"])
         or set(value["reference"]) != {"base_revision", "package_content_sha256"}
         or value["reference"]["base_revision"] != BASE_REVISION
     ):
         raise ValueError("Descritor de inferência incompatível.")
-    if value["license_status"] != "APPROVED" and (
-        value["upload_authorized"] or value["license"] != "unknown"
+    if version == 1:
+        if type(value["upload_authorized"]) is not bool:
+            raise ValueError("Flag de autorização inválida.")
+        if value["license_status"] != "APPROVED" and (
+            value["upload_authorized"] or value["license"] != "unknown"
+        ):
+            raise ValueError("Licença pendente não permite autorização de distribuição.")
+        if value["license_status"] == "APPROVED" and value["license"] == "unknown":
+            raise ValueError("Licença aprovada precisa de identificação explícita.")
+    elif (
+        value["license"] != "other"
+        or value["license_status"] != "REQUIRES_REVIEW"
+        or value["distribution_terms"] != SCOPED_TERMS
+        or value["distribution_terms"].get("operational_confirmation_required") is not True
     ):
-        raise ValueError("Licença pendente não permite autorização de distribuição.")
-    if value["license_status"] == "APPROVED" and value["license"] == "unknown":
-        raise ValueError("Licença aprovada precisa de identificação explícita.")
+        raise ValueError("Política v2 exige licença de escopo limitado e incerteza explícita.")
     for record in value["files"].values():
         if (
             set(record) != {"bytes", "sha256"}
@@ -129,13 +154,19 @@ def _validate_descriptor(value: dict) -> None:
     scan_metadata(json.dumps(value, ensure_ascii=False))
 
 
+def package_files(descriptor: dict) -> tuple[str, ...]:
+    """Allowlists fixas por versão; nomes arbitrários do descritor nunca são aceitos."""
+    return PUBLIC_PACKAGE_FILES if descriptor.get("schema_version") == 2 else PACKAGE_FILES
+
+
 def validate_runtime_package(directory: Path, descriptor: dict) -> None:
-    """Valida somente o pacote e descritor aprovados pelo operador, sem relatórios internos."""
+    """Valida integridade/contrato sem inferir autorização ou aprovação jurídica."""
     from huggingface_hub import ModelCard
 
     validate_descriptor(descriptor)
-    inspect_directory(directory, PACKAGE_FILES)
-    if file_inventory(directory, PACKAGE_FILES) != descriptor["files"]:
+    names = package_files(descriptor)
+    inspect_directory(directory, names)
+    if file_inventory(directory, names) != descriptor["files"]:
         raise ValueError("Integridade do pacote incompatível com o descritor.")
     validate_configuration(directory)
     for name in (*DOCUMENT_FILES, "tokenizer.json"):
@@ -148,12 +179,25 @@ def validate_runtime_package(directory: Path, descriptor: dict) -> None:
     ):
         raise ValueError("Model Card incompatível com o descritor.")
     status = safe_file(directory, "DISTRIBUTION_STATUS.md").read_text()
-    if (
-        f"licensing_status: {descriptor['license_status']}" not in status
-        or f"upload_authorized: {str(descriptor['upload_authorized']).lower()}" not in status
-    ):
+    if f"licensing_status: {descriptor['license_status']}" not in status:
         raise ValueError("Aviso de distribuição incompatível com o descritor.")
-    hashes = [descriptor["files"][n]["sha256"] for n in PACKAGE_FILES]
+    if descriptor["schema_version"] == 1:
+        if f"upload_authorized: {str(descriptor['upload_authorized']).lower()}" not in status:
+            raise ValueError("Aviso de distribuição incompatível com o descritor.")
+    else:
+        terms = descriptor["distribution_terms"]
+        license_text = safe_file(directory, "LICENSE").read_text()
+        scan_metadata(license_text)
+        if (
+            metadata.get("license_name") != terms["license_name"]
+            or metadata.get("license_link") != terms["license_link"]
+            or "legal_clearance: NOT_ESTABLISHED" not in status
+            or "operational_confirmation_required: true" not in status
+            or "https://creativecommons.org/licenses/by-nc-sa/4.0/" not in license_text
+            or "somente os direitos que o responsável controla" not in license_text
+        ):
+            raise ValueError("Avisos de escopo e autorização operacional v2 ausentes.")
+    hashes = [descriptor["files"][n]["sha256"] for n in names]
     if len(hashes) != len(set(hashes)):
         raise ValueError("Arquivos duplicados no candidato.")
 
@@ -181,10 +225,13 @@ class LocalPackage:
 def release_gates(descriptor: dict, approval_root: Path | None = None) -> dict[str, bool]:
     """Confere recibos separados, vinculados ao candidato; revisão humana continua indispensável.
 
-    Os recibos são registros locais de confiança do operador, não assinaturas digitais
-    nem prova automática da suficiência jurídica das permissões.
+    v1 conserva a política anterior; v2 confere decisão operacional sob incerteza,
+    mantendo REQUIRES_REVIEW no descritor. Registros do operador não são assinaturas
+    digitais nem prova automática da suficiência jurídica das permissões.
     """
     validate_descriptor(descriptor)
+    if descriptor["schema_version"] == 2:
+        return _operational_gates(descriptor, approval_root)
     digest = canonical_digest(descriptor)
     receipts = {}
     for name in ("rights", "destination", "human"):
@@ -236,6 +283,91 @@ def release_gates(descriptor: dict, approval_root: Path | None = None) -> dict[s
         "DESTINATION_UNCONFIRMED": not target,
         "PUBLISH_AUTHORIZATION_REQUIRED": not authorized,
     }
+
+
+def _operational_gates(descriptor: dict, root: Path | None) -> dict[str, bool]:
+    """v2: autorização de operação sob incerteza, nunca aprovação jurídica implícita."""
+    digest = canonical_digest(descriptor)
+    records = {}
+    for name in ("risk", "destination", "human"):
+        try:
+            record = read_json(safe_file(root, f"{name}.json")) if root else {}
+            records[name] = record if record.get("descriptor_sha256") == digest else {}
+        except (ValueError, OSError, TypeError, AttributeError):
+            records[name] = {}
+    risk, destination, human = (records[n] for n in ("risk", "destination", "human"))
+    evidence_ok = False
+    try:
+        evidence = safe_file(root, risk.get("evidence_file", ""))
+        evidence_ok = hashlib.sha256(evidence.read_bytes()).hexdigest() == risk.get(
+            "evidence_sha256"
+        )
+    except (ValueError, OSError, TypeError, AttributeError):
+        pass
+    acknowledged = (
+        evidence_ok
+        and risk.get("decision") == "ACKNOWLEDGED_UNRESOLVED_RIGHTS"
+        and risk.get("purpose") == "educational_noncommercial"
+        and risk.get("third_party_permissions") == "NOT_ASSERTED"
+        and isinstance(risk.get("scope"), list)
+        and all(s in risk["scope"] for s in ("public_weights", "public_inference"))
+    )
+    target = (
+        destination.get("confirmed") is True
+        and destination.get("repo_id") == SCOPED_TERMS["model_repo_id"]
+        and destination.get("visibility") == "public"
+        and isinstance(destination.get("revision"), str)
+        and re.fullmatch(REVISION, destination["revision"]) is not None
+    )
+    authorized = (
+        human.get("authorized") is True
+        and human.get("actor") == "JorgeRibeiru"
+        and human.get("repo_id") == destination.get("repo_id")
+        and human.get("revision") == destination.get("revision")
+        and human.get("visibility") == "public"
+        and isinstance(human.get("actions"), list)
+        and all(a in human["actions"] for a in ("download", "public_weights", "public_inference"))
+    )
+    # Situação jurídica continua no descritor (REQUIRES_REVIEW/NOT_ESTABLISHED).
+    # Estes três valores são somente bloqueios operacionais da política v2 explícita.
+    return {
+        "RIGHTS_POLICY_UNACKNOWLEDGED": not acknowledged,
+        "DESTINATION_UNCONFIRMED": not target,
+        "PUBLISH_AUTHORIZATION_REQUIRED": not authorized,
+    }
+
+
+def provision_operational_approvals(payload: str, root: Path, descriptor: dict) -> None:
+    """Materializa um Secret privado já autorizado; não inventa nem aprova seu conteúdo.
+
+    Usado no startup do Space. O operador é a fronteira de confiança; não é assinatura
+    digital. Nunca registrar payload/evidência em logs ou incluir no bundle público.
+    """
+    validate_descriptor(descriptor)
+    if descriptor["schema_version"] != 2 or len(payload.encode()) > 128_000:
+        raise ValueError("Pacote de autorizações operacionais incompatível.")
+    value = json.loads(payload)
+    if (
+        not isinstance(value, dict)
+        or set(value) != {"risk", "destination", "human", "evidence"}
+        or not isinstance(value["evidence"], str)
+        or not all(isinstance(value[n], dict) for n in ("risk", "destination", "human"))
+        or value["risk"].get("evidence_file") != "owner_decision.md"
+    ):
+        raise ValueError("Estrutura de autorização privada inválida.")
+    _no_symlink_ancestors(root)
+    if root.exists():
+        raise FileExistsError("Não sobrescrever autorizações existentes.")
+    root.mkdir(mode=0o700)
+    for name in ("risk", "destination", "human"):
+        path = root / f"{name}.json"
+        path.write_text(json.dumps(value[name], ensure_ascii=False), encoding="utf-8")
+        path.chmod(0o600)
+    evidence = root / "owner_decision.md"
+    evidence.write_text(value["evidence"], encoding="utf-8")
+    evidence.chmod(0o600)
+    if any(release_gates(descriptor, root).values()):
+        raise PermissionError("Autorizações privadas não correspondem ao candidato/revisão.")
 
 
 @dataclass(frozen=True)

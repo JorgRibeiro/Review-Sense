@@ -14,6 +14,5 @@
   "validation": "STATIC_METADATA_ONLY_REAL_ZEROGPU_REQUIRED",
   "candidate_model_repo": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
   "candidate_space_repo": "JorgeRibeiru/reviewsense-ptbr",
-  "license_status": "REQUIRES_REVIEW",
-  "upload_authorized": false
+  "authorization_policy": "SEE_MODEL_DESCRIPTOR_AND_PRIVATE_OPERATIONAL_RECORDS"
 }
