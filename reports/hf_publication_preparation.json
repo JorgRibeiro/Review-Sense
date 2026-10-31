@@ -1,0 +1,481 @@
+{
+  "schema_version": 2,
+  "checked_at_utc": "2026-10-31T01:27:25.633093+00:00",
+  "branch": "feat/hf-public-launch",
+  "base_commit": "de13cf535f854f5af7fa42dfc26a7d0f87d07537",
+  "preparation_code_commit": "ff1c7e0588c2e2d7ca6541036cbef7b3bb9b8d24",
+  "confirmation_status": "PENDING_SPECIFIC_OPERATIONAL_CONFIRMATION",
+  "license_status": "REQUIRES_REVIEW",
+  "legal_clearance": "NOT_ESTABLISHED",
+  "license_representation": {
+    "hub_license": "other",
+    "controlled_rights_license": "cc-by-nc-sa-4.0",
+    "scope": "Only rights controlled by the responsible party, if any; no new third-party permissions asserted",
+    "base_and_code_mit_notices_preserved": true,
+    "official_cc_text": {
+      "source": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.txt",
+      "sha256": "e66c269d4819aaab34b49ef5220c4ddab6756f21bb5180761a4eb8561f2b7bbd",
+      "bytes": 20850
+    },
+    "cc_text_normalization": "Only extra trailing newlines removed; substantive legal text unchanged"
+  },
+  "final_package": {
+    "final_candidate": "outputs/hf-public-launch/reviewed-candidate",
+    "preparation_code_commit": "ff1c7e0588c2e2d7ca6541036cbef7b3bb9b8d24",
+    "plan_canonical_sha256": "4c9baf15fd7a4e4a503690cbeee9d529d46785f698914188eb2590f82be3a340",
+    "plan_file_sha256": "afa2a374531b836a6e3c5867dfbbedab4c6b9c5a601f8eda7c8b8db6abd430ca",
+    "four_artifacts_and_literal_example_identical_to_equivalence_run": true,
+    "final_package_independent_example": {
+      "literal_model_card_example_executed": true,
+      "outside_repository": true,
+      "empty_hf_cache": true,
+      "isolated_python": true,
+      "device": "cpu",
+      "precision": "fp32",
+      "original_models_reports_data_accesses": 0,
+      "network_connections": 0,
+      "reviewsense_module_not_imported": true,
+      "finite_three_class_scores": true
+    },
+    "real_final_test_access": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "network": {
+      "active": false,
+      "blocked_connections": 0
+    },
+    "operational_gates_without_real_receipts": {
+      "RIGHTS_POLICY_UNACKNOWLEDGED": true,
+      "DESTINATION_UNCONFIRMED": true,
+      "PUBLISH_AUTHORIZATION_REQUIRED": true
+    }
+  },
+  "plan_canonical_sha256": "4c9baf15fd7a4e4a503690cbeee9d529d46785f698914188eb2590f82be3a340",
+  "plan_file_sha256": "afa2a374531b836a6e3c5867dfbbedab4c6b9c5a601f8eda7c8b8db6abd430ca",
+  "model": {
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "visibility": "public",
+    "files": {
+      "ATTRIBUTIONS.md": {
+        "bytes": 2343,
+        "sha256": "dbfcc4583ce15b8029d5ed097f921e41c3e3961e94ad141831ec22eafe6dcf4e"
+      },
+      "BASE_MODEL_LICENSE.txt": {
+        "bytes": 1138,
+        "sha256": "f52509e0695fdc19752f725f3d58ba06cc7842d5dc8d828b8d821c8ee2c92e67"
+      },
+      "DISTRIBUTION_STATUS.md": {
+        "bytes": 2054,
+        "sha256": "3e28c42600fdd4dc8754bf8f8739910773e5808cac7498f302a4994e70b7024b"
+      },
+      "LICENSE": {
+        "bytes": 22426,
+        "sha256": "a3bc83c509fb1ed75b6679a6bc89e38123de0da624b8509457cd0491ff832195"
+      },
+      "PROJECT_CODE_LICENSE.txt": {
+        "bytes": 1233,
+        "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+      },
+      "README.md": {
+        "bytes": 15660,
+        "sha256": "321e7a11ea4d4be7c8c89166ea8b06e8667edd7e93f4b1e6d1b6c2ecf2265725"
+      },
+      "config.json": {
+        "bytes": 1061,
+        "sha256": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223"
+      },
+      "model.safetensors": {
+        "bytes": 435725300,
+        "sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+      },
+      "tokenizer.json": {
+        "bytes": 677889,
+        "sha256": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb"
+      },
+      "tokenizer_config.json": {
+        "bytes": 487,
+        "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+      }
+    }
+  },
+  "space": {
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr",
+    "visibility": "public",
+    "files": {
+      "LICENSE": {
+        "bytes": 1233,
+        "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+      },
+      "README.md": {
+        "bytes": 4867,
+        "sha256": "55f4be05bbcf95d5c6cc3b716b3c4dc3e1f68a1b33ccf5ca1e5a0e8e54902018"
+      },
+      "app.py": {
+        "bytes": 2407,
+        "sha256": "c4e338037589b129af487a1653ea3bd316df75f5a09be28cb8da67ebb0a87474"
+      },
+      "app/__init__.py": {
+        "bytes": 76,
+        "sha256": "958f55fb4956e523b20275b5bd0fb7c6d1a1dde8f47ce417b7e716635ce3abf4"
+      },
+      "app/app.py": {
+        "bytes": 14673,
+        "sha256": "f4ec3b9fc3ba01d13d6bfa82f2180d51863e21dfa0c586ba7a3cee7205971b42"
+      },
+      "app/config.py": {
+        "bytes": 2649,
+        "sha256": "27cfe5c8dda651ddae09b316e77f3b9a61f1187729bfda0ddf6d1608749ac080"
+      },
+      "app/style.css": {
+        "bytes": 7790,
+        "sha256": "858de5a4d3b7ef431ed12a4d5912acd43ed7a50a00478056bb2c4a2771effb0d"
+      },
+      "model_descriptor.json": {
+        "bytes": 2328,
+        "sha256": "04dc6c98457588175bc85f667ab72eff4484eec55403e7e517e6468093d2f2e6"
+      },
+      "requirements.txt": {
+        "bytes": 296,
+        "sha256": "1c4a97e71d235ad1c5e3c9b75da451a35cbfb30747617d91eecb0e6af61c9001"
+      },
+      "reviewsense/__init__.py": {
+        "bytes": 104,
+        "sha256": "bcadbfc9c96b14d4cc9a94509fe54d981db51d6793a126706b9edb8640f5f973"
+      },
+      "reviewsense/artifacts.py": {
+        "bytes": 3687,
+        "sha256": "70d9d2aa0c7ce02dac3a614520396f92497c9cbfa4ad331e8ddc760b79a5cac4"
+      },
+      "reviewsense/hub_cache.py": {
+        "bytes": 4742,
+        "sha256": "2f44a77b37950bef3b3f9074434136ef920429ecd0abebd6fcf74b06010256a6"
+      },
+      "reviewsense/labels.py": {
+        "bytes": 814,
+        "sha256": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1"
+      },
+      "reviewsense/model_resolution.py": {
+        "bytes": 17056,
+        "sha256": "dcd472305eb364930dce979a10e6f6616a665010fb30365476471df2fcc184e2"
+      },
+      "reviewsense/predict.py": {
+        "bytes": 15601,
+        "sha256": "b92c0512e0e52d0537539168cfdeeafe0e69bc1768eec85fc776841a99f94070"
+      },
+      "reviewsense/zerogpu.py": {
+        "bytes": 8111,
+        "sha256": "d3dad8e83ddcc274030c9a78817d2def7ff6f3a6e8f205ca0bea9c6e4e5392c8"
+      },
+      "runtime.json": {
+        "bytes": 612,
+        "sha256": "f8ac520f5e1a554ce13d1b2eb05c11ca950d0d028e9c109b6f76a21d5bff9307"
+      }
+    },
+    "hardware": "zero-a10g",
+    "paid_resources_allowed": false
+  },
+  "model_hub_revision": null,
+  "pytest": {
+    "passed": 432,
+    "seconds": 19.12,
+    "code_commit": "ff1c7e0588c2e2d7ca6541036cbef7b3bb9b8d24",
+    "guard": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    }
+  },
+  "ruff": {
+    "result": "All checks passed!",
+    "directories": [
+      "src",
+      "tests",
+      "app",
+      "scripts",
+      "deploy/zerogpu"
+    ]
+  },
+  "format": {
+    "already_formatted_files": 59
+  },
+  "pip_check": "No broken requirements found.",
+  "equivalence": {
+    "cpu_fp32": {
+      "same_predicted_classes": true,
+      "logits_allclose": true,
+      "normalized_scores_allclose": true,
+      "atol": 1e-06,
+      "rtol": 1e-05,
+      "max_absolute_logit_difference": 0.0,
+      "max_absolute_score_difference": 0.0,
+      "samples": 5,
+      "device": "cpu",
+      "precision": "fp32",
+      "executed": true,
+      "original": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      },
+      "package": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      }
+    },
+    "cuda_fp16": {
+      "same_predicted_classes": true,
+      "logits_allclose": true,
+      "normalized_scores_allclose": true,
+      "atol": 0.001,
+      "rtol": 0.001,
+      "max_absolute_logit_difference": 0.0,
+      "max_absolute_score_difference": 0.0,
+      "samples": 5,
+      "device": "cuda",
+      "precision": "fp16",
+      "executed": true,
+      "original": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      },
+      "package": {
+        "maximum_padded_tokens": 256,
+        "id2label_verified": true,
+        "tokenizer_cased_verified": true,
+        "eval_and_inference_mode": true
+      }
+    },
+    "independent_example": {
+      "literal_model_card_example_executed": true,
+      "outside_repository": true,
+      "empty_hf_cache": true,
+      "isolated_python": true,
+      "device": "cpu",
+      "precision": "fp32",
+      "original_models_reports_data_accesses": 0,
+      "network_connections": 0,
+      "reviewsense_module_not_imported": true,
+      "finite_three_class_scores": true
+    },
+    "network": {
+      "active": false,
+      "blocked_connections": 0
+    },
+    "real_final_test_access": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "software": {
+      "torch": "2.14.1+cu132",
+      "transformers": "5.22.1",
+      "tokenizers": "0.23.3",
+      "huggingface-hub": "2.4.0",
+      "safetensors": "0.8.0"
+    }
+  },
+  "links": [
+    {
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "status": 200,
+      "resolved_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.en",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01/blob/4639429ec698d7821fc99a0bc665fa213d9fcd5a/b2wreviews01_stil2019.pdf",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01/blob/4639429ec698d7821fc99a0bc665fa213d9fcd5a/b2wreviews01_stil2019.pdf",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "status": 200,
+      "resolved_url": "https://github.com/americanas-tech/b2w-reviews01/tree/4639429ec698d7821fc99a0bc665fa213d9fcd5a",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/phase3c_final_metrics.json",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/5441d02/reports/validation_phase3c.md",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/98845aa323508aaa79b42d3fa9e547409a28558a/docs/FASE4B_LICENSE_REVIEW.md",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/98845aa323508aaa79b42d3fa9e547409a28558a/docs/FASE4B_LICENSE_REVIEW.md",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/blob/d05921c/reports/phase4a_inference_smoke.json",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/jorgeribeiru/Review-Sense/issues",
+      "status": 200,
+      "resolved_url": "https://github.com/jorgeribeiru/Review-Sense/issues",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://github.com/neuralmind-ai/portuguese-bert",
+      "status": 200,
+      "resolved_url": "https://github.com/neuralmind-ai/portuguese-bert",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/datasets/ruanchaves/b2w-reviews01",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/docs/transformers/tasks/sequence_classification",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md",
+      "status": 200,
+      "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased/blob/94d69c95f98f7d5b2a8700c420230ae10def0baa/README.md",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://link.springer.com/chapter/10.1007/978-3-030-61377-8_28",
+      "status": 200,
+      "resolved_url": "https://link.springer.com/chapter/10.1007/978-3-030-61377-8_28?error=cookies_not_supported&code=d5219590-50cc-403f-8029-dc4d31abe613",
+      "method": "HEAD"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE",
+      "status": 200,
+      "resolved_url": "https://raw.githubusercontent.com/neuralmind-ai/portuguese-bert/679423c38eaa267241abccc18465be1a25c7eff0/LICENSE",
+      "method": "HEAD"
+    }
+  ],
+  "remote_destination_read_only_observations": {
+    "model": "Not found in public lookup",
+    "space": "Not found or authentication required",
+    "absence_or_availability_proven": false,
+    "authenticated_identity_confirmed": false
+  },
+  "preservation": {
+    "snapshot_files": 183,
+    "unchanged_files": 173,
+    "intentional_changed_files": [
+      "README.md",
+      "deploy/zerogpu/README.md",
+      "deploy/zerogpu/app.py",
+      "deploy/zerogpu/runtime.json",
+      "docs/RELEASE_RIGHTS_DECISION.md",
+      "scripts/verify_phase4b_package.py",
+      "src/reviewsense/hub_cache.py",
+      "src/reviewsense/model_resolution.py",
+      "src/reviewsense/space_bundle.py",
+      "src/reviewsense/zerogpu.py"
+    ],
+    "split_stat_unchanged": true,
+    "csv_contents_opened_or_hashed": false,
+    "legacy_package_manifest_sha256": "836f5745422f2e58dcf2f4ee8f7e5b02fedc5f1d77d95e223a1683bb6e64eb6e",
+    "legacy_descriptor_sha256": "bb51b7f6a0f774871975d744d0c7d582fd6301a324deb72951ec906e1a4aa117",
+    "frozen_metrics_sha256": "8f32d5fa4dccd74b47f2b6c26455372bf7d50415390548eaa2085ed9e21bf302"
+  },
+  "operational_gates_without_receipts": {
+    "RIGHTS_POLICY_UNACKNOWLEDGED": true,
+    "DESTINATION_UNCONFIRMED": true,
+    "PUBLISH_AUTHORIZATION_REQUIRED": true
+  },
+  "legacy_operational_gates_without_receipts": {
+    "LEGAL_REVIEW_REQUIRED": true,
+    "DESTINATION_UNCONFIRMED": true,
+    "PUBLISH_AUTHORIZATION_REQUIRED": true
+  },
+  "not_executed": [
+    "authentication",
+    "credential acquisition",
+    "model repo creation",
+    "model upload",
+    "model Hub download",
+    "Space creation",
+    "Space Secret configuration",
+    "deploy",
+    "real ZeroGPU inference",
+    "purchase",
+    "LinkedIn post",
+    "Git push",
+    "merge",
+    "tag or release changes"
+  ],
+  "git_payload_audit": {
+    "files": [
+      "README.md",
+      "deploy/zerogpu/README.md",
+      "deploy/zerogpu/app.py",
+      "deploy/zerogpu/runtime.json",
+      "docs/HF_PUBLIC_LAUNCH.md",
+      "docs/RELEASE_RIGHTS_DECISION.md",
+      "publishing/hf_release/inference_descriptor.json",
+      "publishing/hf_release/launch_plan.json",
+      "publishing/hf_release/model_card/ATTRIBUTIONS.md",
+      "publishing/hf_release/model_card/BASE_MODEL_LICENSE.txt",
+      "publishing/hf_release/model_card/DISTRIBUTION_STATUS.md",
+      "publishing/hf_release/model_card/LICENSE",
+      "publishing/hf_release/model_card/PROJECT_CODE_LICENSE.txt",
+      "publishing/hf_release/model_card/README.md",
+      "publishing/hf_release/package_manifest.json",
+      "reports/hf_publication_preparation.json",
+      "reports/validation_hf_publication_preparation.md",
+      "scripts/verify_phase4b_package.py",
+      "src/reviewsense/hf_launch.py",
+      "src/reviewsense/hub_cache.py",
+      "src/reviewsense/model_resolution.py",
+      "src/reviewsense/space_bundle.py",
+      "src/reviewsense/zerogpu.py",
+      "tests/phase4c/test_hf_launch.py"
+    ],
+    "file_count": 24,
+    "secret_patterns_checked": [
+      "hf_token",
+      "github_token",
+      "aws_key",
+      "private_key",
+      "personal_home",
+      "credential_assignment"
+    ],
+    "findings": [],
+    "local_markdown_targets_valid": 50,
+    "scope": "changed/new files only; pattern scan plus manual review, not proof about all Git history or weight memorization"
+  }
+}
