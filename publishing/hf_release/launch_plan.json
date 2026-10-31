@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "account": "JorgeRibeiru",
+  "operational_confirmation_required": true,
+  "legal_clearance": "NOT_ESTABLISHED",
+  "descriptor_sha256": "fe809fc4fa5da8b3355d1459363840c9474eef5429ed3fc7ebfa0d93618d9d8d",
+  "model": {
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "visibility": "public",
+    "files": {
+      "ATTRIBUTIONS.md": {
+        "bytes": 2343,
+        "sha256": "dbfcc4583ce15b8029d5ed097f921e41c3e3961e94ad141831ec22eafe6dcf4e"
+      },
+      "BASE_MODEL_LICENSE.txt": {
+        "bytes": 1138,
+        "sha256": "f52509e0695fdc19752f725f3d58ba06cc7842d5dc8d828b8d821c8ee2c92e67"
+      },
+      "DISTRIBUTION_STATUS.md": {
+        "bytes": 2054,
+        "sha256": "3e28c42600fdd4dc8754bf8f8739910773e5808cac7498f302a4994e70b7024b"
+      },
+      "LICENSE": {
+        "bytes": 22426,
+        "sha256": "a3bc83c509fb1ed75b6679a6bc89e38123de0da624b8509457cd0491ff832195"
+      },
+      "PROJECT_CODE_LICENSE.txt": {
+        "bytes": 1233,
+        "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+      },
+      "README.md": {
+        "bytes": 15660,
+        "sha256": "321e7a11ea4d4be7c8c89166ea8b06e8667edd7e93f4b1e6d1b6c2ecf2265725"
+      },
+      "config.json": {
+        "bytes": 1061,
+        "sha256": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223"
+      },
+      "model.safetensors": {
+        "bytes": 435725300,
+        "sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+      },
+      "tokenizer.json": {
+        "bytes": 677889,
+        "sha256": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb"
+      },
+      "tokenizer_config.json": {
+        "bytes": 487,
+        "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+      }
+    }
+  },
+  "space": {
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr",
+    "visibility": "public",
+    "files": {
+      "LICENSE": {
+        "bytes": 1233,
+        "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+      },
+      "README.md": {
+        "bytes": 4867,
+        "sha256": "55f4be05bbcf95d5c6cc3b716b3c4dc3e1f68a1b33ccf5ca1e5a0e8e54902018"
+      },
+      "app.py": {
+        "bytes": 2407,
+        "sha256": "c4e338037589b129af487a1653ea3bd316df75f5a09be28cb8da67ebb0a87474"
+      },
+      "app/__init__.py": {
+        "bytes": 76,
+        "sha256": "958f55fb4956e523b20275b5bd0fb7c6d1a1dde8f47ce417b7e716635ce3abf4"
+      },
+      "app/app.py": {
+        "bytes": 14673,
+        "sha256": "f4ec3b9fc3ba01d13d6bfa82f2180d51863e21dfa0c586ba7a3cee7205971b42"
+      },
+      "app/config.py": {
+        "bytes": 2649,
+        "sha256": "27cfe5c8dda651ddae09b316e77f3b9a61f1187729bfda0ddf6d1608749ac080"
+      },
+      "app/style.css": {
+        "bytes": 7790,
+        "sha256": "858de5a4d3b7ef431ed12a4d5912acd43ed7a50a00478056bb2c4a2771effb0d"
+      },
+      "model_descriptor.json": {
+        "bytes": 2328,
+        "sha256": "04dc6c98457588175bc85f667ab72eff4484eec55403e7e517e6468093d2f2e6"
+      },
+      "requirements.txt": {
+        "bytes": 296,
+        "sha256": "1c4a97e71d235ad1c5e3c9b75da451a35cbfb30747617d91eecb0e6af61c9001"
+      },
+      "reviewsense/__init__.py": {
+        "bytes": 104,
+        "sha256": "bcadbfc9c96b14d4cc9a94509fe54d981db51d6793a126706b9edb8640f5f973"
+      },
+      "reviewsense/artifacts.py": {
+        "bytes": 3687,
+        "sha256": "70d9d2aa0c7ce02dac3a614520396f92497c9cbfa4ad331e8ddc760b79a5cac4"
+      },
+      "reviewsense/hub_cache.py": {
+        "bytes": 4742,
+        "sha256": "2f44a77b37950bef3b3f9074434136ef920429ecd0abebd6fcf74b06010256a6"
+      },
+      "reviewsense/labels.py": {
+        "bytes": 814,
+        "sha256": "4916278d0dee2e3784a615742204c4e1ca14719d6a4edfd0e6d0858f8eb89ec1"
+      },
+      "reviewsense/model_resolution.py": {
+        "bytes": 17056,
+        "sha256": "dcd472305eb364930dce979a10e6f6616a665010fb30365476471df2fcc184e2"
+      },
+      "reviewsense/predict.py": {
+        "bytes": 15601,
+        "sha256": "b92c0512e0e52d0537539168cfdeeafe0e69bc1768eec85fc776841a99f94070"
+      },
+      "reviewsense/zerogpu.py": {
+        "bytes": 8111,
+        "sha256": "d3dad8e83ddcc274030c9a78817d2def7ff6f3a6e8f205ca0bea9c6e4e5392c8"
+      },
+      "runtime.json": {
+        "bytes": 612,
+        "sha256": "f8ac520f5e1a554ce13d1b2eb05c11ca950d0d028e9c109b6f76a21d5bff9307"
+      }
+    },
+    "hardware": "zero-a10g",
+    "paid_resources_allowed": false
+  },
+  "model_hub_revision": null,
+  "revision_policy": "PIN_VERIFIED_COMMIT_AFTER_MODEL_UPLOAD_BEFORE_SPACE",
+  "allowed_operations_after_confirmation": [
+    "create_public_model",
+    "upload_model_allowlist",
+    "verify_pinned_model",
+    "configure_private_operational_secret",
+    "create_public_zerogpu_space",
+    "upload_space_allowlist",
+    "verify_real_synthetic_inference"
+  ]
+}

@@ -12,8 +12,14 @@ from dataclasses import dataclass
 from functools import wraps
 from pathlib import Path
 
-from reviewsense.artifacts import PACKAGE_FILES, read_json, safe_file
-from reviewsense.model_resolution import REPO_ID, REVISION, HubSnapshot, release_gates
+from reviewsense.artifacts import read_json, safe_file
+from reviewsense.model_resolution import (
+    REPO_ID,
+    REVISION,
+    HubSnapshot,
+    package_files,
+    release_gates,
+)
 from reviewsense.predict import (
     ArtifactError,
     InferenceError,
@@ -69,7 +75,7 @@ class ZeroGPUSettings:
                 repo_id=self.repo_id,
                 revision=self.revision,
                 repo_type="model",
-                allow_patterns=list(PACKAGE_FILES),
+                allow_patterns=list(package_files(read_json(self.descriptor))),
                 cache_dir=self.cache_root,
                 local_files_only=False,
                 token=False,

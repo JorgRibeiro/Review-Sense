@@ -83,7 +83,18 @@ def validate_bundle(directory: Path, inventory: dict) -> None:
     validate_descriptor(json.loads((directory / "model_descriptor.json").read_text()))
 
 
-def prepare_bundle(root: Path, destination: Path) -> dict:
+def bundle_inventory(directory: Path) -> dict:
+    """Inventário dos 17 nomes fixos, inclusive subpastas; não aceita caminhos externos."""
+    result = {}
+    for name in sorted(BUNDLE_FILES):
+        path = directory / name
+        safe_file(path.parent, path.name)
+        result[name] = {"bytes": path.stat().st_size, "sha256": file_sha256(path)}
+    validate_bundle(directory, {name: record["sha256"] for name, record in result.items()})
+    return result
+
+
+def prepare_bundle(root: Path, destination: Path, *, descriptor: Path | None = None) -> dict:
     _no_symlink_ancestors(destination)
     if os.path.lexists(destination):
         raise FileExistsError("Candidato de código existente; não sobrescrever.")
@@ -97,7 +108,7 @@ def prepare_bundle(root: Path, destination: Path) -> dict:
         staging.mkdir()
         inventory = {}
         for name, origin in sorted(BUNDLE_FILES.items()):
-            path = root / origin
+            path = descriptor if name == "model_descriptor.json" and descriptor else root / origin
             safe_file(path.parent, path.name)
             target = staging / name
             target.parent.mkdir(parents=True, exist_ok=True)
@@ -115,8 +126,9 @@ def main() -> None:
     parser.add_argument(
         "--destination", type=Path, default=Path("outputs/phase4c-zerogpu/space-candidate")
     )
+    parser.add_argument("--descriptor", type=Path)
     args = parser.parse_args()
-    inventory = prepare_bundle(Path.cwd(), args.destination)
+    inventory = prepare_bundle(Path.cwd(), args.destination, descriptor=args.descriptor)
     print(json.dumps({"files": inventory, "upload_authorized": False}, indent=2))
 
 

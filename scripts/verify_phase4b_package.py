@@ -52,8 +52,12 @@ def no_network():
         state["active"] = False
 
 
-def verify_independent_example(package: Path, repository: Path) -> dict:
+def verify_independent_example(
+    package: Path, repository: Path, *, names: tuple[str, ...] = PACKAGE_FILES
+) -> dict:
     """Executa o snippet literal fora do repo, com cache vazio e acesso à origem bloqueado."""
+    if names not in (PACKAGE_FILES, tuple(sorted((*PACKAGE_FILES, "LICENSE")))):
+        raise ValueError("Allowlist independente incompatível.")
     snippet = card_example((package / "README.md").read_text())
     worker = """import json, os, runpy, sys
 from pathlib import Path
@@ -83,10 +87,10 @@ print("INDEPENDENT_CHECK:" + json.dumps(state))
         outside = Path(temporary)
         copied = outside / "model"
         copied.mkdir()
-        for name in PACKAGE_FILES:
+        for name in names:
             shutil.copyfile(safe_file(package, name), copied / name, follow_symlinks=False)
         # Confirma que a cópia independente também tem os mesmos bytes.
-        if file_inventory(copied, PACKAGE_FILES) != file_inventory(package, PACKAGE_FILES):
+        if file_inventory(copied, names) != file_inventory(package, names):
             raise ValueError("Cópia independente divergente.")
         example = outside / "example.py"
         example.write_text(snippet)

@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "descriptor_sha256": "fe809fc4fa5da8b3355d1459363840c9474eef5429ed3fc7ebfa0d93618d9d8d",
+  "files": {
+    "ATTRIBUTIONS.md": {
+      "bytes": 2343,
+      "sha256": "dbfcc4583ce15b8029d5ed097f921e41c3e3961e94ad141831ec22eafe6dcf4e"
+    },
+    "BASE_MODEL_LICENSE.txt": {
+      "bytes": 1138,
+      "sha256": "f52509e0695fdc19752f725f3d58ba06cc7842d5dc8d828b8d821c8ee2c92e67"
+    },
+    "DISTRIBUTION_STATUS.md": {
+      "bytes": 2054,
+      "sha256": "3e28c42600fdd4dc8754bf8f8739910773e5808cac7498f302a4994e70b7024b"
+    },
+    "LICENSE": {
+      "bytes": 22426,
+      "sha256": "a3bc83c509fb1ed75b6679a6bc89e38123de0da624b8509457cd0491ff832195"
+    },
+    "PROJECT_CODE_LICENSE.txt": {
+      "bytes": 1233,
+      "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+    },
+    "README.md": {
+      "bytes": 15660,
+      "sha256": "321e7a11ea4d4be7c8c89166ea8b06e8667edd7e93f4b1e6d1b6c2ecf2265725"
+    },
+    "config.json": {
+      "bytes": 1061,
+      "sha256": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223"
+    },
+    "model.safetensors": {
+      "bytes": 435725300,
+      "sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+    },
+    "tokenizer.json": {
+      "bytes": 677889,
+      "sha256": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb"
+    },
+    "tokenizer_config.json": {
+      "bytes": 487,
+      "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+    }
+  },
+  "original_artifact_sha256": {
+    "model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "config.json": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223",
+    "tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+    "tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+  },
+  "selected_checkpoint": {
+    "epoch": 1,
+    "global_step": 5543
+  },
+  "frozen_test_metrics": {
+    "f1_macro": 0.7544611794363947,
+    "precision_macro": 0.7704919166001464,
+    "recall_macro": 0.7462112828169135,
+    "accuracy": 0.8633971795411493,
+    "per_class": {
+      "negativo": {
+        "precision": 0.8795749704840614,
+        "recall": 0.9141104294478528,
+        "f1-score": 0.8965102286401926,
+        "support": 4890.0
+      },
+      "neutro": {
+        "precision": 0.5273459988485896,
+        "recall": 0.38552188552188554,
+        "f1-score": 0.44541697058108437,
+        "support": 2376.0
+      },
+      "positivo": {
+        "precision": 0.9045547804677883,
+        "recall": 0.9390015334810019,
+        "f1-score": 0.921456339087907,
+        "support": 11738.0
+      }
+    },
+    "label_order": [
+      0,
+      1,
+      2
+    ],
+    "label_names": [
+      "negativo",
+      "neutro",
+      "positivo"
+    ],
+    "confusion_matrix": [
+      [
+        4470,
+        292,
+        128
+      ],
+      [
+        425,
+        916,
+        1035
+      ],
+      [
+        187,
+        529,
+        11022
+      ]
+    ],
+    "samples": 19004
+  },
+  "provenance": {
+    "packaging_code_commit": "ff1c7e0588c2e2d7ca6541036cbef7b3bb9b8d24",
+    "training_code_commit": "0dd1ed9a4de1a9884bf1eda4623c70a97671b59a",
+    "evaluation_code_commit": "90893aa3fe3053433e3e72a22977fc40747bed5f",
+    "metrics_reference": "reports/phase3c_final_metrics.json",
+    "metrics_sha256": "8f32d5fa4dccd74b47f2b6c26455372bf7d50415390548eaa2085ed9e21bf302",
+    "license_review_reference": "docs/FASE4B_LICENSE_REVIEW.md",
+    "license_review_sha256": "636137b9b5eedf178a0f6f429a3df375f5c5501a3f7ceccc3b04121e750c4c5f",
+    "preparation_code_sha256": {
+      "src/reviewsense/hf_launch.py": "5d615743735259f1f14509a1a131fab3dd95ebfe5a0e57779d7594c1ea945a1d",
+      "src/reviewsense/model_resolution.py": "dcd472305eb364930dce979a10e6f6616a665010fb30365476471df2fcc184e2",
+      "src/reviewsense/space_bundle.py": "f4926a6020a2aff317a7de9ac553f3cb35d514da1757f35ecf662deb6becad0d",
+      "deploy/zerogpu/app.py": "c4e338037589b129af487a1653ea3bd316df75f5a09be28cb8da67ebb0a87474"
+    }
+  },
+  "operational_confirmation_required": true,
+  "legal_clearance": "NOT_ESTABLISHED"
+}

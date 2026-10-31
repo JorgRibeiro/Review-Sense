@@ -13,8 +13,14 @@ startup_duration_timeout: 30m
 
 # ReviewSense PT-BR — candidato ZeroGPU, não publicado
 
-**license_status=REQUIRES_REVIEW; upload_authorized=false.**
-Este esqueleto não autoriza criar Space, publicar pesos ou hospedar inferência.
+**Preparação local; nenhuma criação de Space ou hospedagem foi executada.**
+Situação jurídica e autorização operacional são separadas no descritor do modelo.
+O descritor v1 original permanece REQUIRES_REVIEW/upload_authorized=false e bloqueado.
+O candidato v2 mantém REQUIRES_REVIEW/NOT_ESTABLISHED, com oferta de CC BY-NC-SA
+somente nos direitos controlados pelo responsável e avisos MIT separados. Não há
+aprovação jurídica implícita: o v2 exige decisão de risco, destino/revisão e
+autorização operacional específica em registros privados vinculados aos hashes.
+Este esqueleto sozinho não autoriza criar Space, publicar pesos ou hospedar inferência.
 Conta informada: `JorgeRibeiru`. Destinos candidatos, sem repositórios consultados
 ou criados: modelo `JorgeRibeiru/reviewsense-ptbr-bertimbau` e Space
 `JorgeRibeiru/reviewsense-ptbr`. Não são defaults executáveis de provisionamento.
@@ -23,19 +29,32 @@ O diretório sozinho é um template. O preparador local do projeto copia por
 allowlist o código de inferência e a UI existentes para um bundle independente.
 Não copiar o repositório inteiro: datasets, relatórios, treinamento, estados e
 pesos não fazem parte do Space de código. O descritor acompanha o bundle fora
-do pacote de nove arquivos do modelo, que permanece intacto.
+do pacote original de nove arquivos, que permanece intacto. O candidato v2 usa
+dez arquivos no repositório do modelo (inclui LICENSE); o Space continua com 17.
 
 A entrada exige variáveis explícitas `REVIEWSENSE_MODEL_REPO_ID`,
 `REVIEWSENSE_MODEL_REVISION` (SHA de 40 caracteres), `REVIEWSENSE_CACHE_ROOT`,
-`REVIEWSENSE_APPROVAL_ROOT` e o `SPACE_ID` do runtime. Não há valores de exemplo
+`SPACE_ID` do runtime e uma origem de aprovações. Não há valores de exemplo
 que concedam aprovação. Recibos privados não são enviados no bundle. O recibo
 humano futuro deve vincular space_id e ação host_zerogpu ao candidato, além dos
 gates de direitos/destino/autorização já existentes.
 
+No Space v2, fornecer `REVIEWSENSE_OPERATIONAL_APPROVAL_JSON` como **Secret**,
+depois da confirmação humana e da verificação do SHA real do modelo. O JSON contém
+risk/destination/human/evidence legítimos; nunca arquivos do bundle, variáveis
+públicas ou tokens. A entrada materializa esse conteúdo em diretório temporário
+privado (0700, arquivos 0600), retira a variável do ambiente e valida vínculos,
+decisão, destino e SHA antes de importar o runtime. Não imprime o Secret.
+O diretório permanece bloqueado para acesso Gradio e é removido ao encerrar.
+`REVIEWSENSE_APPROVAL_ROOT` continua disponível para provisão local existente;
+as duas origens juntas são recusadas. Nenhum registro real foi criado nesta preparação.
+
 O padrão só materializa cache local autorizado. Provisionamento público futuro
 exige opção separada REVIEWSENSE_PROVISION_PUBLIC_SNAPSHOT=1 e todos os gates;
-usa revisão fixa, allowlist e token=False. Com o descritor atual, nem leitura de
-snapshot nem download são permitidos por este caminho. Não há login ou uploader.
+usa revisão fixa, allowlist por versão e token=False. Sem registros operacionais
+correspondentes, nem leitura de snapshot nem download são permitidos por este caminho.
+O SHA da revisão vem do upload verificado do modelo, nunca de valor inventado.
+Não há login ou uploader nesta aplicação.
 Não configurar preload_from_hub no metadata enquanto a publicação está bloqueada.
 
 Runtime alvo e versões observadas estão em runtime.json. Gradio é selecionado
