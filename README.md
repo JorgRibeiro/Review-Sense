@@ -8,7 +8,7 @@ com pipeline de dados reproduzível, baseline **TF-IDF + LinearSVC**, fine-tunin
 aplicação local. O clone **não contém os pesos treinados nem o dataset**.
 Um [candidato dos pesos foi publicado posteriormente no Hugging Face](https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau),
 e sua verificação pós-download foi concluída com cache compatível e todos os hashes aprovados.
-**Não há inferência hospedada.** A integração ZeroGPU permanece preparada, sem deploy.
+**Não há inferência hospedada.** A criação do Space ZeroGPU foi recusada pelo Hugging Face (HTTP 402; conta sem elegibilidade gratuita no momento). A integração permanece preparada, sem deploy. [Registro do bloqueio](reports/validation_hf_zerogpu_402.md).
 
 A [release v1.0.0](https://github.com/jorgeribeiru/Review-Sense/releases/tag/v1.0.0)
 está publicada no commit `98845aa`, com esse escopo. A
