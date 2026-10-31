@@ -1,0 +1,651 @@
+{
+  "schema_version": 1,
+  "scope": "v1.0.0 source code, documentation, frozen aggregate results and local demonstration; no weight distribution or hosted inference",
+  "checked_at_utc": "2026-10-31T00:35:25.451216+00:00",
+  "branch": "feat/release-v1-code-docs",
+  "base_commit": "09d18b04051c64ca5f8ca1c530c1e6a0693a7072",
+  "source_version": "1.0.0",
+  "installed_editable_metadata_version": "0.1.0",
+  "environment": {
+    "python": "3.11.14",
+    "system": "Linux",
+    "torch": "2.14.1+cu132",
+    "transformers": "5.22.1",
+    "scikit-learn": "1.9.1",
+    "gradio": "6.31.0",
+    "pytest": "9.2.0",
+    "ruff": "0.17.3"
+  },
+  "checks": {
+    "pytest": {
+      "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 .venv/bin/python (pytest.main([\"-q\"]) inside test_access_policy on the real final test path)",
+      "passed": 393,
+      "failed": 0,
+      "seconds": 14.77,
+      "real_final_test_access": {
+        "active": false,
+        "read_opens": 0,
+        "blocked_opens": 0
+      }
+    },
+    "ruff": {
+      "command": ".venv/bin/ruff check src tests app scripts deploy/zerogpu",
+      "exit_code": 0
+    },
+    "format": {
+      "command": ".venv/bin/ruff format --check src tests app scripts deploy/zerogpu",
+      "exit_code": 0,
+      "already_formatted_files": 57
+    },
+    "pip_check": {
+      "command": ".venv/bin/python -m pip check",
+      "exit_code": 0,
+      "result": "No broken requirements found."
+    },
+    "git_diff_check": {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    "source_version_consistency": true,
+    "historical_readme_preserved_with_heading_and_link_relocation_only": true,
+    "zerogpu_code_bundle": {
+      "files": 17,
+      "independent_allowlist_verified": true,
+      "weights_or_data": false,
+      "output": "temporary_directory_only"
+    }
+  },
+  "documentation_audit": {
+    "local_markdown_links": [
+      {
+        "source": "README.md",
+        "target": "docs/RELEASE_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/RELEASE_NOTES_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "CHANGELOG.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/HISTORICO_TECNICO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "reports/phase3c_final_metrics.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "reports/figures/phase3c_f1_comparison.png",
+        "image": true,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "reports/validation_phase3c.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE3C_PROTOCOL.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "notebooks/04_final_model_comparison.ipynb",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "reports/figures/phase4a_desktop.png",
+        "image": true,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/RELEASE_v1.0.0.md#demonstração-local-com-artefatos-legítimos",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/RELEASE_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/HISTORICO_TECNICO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE2_BASELINE.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE3B_BERTIMBAU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE4C_RELEASE_READINESS.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "publishing/model_card/README.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE4B_MODEL_PACKAGING.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE4C_ZEROGPU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "ReviewSense_PTBR_PLANO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "reports/validation_release_v1.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "LICENSE",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "README.md",
+        "target": "docs/FASE4C_RIGHTS_OUTREACH.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "CHANGELOG.md",
+        "target": "docs/RELEASE_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "CHANGELOG.md",
+        "target": "docs/RELEASE_NOTES_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "CHANGELOG.md",
+        "target": "docs/HISTORICO_TECNICO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../reports/phase3c_final_metrics.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../reports/validation_phase3c.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../constraints-transformer.txt",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "HISTORICO_TECNICO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "FASE2_BASELINE.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "FASE3B_BERTIMBAU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "FASE4C_RELEASE_READINESS.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../LICENSE",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "FASE4C_RIGHTS_OUTREACH.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "FASE4C_ZEROGPU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../reports/validation_phase4c_zerogpu_corrections.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../reports/validation_release_v1.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "../CHANGELOG.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/RELEASE_v1.0.0.md",
+        "target": "RELEASE_NOTES_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../README.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "RELEASE_v1.0.0.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../ReviewSense_PTBR_PLANO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4A_INFERENCE_GRADIO.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/figures/phase4a_desktop.png",
+        "image": true,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/phase4a_inference_smoke.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4B_LICENSE_REVIEW.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../publishing/model_card/README.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/phase4b_package_manifest.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase4b.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4B_MODEL_PACKAGING.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4C_RELEASE_PLAN.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE2_BASELINE.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../notebooks/02_tfidf_svm_baseline.ipynb",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase2.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase3a.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE3A_BERTIMBAU_SMOKE.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase3b.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE3B_BERTIMBAU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../notebooks/03_bertimbau_finetune.ipynb",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase3c.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/phase3c_final_metrics.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE3C_PROTOCOL.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE3C_FINAL_EVALUATION.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../notebooks/04_final_model_comparison.ipynb",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../notebooks/01_data_audit_eda.ipynb",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../configs/data.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../data/README.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../LICENSE",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../publishing/inference_descriptor.json",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4C_RELEASE_READINESS.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4C_RIGHTS_OUTREACH.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4C_HOSTING_DECISION.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase4c_readiness.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/phase4c_premerge_corrections.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../deploy/zerogpu/README.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../docs/FASE4C_ZEROGPU.md",
+        "image": false,
+        "status": "ok"
+      },
+      {
+        "source": "docs/HISTORICO_TECNICO.md",
+        "target": "../reports/validation_phase4c_zerogpu.md",
+        "image": false,
+        "status": "ok"
+      }
+    ],
+    "external_links": [
+      {
+        "url": "https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository",
+        "status": 200,
+        "resolved_url": "https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository"
+      },
+      {
+        "url": "https://github.com/americanas-tech/b2w-reviews01",
+        "status": 200,
+        "resolved_url": "https://github.com/americanas-tech/b2w-reviews01"
+      },
+      {
+        "url": "https://github.com/jorgeribeiru/Review-Sense",
+        "status": 200,
+        "resolved_url": "https://github.com/jorgeribeiru/Review-Sense"
+      },
+      {
+        "url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased",
+        "status": 200,
+        "resolved_url": "https://huggingface.co/neuralmind/bert-base-portuguese-cased"
+      }
+    ],
+    "loopback_demo_url": {
+      "url": "http://127.0.0.1:7860",
+      "check": "instruction_only_not_contacted"
+    },
+    "preservation": {
+      "sha256_files_checked": 141,
+      "sha256_mismatches": [],
+      "split_stat_unchanged": {
+        "data/processed/phase1-final/train.csv": true,
+        "data/processed/phase1-final/val.csv": true,
+        "data/processed/phase1-final/test.csv": true
+      },
+      "csv_contents_read": false
+    },
+    "readme_metrics_from_frozen_json": {
+      "svm": {
+        "f1_macro": "0,7231",
+        "accuracy": "0,8325"
+      },
+      "bertimbau": {
+        "f1_macro": "0,7545",
+        "accuracy": "0,8634"
+      }
+    },
+    "readme_neutral_metrics_from_frozen_json": {
+      "f1-score": "0,4454",
+      "recall": "0,3855"
+    }
+  },
+  "preservation_reference_sha256": {
+    "reports/phase3c_final_metrics.json": "8f32d5fa4dccd74b47f2b6c26455372bf7d50415390548eaa2085ed9e21bf302",
+    "reports/phase4b_package_manifest.json": "836f5745422f2e58dcf2f4ee8f7e5b02fedc5f1d77d95e223a1683bb6e64eb6e",
+    "publishing/inference_descriptor.json": "bb51b7f6a0f774871975d744d0c7d582fd6301a324deb72951ec906e1a4aa117",
+    "outputs/phase4b/model-repo-staging/model.safetensors": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "outputs/phase4b/model-repo-staging/tokenizer.json": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb",
+    "outputs/phase4b/model-repo-staging/tokenizer_config.json": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+  },
+  "release_gates": {
+    "license_status": "REQUIRES_REVIEW",
+    "upload_authorized": false,
+    "scope": "fine-tuned weights and hosted inference; own code license remains MIT"
+  },
+  "planned_commit_files": [
+    "README.md",
+    "CHANGELOG.md",
+    "docs/HISTORICO_TECNICO.md",
+    "docs/RELEASE_v1.0.0.md",
+    "docs/RELEASE_NOTES_v1.0.0.md",
+    "pyproject.toml",
+    "src/reviewsense/__init__.py",
+    "reports/validation_release_v1.md",
+    "reports/release_v1_verification.json"
+  ],
+  "git_payload_audit": {
+    "paths": [
+      "README.md",
+      "CHANGELOG.md",
+      "docs/HISTORICO_TECNICO.md",
+      "docs/RELEASE_v1.0.0.md",
+      "docs/RELEASE_NOTES_v1.0.0.md",
+      "pyproject.toml",
+      "src/reviewsense/__init__.py",
+      "reports/validation_release_v1.md",
+      "reports/release_v1_verification.json"
+    ],
+    "secret_scan_rules": [
+      "hugging_face_token",
+      "github_token",
+      "aws_access_key",
+      "private_key",
+      "personal_home_path",
+      "credential_assignment"
+    ],
+    "findings": [],
+    "scope": "all changed/new text files; pattern scan plus manual review, not proof of absence in all history",
+    "tracked_data_models_cache_outputs": [
+      "data/README.md"
+    ],
+    "forbidden_artifacts_in_payload": [],
+    "note": "Final staged-path and pattern scan recorded in validation_release_v1.md; unchanged ignored artifacts are not staged.",
+    "file_count": 9
+  },
+  "not_performed": [
+    "real final test access",
+    "training",
+    "new benchmarks or recomputed model metrics",
+    "real trained-model inference",
+    "dependency installation or replacement",
+    "clean installation validation",
+    "real ZeroGPU hardware validation",
+    "email requests",
+    "push",
+    "merge of the release branch",
+    "tag",
+    "GitHub Release",
+    "HF upload",
+    "Space creation",
+    "deployment",
+    "LinkedIn post"
+  ]
+}
