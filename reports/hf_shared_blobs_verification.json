@@ -1,0 +1,360 @@
+{
+  "schema_version": 2,
+  "checked_at_utc": "2026-10-31T02:06:57.776531+00:00",
+  "client_timezone": "America/Recife",
+  "checked_at_client_timezone": "2026-10-30T23:06:57.776624-03:00",
+  "branch": "feat/hf-public-launch",
+  "base_commit": "21c3b697b5805acfa0833972fed08e982cb4737d",
+  "state": "PINNED_MODEL_DOWNLOAD_AND_INDEPENDENT_INFERENCE_VERIFIED_NO_SHARED_BLOBS",
+  "legal_clearance": "NOT_ESTABLISHED",
+  "license_status": "REQUIRES_REVIEW",
+  "original_cache_inspection": {
+    "at_utc": "2026-10-31T01:55:40.543094+00:00",
+    "original_cache_entries_remaining": [],
+    "original_failed_cache_inspected": false,
+    "limitation": "Original temporary cache was deleted by TemporaryDirectory; old blob target cannot be recovered from this inspection."
+  },
+  "import_time_behavior": [
+    {
+      "initial_env": "0",
+      "observations": [
+        {
+          "before": false,
+          "enabled_before": true
+        },
+        {
+          "after_late_env": false,
+          "enabled_after_late_env": true
+        }
+      ]
+    },
+    {
+      "initial_env": "1",
+      "observations": [
+        {
+          "before": true,
+          "enabled_before": false
+        },
+        {
+          "after_late_env": true,
+          "enabled_after_late_env": false
+        }
+      ]
+    }
+  ],
+  "installed_library_source_sha256": {
+    "constants.py": "8db94de6ee2b0bd04aa76bd08e3c2fe2bf21967c8946fea6554cd7213d78d9e0",
+    "file_download.py": "13508731cdbde034742219fdee35cea0860ed85519728456416e3b1103efeb02",
+    "utils/_shared_blobs.py": "00277be9150b5c4268a7675f6f5ae8bf277cb50174f68a0c23a72764dba4055f"
+  },
+  "verification": {
+    "at_utc": "2026-10-31T01:57:38.857957+00:00",
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "url": "https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "revision": "ae89cf168ffaa64115c097204e678ed513a54265",
+    "public_unauthenticated_download": true,
+    "ten_file_hashes_match": true,
+    "remote_files": [
+      ".gitattributes",
+      "ATTRIBUTIONS.md",
+      "BASE_MODEL_LICENSE.txt",
+      "DISTRIBUTION_STATUS.md",
+      "LICENSE",
+      "PROJECT_CODE_LICENSE.txt",
+      "README.md",
+      "config.json",
+      "model.safetensors",
+      "tokenizer.json",
+      "tokenizer_config.json"
+    ],
+    "fresh_cache": true,
+    "model_card_validated_offline": true,
+    "independent_literal_example": {
+      "literal_model_card_example_executed": true,
+      "outside_repository": true,
+      "empty_hf_cache": true,
+      "isolated_python": true,
+      "device": "cpu",
+      "precision": "fp32",
+      "original_models_reports_data_accesses": 0,
+      "network_connections": 0,
+      "reviewsense_module_not_imported": true,
+      "finite_three_class_scores": true
+    },
+    "synthetic_inference": {
+      "samples": [
+        {
+          "synthetic_case": 1,
+          "class_id": 2,
+          "label": "positivo",
+          "uncalibrated_scores": {
+            "negativo": 0.0028188552241772413,
+            "neutro": 0.2814115881919861,
+            "positivo": 0.7157695293426514
+          },
+          "padded_tokens": 16
+        },
+        {
+          "synthetic_case": 2,
+          "class_id": 0,
+          "label": "negativo",
+          "uncalibrated_scores": {
+            "negativo": 0.9290517568588257,
+            "neutro": 0.05841963365674019,
+            "positivo": 0.012528695166110992
+          },
+          "padded_tokens": 16
+        },
+        {
+          "synthetic_case": 3,
+          "class_id": 1,
+          "label": "neutro",
+          "uncalibrated_scores": {
+            "negativo": 0.022296857088804245,
+            "neutro": 0.5681156516075134,
+            "positivo": 0.40958744287490845
+          },
+          "padded_tokens": 16
+        },
+        {
+          "synthetic_case": 4,
+          "class_id": 1,
+          "label": "neutro",
+          "uncalibrated_scores": {
+            "negativo": 0.04803204908967018,
+            "neutro": 0.7503376603126526,
+            "positivo": 0.20163020491600037
+          },
+          "padded_tokens": 16
+        },
+        {
+          "synthetic_case": 5,
+          "class_id": 1,
+          "label": "neutro",
+          "uncalibrated_scores": {
+            "negativo": 0.10957276076078415,
+            "neutro": 0.7514707446098328,
+            "positivo": 0.1389564424753189
+          },
+          "padded_tokens": 256
+        }
+      ],
+      "isolation": {
+        "original_repository_accesses": 0,
+        "network_connections": 0
+      },
+      "device": "cpu",
+      "precision": "fp32",
+      "labels_verified": true,
+      "tokenizer_cased_verified": true
+    },
+    "network_after_download": {
+      "active": false,
+      "blocked_connections": 0
+    },
+    "test_access": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    },
+    "legal_clearance": "NOT_ESTABLISHED",
+    "cache_layout_lstat_readlink": [
+      {
+        "file": "ATTRIBUTIONS.md",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/dc4b8a5f0b8967ec9f913f0f436419410dda96ea",
+        "blob_type": "regular",
+        "blob_bytes": 2343
+      },
+      {
+        "file": "BASE_MODEL_LICENSE.txt",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/c8ec0ad81d42f847d8503b281e12b62cbe624edd",
+        "blob_type": "regular",
+        "blob_bytes": 1138
+      },
+      {
+        "file": "DISTRIBUTION_STATUS.md",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/ae3db3ec0cee08359dca75478c9c3016ffff2f92",
+        "blob_type": "regular",
+        "blob_bytes": 2054
+      },
+      {
+        "file": "LICENSE",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/0a21d811c8e1dbc5e06cd09824f2409853adbc66",
+        "blob_type": "regular",
+        "blob_bytes": 22426
+      },
+      {
+        "file": "PROJECT_CODE_LICENSE.txt",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/0ae32f3051b68ada704a8966bf8b42eb29513b5b",
+        "blob_type": "regular",
+        "blob_bytes": 1233
+      },
+      {
+        "file": "README.md",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/bae901a94a2ab6e6a55e92813032cc4e1d476c56",
+        "blob_type": "regular",
+        "blob_bytes": 15660
+      },
+      {
+        "file": "config.json",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/b8b9f0a3162121acff7e130d226340c05831bfc7",
+        "blob_type": "regular",
+        "blob_bytes": 1061
+      },
+      {
+        "file": "model.safetensors",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+        "blob_type": "regular",
+        "blob_bytes": 435725300
+      },
+      {
+        "file": "tokenizer.json",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/99c794ee20ab0901ea5b6fac76a18659b063777f",
+        "blob_type": "regular",
+        "blob_bytes": 677889
+      },
+      {
+        "file": "tokenizer_config.json",
+        "snapshot_type": "symlink",
+        "snapshot_raw_link": "../../blobs/f446051d53afa4b1f990e544a825ee49bdee9dea",
+        "blob_type": "regular",
+        "blob_bytes": 487
+      }
+    ],
+    "verified_file_inventory": {
+      "ATTRIBUTIONS.md": {
+        "bytes": 2343,
+        "sha256": "dbfcc4583ce15b8029d5ed097f921e41c3e3961e94ad141831ec22eafe6dcf4e"
+      },
+      "BASE_MODEL_LICENSE.txt": {
+        "bytes": 1138,
+        "sha256": "f52509e0695fdc19752f725f3d58ba06cc7842d5dc8d828b8d821c8ee2c92e67"
+      },
+      "DISTRIBUTION_STATUS.md": {
+        "bytes": 2054,
+        "sha256": "3e28c42600fdd4dc8754bf8f8739910773e5808cac7498f302a4994e70b7024b"
+      },
+      "LICENSE": {
+        "bytes": 22426,
+        "sha256": "a3bc83c509fb1ed75b6679a6bc89e38123de0da624b8509457cd0491ff832195"
+      },
+      "PROJECT_CODE_LICENSE.txt": {
+        "bytes": 1233,
+        "sha256": "802ff8d320c2f6bdc3849bae730c5892090bb3de9f1dabd9c005f25c1455d499"
+      },
+      "README.md": {
+        "bytes": 15660,
+        "sha256": "321e7a11ea4d4be7c8c89166ea8b06e8667edd7e93f4b1e6d1b6c2ecf2265725"
+      },
+      "config.json": {
+        "bytes": 1061,
+        "sha256": "2389ccb3801ce52974ec8501f258cdb3ebc8006bdea439f49e47a330dcd93223"
+      },
+      "model.safetensors": {
+        "bytes": 435725300,
+        "sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+      },
+      "tokenizer.json": {
+        "bytes": 677889,
+        "sha256": "ed6341298b0e748c076332b22e895ec601d33053de0ff6b8dae8c846cce961bb"
+      },
+      "tokenizer_config.json": {
+        "bytes": 487,
+        "sha256": "32f7a4b0527717d3c7bd79f5c0edda7baeb8a5f3b9e16c6cb22df5fd581c9a1a"
+      }
+    },
+    "environment": {
+      "HF_HUB_DISABLE_SHARED_BLOBS": "1",
+      "constant_effective": true,
+      "shared_blobs_enabled": false,
+      "HF_HUB_DISABLE_XET": false,
+      "huggingface_hub_version": "2.4.0",
+      "hf_xet_version": "1.8.0",
+      "set_before_import": true
+    }
+  },
+  "approved_space_import_probe": {
+    "approved_entry_imported": true,
+    "hub_version": "2.4.0",
+    "constant_effective": true,
+    "shared_blobs_enabled": false,
+    "cuda_or_spaces_initialized": false,
+    "network": {
+      "network_connections": 0
+    },
+    "scope": "import-only; no Space/runtime/GPU startup"
+  },
+  "pytest": {
+    "passed": 432,
+    "seconds": 19.85,
+    "environment": {
+      "HF_HUB_DISABLE_SHARED_BLOBS": "1",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1"
+    },
+    "real_test_guard": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    }
+  },
+  "ruff": "All checks passed!",
+  "format_already_formatted_files": 59,
+  "pip_check": "No broken requirements found.",
+  "approved_plan_canonical_sha256": "4c9baf15fd7a4e4a503690cbeee9d529d46785f698914188eb2590f82be3a340",
+  "approved_model_and_space_files_unchanged": true,
+  "source_and_security_controls_modified": false,
+  "new_payload_inventory_required": false,
+  "space_configuration_decision": {
+    "set_before_process_start": {
+      "HF_HUB_DISABLE_SHARED_BLOBS": "1"
+    },
+    "fresh_cache_root_example": "/tmp/reviewsense-hub-no-shared-v1",
+    "do_not_reuse_old_shared_cache": true,
+    "pinned_hub_library_version": "2.4.0",
+    "model_revision": "ae89cf168ffaa64115c097204e678ed513a54265",
+    "full_real_zerogpu_runtime_validated": false
+  },
+  "authorization_coverage": {
+    "prior_operational_authorization_remains_applicable_to_unchanged_files_and_destinations": true,
+    "new_request_explicitly_requests_environment_only_strategy": true,
+    "no_scope_expansion_to_paid_resources_or_other_models": true,
+    "space_creation_deferred_in_this_verification_request": true
+  },
+  "preservation": {
+    "monitored_files": 197,
+    "unchanged_files": 193,
+    "intentional_documentation_changes": [
+      "README.md",
+      "docs/HF_PUBLIC_LAUNCH.md",
+      "docs/PUBLIC_LAUNCH_COMMUNICATION.md",
+      "docs/RELEASE_RIGHTS_DECISION.md"
+    ],
+    "all_historical_reports_metrics_code_weights_tokenizer_unchanged": true,
+    "frozen_split_stat_unchanged": true,
+    "csv_contents_opened_or_hashed": false
+  },
+  "remote_writes_in_this_execution": [],
+  "space_created": false,
+  "paid_resources_used": false,
+  "sources": [
+    "https://huggingface.co/docs/huggingface_hub/guides/manage-cache",
+    "https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables",
+    "https://man7.org/linux/man-pages/man2/open.2.html"
+  ],
+  "verification_procedure_sha256": "be4e1d65a12c12267d1eac44fc5da8e7ab70e7fb9f8b2b25d220d2451f333ad2",
+  "documentation_audit": {
+    "local_markdown_targets_valid": 49,
+    "secret_pattern_findings": [],
+    "scope": "six changed/new documentation/evidence files; not exhaustive history or weight audit"
+  }
+}

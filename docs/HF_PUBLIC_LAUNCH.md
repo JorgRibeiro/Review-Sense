@@ -2,14 +2,17 @@
 
 **Atualização de execução:** o responsável confirmou o plano canônico 4c9baf15fd7a.
 O modelo foi publicado na revisão ae89cf168ffaa64115c097204e678ed513a54265.
-A verificação pós-download parou em OSError errno 40, sem contornar o validador
-de symlinks. Space não criado; inferências pós-download/ZeroGPU não executadas.
-[Relatório da operação](../reports/validation_hf_publication_execution.md).
+A primeira verificação falhou em Errno 40; uma nova verificação, autorizada pelo
+responsável, passou usando HF_HUB_DISABLE_SHARED_BLOBS=1 antes da importação,
+cache vazio, o mesmo materializador e todos os controles preservados.
+Hashes/tamanhos dos dez arquivos e inferência independente passaram. Space não
+criado; build/ZeroGPU real não exercitados. [Relatório atual](../reports/validation_hf_shared_blobs.md)
+e [falha inicial preservada](../reports/validation_hf_publication_execution.md).
 O conteúdo abaixo registra o procedimento e o ponto de confirmação da preparação,
 não uma nova exigência de autorização para o plano já confirmado.
 
 Branch feat/hf-public-launch. Preparação e operações específicas foram autorizadas;
-a execução está **interrompida na verificação do modelo**, antes do Space.
+a verificação do modelo foi concluída; **a criação do Space continua suspensa nesta execução**.
 Este guia sucede a recomendação operacional inicial da Etapa A pela
 [decisão explícita do responsável](RELEASE_RIGHTS_DECISION.md), sem alterar a análise
 jurídica, a tag v1.0.0 ou os resultados congelados.
@@ -21,7 +24,7 @@ jurídica, a tag v1.0.0 ou os resultados congelados.
 | Integridade técnica | Allowlists, bytes/SHA-256, labels, tokenizer e equivalência sintética |
 | Ciência/decisão do responsável | Intenção de preparar publicação educacional, sem monetização e com atribuição |
 | Situação jurídica | REQUIRES_REVIEW, legal_clearance=NOT_ESTABLISHED; sem parecer ou novas permissões de terceiros |
-| Autorização operacional | Concedida para o plano 4c9baf15fd7a; execução parcial interrompida, sem contornar controles |
+| Autorização operacional | Concedida para o plano 4c9baf15fd7a; payload inalterado e verificado, sem criação de Space nesta execução |
 
 O novo Model Card usa license: other, license_name descritivo e license_link=LICENSE.
 LICENSE oferece CC BY-NC-SA 4.0 somente nos direitos que o responsável controla,
@@ -110,6 +113,30 @@ por configuração do Space, sem precisar alterar os bytes aprovados do bundle.
 Nenhum SHA fictício ou recibo de aprovação do modelo real foi produzido nos testes.
 
 ## Registros operacionais privados no Space
+
+### Configuração de cache obrigatória antes do startup
+
+Fornecer **HF_HUB_DISABLE_SHARED_BLOBS=1 como Variable pública**, não Secret,
+antes de iniciar qualquer processo Python do Space. A versão alvo huggingface-hub
+2.4.0 lê a variável na importação. Defini-la depois não muda a constante já carregada.
+Não é necessário desativar Xet, alterar o materializador ou aceitar links extras.
+
+Usar cache próprio vazio no primeiro startup, por exemplo
+REVIEWSENSE_CACHE_ROOT=/tmp/reviewsense-hub-no-shared-v1. Desativar compartilhamento
+não converte symlinks já existentes em um cache antigo; não reaproveitar o cache
+problemático. O repo e a revisão continuam os mesmos, token=False e allowlist de dez.
+Na configuração do Space, REVIEWSENSE_MODEL_REVISION deve conter o SHA real já
+verificado: ae89cf168ffaa64115c097204e678ed513a54265.
+
+Essa configuração externa não altera os 17 arquivos aprovados nem o digest do plano.
+A autorização operacional anterior cobre os mesmos destinos/payload, a provisão
+necessária e o uso gratuito elegível; este pedido de diagnóstico também solicitou
+preferir essa variável. Isso não autoriza gastos ou mudanças de arquivos/runtime
+fora do escopo. Conforme a pausa solicitada, nenhum Space foi criado nesta execução.
+Na retomada, confirmar elegibilidade gratuita e a matriz real; qualquer divergência
+de payload ou necessidade de correção nos arquivos exige nova revisão do inventário.
+
+### Secret dos registros operacionais
 
 Após confirmação real e verificação do upload, fornecer como **Secret**
 REVIEWSENSE_OPERATIONAL_APPROVAL_JSON um objeto com risk, destination, human e evidence.

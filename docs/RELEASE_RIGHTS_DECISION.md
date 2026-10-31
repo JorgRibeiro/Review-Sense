@@ -1,5 +1,16 @@
 # Decisão de direitos — preflight do lançamento público
 
+## Recuperação técnica por configuração de cache
+
+Após a falha inicial descrita abaixo, o responsável autorizou uma nova verificação
+por revisão fixa, com HF_HUB_DISABLE_SHARED_BLOBS=1 antes de importar a biblioteca.
+O novo download anônimo em cache vazio, os dez hashes/tamanhos e a inferência
+independente passaram, sem alterar pesos, código de segurança ou payload aprovado.
+O Space continua não criado nesta execução. A autorização operacional anterior
+permanece válida para os mesmos arquivos/destinos e condições gratuitas, com essa
+configuração externa, sem representar resolução jurídica. REQUIRES_REVIEW /
+NOT_ESTABLISHED permanecem intactos. [Verificação técnica atual](../reports/validation_hf_shared_blobs.md).
+
 ## Execução após confirmação operacional
 
 O responsável confirmou explicitamente a publicação dos dez arquivos do modelo e

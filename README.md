@@ -7,14 +7,15 @@ com pipeline de dados reproduzível, baseline **TF-IDF + LinearSVC**, fine-tunin
 **Escopo da v1.0.0:** código-fonte, documentação, resultados experimentais e
 aplicação local. O clone **não contém os pesos treinados nem o dataset**.
 Um [candidato dos pesos foi publicado posteriormente no Hugging Face](https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau),
-mas sua verificação pós-download foi interrompida pelo validador seguro de cache.
+e sua verificação pós-download foi concluída com cache compatível e todos os hashes aprovados.
 **Não há inferência hospedada.** A integração ZeroGPU permanece preparada, sem deploy.
 
 A [release v1.0.0](https://github.com/jorgeribeiru/Review-Sense/releases/tag/v1.0.0)
 está publicada no commit `98845aa`, com esse escopo. A
 [decisão do responsável](docs/RELEASE_RIGHTS_DECISION.md) autorizou o upload específico
 sob incerteza jurídica, sem representar aprovação jurídica. A execução parou antes
-de criar o Space; [estado, SHA e falha verificada](reports/validation_hf_publication_execution.md).
+de criar o Space. A falha inicial de cache foi resolvida por configuração externa,
+sem alterar os arquivos aprovados; [verificação e decisão sobre continuidade](reports/validation_hf_shared_blobs.md).
 Os [materiais anteriores de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md) precisam
 de revisão antes de uso e não foram publicados.
 
@@ -165,6 +166,7 @@ transparência, canal para manifestações fundamentadas e eventual suspensão/r
 não presume autorização por silêncio, finalidade não comercial ou aviso de retirada.
 
 A release v1.0.0 preserva seu escopo original de código, documentação e resultados.
-O candidato de pesos publicado depois dela tem verificação pós-download incompleta.
+O candidato de pesos publicado depois dela teve download por revisão fixa, hashes
+e inferência independente verificados, mantendo a incerteza jurídica declarada.
 Não há Space implantado ou URL de inferência validada; não se declara lançamento
 hospedado concluído nem resolução jurídica dos direitos.
