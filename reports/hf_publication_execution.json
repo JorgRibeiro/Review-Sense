@@ -1,0 +1,158 @@
+{
+  "schema_version": 2,
+  "at_utc": "2026-10-31T01:48:39.458960+00:00",
+  "branch": "feat/hf-public-launch",
+  "approved_code_commit": "ff1c7e0588c2e2d7ca6541036cbef7b3bb9b8d24",
+  "approved_preparation_commit": "a376fce714a8331d77654727dbe4371fe0e14c92",
+  "authorized_plan_canonical_sha256": "4c9baf15fd7a4e4a503690cbeee9d529d46785f698914188eb2590f82be3a340",
+  "real_operational_authorization_recorded_privately": true,
+  "legal_clearance": "NOT_ESTABLISHED",
+  "license_status": "REQUIRES_REVIEW",
+  "identity": {
+    "name": "JorgeRibeiru",
+    "auth_type": "oauth",
+    "is_pro": false,
+    "matches_approved_account": true,
+    "server_auth_check_write_passed_before_upload": true,
+    "legacy_token_role_not_exposed_for_oauth": true
+  },
+  "state": "STOPPED_MODEL_DOWNLOAD_VERIFICATION",
+  "model": {
+    "created": true,
+    "public": true,
+    "repo_id": "JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "url": "https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau",
+    "revision": "ae89cf168ffaa64115c097204e678ed513a54265",
+    "commit_url": "https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau/commit/ae89cf168ffaa64115c097204e678ed513a54265",
+    "approved_files_uploaded": [
+      "ATTRIBUTIONS.md",
+      "BASE_MODEL_LICENSE.txt",
+      "DISTRIBUTION_STATUS.md",
+      "LICENSE",
+      "PROJECT_CODE_LICENSE.txt",
+      "README.md",
+      "config.json",
+      "model.safetensors",
+      "tokenizer.json",
+      "tokenizer_config.json"
+    ],
+    "remote_files_metadata": [
+      {
+        "name": ".gitattributes",
+        "size": 1519
+      },
+      {
+        "name": "ATTRIBUTIONS.md",
+        "size": 2343
+      },
+      {
+        "name": "BASE_MODEL_LICENSE.txt",
+        "size": 1138
+      },
+      {
+        "name": "DISTRIBUTION_STATUS.md",
+        "size": 2054
+      },
+      {
+        "name": "LICENSE",
+        "size": 22426
+      },
+      {
+        "name": "PROJECT_CODE_LICENSE.txt",
+        "size": 1233
+      },
+      {
+        "name": "README.md",
+        "size": 15660
+      },
+      {
+        "name": "config.json",
+        "size": 1061
+      },
+      {
+        "name": "model.safetensors",
+        "size": 435725300,
+        "server_declared_lfs_sha256": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70"
+      },
+      {
+        "name": "tokenizer.json",
+        "size": 677889
+      },
+      {
+        "name": "tokenizer_config.json",
+        "size": 487
+      }
+    ],
+    "platform_metadata_files": [
+      ".gitattributes"
+    ],
+    "remote_metadata_is_not_download_hash_verification": true,
+    "sha_used_for_download": "ae89cf168ffaa64115c097204e678ed513a54265"
+  },
+  "verification": {
+    "phase": "pinned snapshot cache materialization before inference",
+    "type": "OSError",
+    "errno": 40,
+    "message": "Too many levels of symbolic links",
+    "refused_blob": "a65f1ee302987c5f0b01cd7981722e92f17ff332358b8e19b8dc01ee05753c70",
+    "location": "reviewsense.hub_cache._copy_approved_file / os.open(O_NOFOLLOW)",
+    "exact_blob_target_inspected": false,
+    "temporary_cache_retained": false,
+    "hash_divergence_proven": false,
+    "integral_download_verification_completed": false,
+    "public_pinned_snapshot_download_returned": true,
+    "synthetic_inference_after_download_executed": false,
+    "independent_example_after_download_executed": false,
+    "retry_or_security_bypass_performed": false,
+    "temporary_cache_cleaned_by_context_manager": true,
+    "failed_worker_audit_summary_written": false
+  },
+  "space": {
+    "created": false,
+    "uploaded": false,
+    "secret_configured": false,
+    "build_state": "NOT_STARTED",
+    "model_revision_configured": null,
+    "public_url": null,
+    "synthetic_inference_executed": false,
+    "runtime_versions_verified": false
+  },
+  "cost_controls": {
+    "paid_resources_authorized": false,
+    "purchases_or_subscriptions": false,
+    "compute_resource_allocated": false,
+    "hardware_catalog_zero_a10g_unit_cost_usd": 0,
+    "hardware_catalog_lookup_only": true
+  },
+  "preservation": {
+    "approved_ten_model_files_unchanged_locally": true,
+    "approved_seventeen_space_files_unchanged": true,
+    "source_tests_deploy_publishing_unchanged_since_approved_commit": true,
+    "historical_reports_and_metrics_unchanged": true,
+    "legacy_package_checkpoint_tokenizer_baseline_unchanged": true,
+    "frozen_split_stat_unchanged": true,
+    "csv_contents_hashed": false,
+    "main_and_v1_tag_unchanged": true,
+    "report_verification_guard": {
+      "active": false,
+      "read_opens": 0,
+      "blocked_opens": 0
+    }
+  },
+  "not_executed": [
+    "model verification retry",
+    "Space creation",
+    "Space Secret upload",
+    "Space code upload",
+    "ZeroGPU deployment or inference",
+    "paid resource or credit purchase",
+    "training",
+    "dataset/test evaluation",
+    "new ML metrics",
+    "LinkedIn publication",
+    "Git push or merge",
+    "tag/release modification",
+    "model repo deletion or visibility change"
+  ],
+  "next_step": "Investigate the real downloaded blob layout and prepare a localized verified fix without relaxing LocalPackage/O_NOFOLLOW. Any change to the approved 17 file bytes requires a new reviewed inventory/operational scope before upload. No fix/retry was executed in this operation."
+}

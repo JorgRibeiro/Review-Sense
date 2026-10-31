@@ -1,6 +1,15 @@
 # Preparação imediata da publicação HF — ponto de confirmação operacional
 
-Branch feat/hf-public-launch. **Preparação local autorizada; escrita remota ainda não.**
+**Atualização de execução:** o responsável confirmou o plano canônico 4c9baf15fd7a.
+O modelo foi publicado na revisão ae89cf168ffaa64115c097204e678ed513a54265.
+A verificação pós-download parou em OSError errno 40, sem contornar o validador
+de symlinks. Space não criado; inferências pós-download/ZeroGPU não executadas.
+[Relatório da operação](../reports/validation_hf_publication_execution.md).
+O conteúdo abaixo registra o procedimento e o ponto de confirmação da preparação,
+não uma nova exigência de autorização para o plano já confirmado.
+
+Branch feat/hf-public-launch. Preparação e operações específicas foram autorizadas;
+a execução está **interrompida na verificação do modelo**, antes do Space.
 Este guia sucede a recomendação operacional inicial da Etapa A pela
 [decisão explícita do responsável](RELEASE_RIGHTS_DECISION.md), sem alterar a análise
 jurídica, a tag v1.0.0 ou os resultados congelados.
@@ -12,7 +21,7 @@ jurídica, a tag v1.0.0 ou os resultados congelados.
 | Integridade técnica | Allowlists, bytes/SHA-256, labels, tokenizer e equivalência sintética |
 | Ciência/decisão do responsável | Intenção de preparar publicação educacional, sem monetização e com atribuição |
 | Situação jurídica | REQUIRES_REVIEW, legal_clearance=NOT_ESTABLISHED; sem parecer ou novas permissões de terceiros |
-| Autorização operacional | Confirmação específica de plano, arquivos, conta e destinos; ainda pendente |
+| Autorização operacional | Concedida para o plano 4c9baf15fd7a; execução parcial interrompida, sem contornar controles |
 
 O novo Model Card usa license: other, license_name descritivo e license_link=LICENSE.
 LICENSE oferece CC BY-NC-SA 4.0 somente nos direitos que o responsável controla,

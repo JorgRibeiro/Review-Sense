@@ -1,5 +1,10 @@
 # Divulgação disponível — v1.0.0 de código e demonstração local
 
+**Rascunho histórico, não usar sem revisão:** após sua redação, o responsável
+autorizou e executou o upload de um candidato de pesos, cuja verificação posterior
+foi interrompida. Não há Space validado. O texto abaixo não descreve integralmente
+o estado atual e não foi publicado. Ver [relatório da execução](../reports/validation_hf_publication_execution.md).
+
 Plano alternativo solicitado para a hipótese de direitos dos pesos ainda incertos.
 **Rascunho para revisão humana; nada foi postado.** Não anuncia modelo no Hub ou
 inferência hospedada. A [decisão de direitos](RELEASE_RIGHTS_DECISION.md) permanece
