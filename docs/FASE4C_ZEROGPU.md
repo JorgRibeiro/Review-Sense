@@ -45,7 +45,8 @@ flowchart LR
 ```
 
 `reviewsense.zerogpu` não importa spaces/torch ao ser importado. A factory valida
-os gates e a matriz, exige SPACES_ZERO_GPU=true, ordem de importação correta e
+os gates e a matriz, aceita SPACES_ZERO_GPU=1/t/true (sem distinguir caixa),
+exige a ordem de importação correta e
 Config.zero_gpu ativo. Não usa torch.cuda.is_available para simular ZeroGPU.
 Só então importa o runtime e prepara `ZeroGPUInferenceService` fora do callback.
 
@@ -63,8 +64,16 @@ workers e reconstruir processos; não se promete um único objeto global entre r
 ou reinícios. A colocação inicial e o custo de hidratação precisam de medição real.
 
 `create_app` mantém o design e recebe um transformador opcional do callback.
-O callback usa spaces.GPU(duration=10); um wrapper com functools.wraps preserva
-metadata zerogpu e contexto do Gradio e sanitiza falhas do scheduler fora da função.
+O callback usa spaces.GPU(duration=10); um wrapper externo valida entradas e
+sanitiza falhas do scheduler. functools.wraps sozinho não registra sua identidade.
+A camada de compatibilidade 0.51.3 confere as associações callback/handler em
+spaces.zero.decorator.decorated_cache, registra o guard como alias de si mesmo e
+verifica que GPU(guard) retorna o mesmo objeto. É esse guard que os dois eventos
+Gradio recebem. Ele sempre delega ao handler alocador do SDK para inferência;
+o task_id continua sendo o id do callback original, como no wrapper upstream.
+A consulta/auto-wrap pelo SDK é idempotente e não remove o guard. Isso usa contrato
+**interno** do SDK, limitado à versão fixada; mudança de contrato falha no startup,
+e futura atualização requer revisão. A sanitização permanece fora do alocador.
 Botão/Enter compartilham a mesma função, concorrência 1 e fila 8. Entradas vazias,
 acima de 8.000 caracteres ou outro modelo são rejeitadas antes da alocação. Duração
 10 s é orçamento inicial conservador, **não medição nem SLA**. A documentação usa
@@ -187,3 +196,26 @@ canal de reclamações monitorado, deploy e revisão pública. LinkedIn permanec
 para o encerramento após materiais públicos definitivos e verificados.
 
 **Adaptação ZeroGPU preparada localmente. Deploy, distribuição dos pesos e encerramento da Fase 4C ainda pendentes.**
+
+
+## Correção de compatibilidade posterior à primeira auditoria
+
+O parser original de spaces 0.51.3 aceita exatamente 1, t e true, ignorando caixa;
+não aceita espaços, yes ou on. A checagem preliminar acompanha esses valores e
+Config.zero_gpu continua sendo conferido após importar o SDK. Variável verdadeira
+não supera Config inativo, nem permite startup quando o runtime está ausente.
+
+Os testes adicionais executam trechos exatos de boolean, GPU/_GPU e
+regular_function_wrapper do wheel 0.51.3, com hashes/proveniência/Apache-2.0 em
+tests/fixtures/spaces_0_51_3. Apenas imports, transporte e workers são substituídos;
+o pacote e a inicialização CUDA não são executados. Eles provam que wraps sozinho
+não inclui o objeto no cache, conferem a identidade final nos eventos Gradio e no
+registro real do decorador, o task_id enviado ao transporte substituído e a ordem
+schedule -> worker -> release. Negação de schedule impede inferência e gera erro
+público sanitizado; entradas inválidas não chegam ao scheduler.
+
+Isso comprova o contrato Python local dessa versão, **não** o registro externo,
+o control plane, processos/hidratação reais, quotas ou alocação de hardware.
+Esses pontos continuam exigindo runtime ZeroGPU autorizado. Os fixtures de SDK
+não são dependências instaladas nem fazem parte dos 17 arquivos do Space.
+Evidência adicional: [validation_phase4c_zerogpu_corrections.md](../reports/validation_phase4c_zerogpu_corrections.md).

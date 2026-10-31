@@ -1,0 +1,139 @@
+def process_duration(duration: Duration | None):
+    if duration is None or isinstance(duration, timedelta):
+        return duration
+    return timedelta(seconds=duration)
+
+def static_duration(duration: DynamicDuration[Param], *args: Param.args, **kwargs: Param.kwargs):
+    if not callable(duration):
+        return duration
+    return duration(*args, **kwargs)
+
+def regular_function_wrapper(
+    task: Callable[Param, Res],
+    duration: DynamicDuration[Param],
+    gpu_size: GPUSize | None,
+) -> Callable[Param, Res]:
+
+    import gradio as gr
+
+    request_var = gradio_request_var()
+    workers: dict[NvidiaIndex, Worker[RegularResQueueResult[Res, gr.Error] | None]] = {}
+    task_id = id(task)
+
+    @wraps(task)
+    def gradio_handler(*args: Param.args, **kwargs: Param.kwargs) -> Res:
+
+        if forked:
+            return task(*args, **kwargs)
+
+        request = request_var.get(None)
+        duration_ = static_duration(duration, *args, **kwargs)
+        duration_ = process_duration(duration_)
+        schedule_response = client.schedule(task_id=task_id, request=request, duration=duration_, gpu_size=gpu_size)
+        allow_token = schedule_response.allowToken
+        nvidia_index = schedule_response.nvidiaIndex
+        nvidia_uuid = schedule_response.nvidiaUUID
+        release = partial(client.release, allow_token)
+
+        try:
+            worker = workers.pop(nvidia_index)
+        except KeyError:
+            worker = None
+
+        if worker is not None and worker.process.is_alive() and schedule_response.idle:
+            assert worker.arg_queue.empty()
+            assert worker.res_queue.empty()
+        else:
+            worker = Worker(thread_wrapper, allow_token, nvidia_uuid)
+
+        try:
+            worker.arg_queue.put(((args, kwargs), GradioPartialContext.get()))
+        except PicklingError: # TODO: detailed serialization diagnostic
+            release(fail=True)
+            raise
+
+        duration_seconds = client.get_duration_seconds(duration_, gpu_size)
+        res_event = ThreadEvent()
+        def warn_duration():
+            if not res_event.wait(duration_seconds):
+                client.duration_warning()
+
+        with ThreadPoolExecutor(1) as executor:
+            executor.submit(copy_context().run, warn_duration)
+            try:
+                while True:
+                    res = worker.res_queue.get()
+                    if res is None:
+                        release(fail=True, allow_404=True)
+                        raise error("ZeroGPU worker error", "GPU task aborted")
+                    if isinstance(res, ExceptionResult):
+                        release(fail=True)
+                        if res.gradio_error is not None:
+                            if res.gradio_error.print_exception:
+                                print(res.traceback)
+                                res.gradio_error.print_exception = False
+                            raise res.gradio_error
+                        else:
+                            print(res.traceback)
+                            raise error("ZeroGPU worker error", res.error_cls)
+                    if isinstance(res, OkResult):
+                        workers[nvidia_index] = worker
+                        release()
+                        return res.value
+                    if isinstance(res, GradioQueueEvent):
+                        try_process_queue_event(res.method_name, *res.args, **res.kwargs)
+                        continue
+                    assert_never(res)
+            finally:
+                res_event.set()
+
+
+    def thread_wrapper(
+        arg_queue: Queue[tuple[Params, GradioPartialContext]],
+        res_queue: Queue[RegularResQueueResult[Res, gr.Error] | None],
+        _stop_event: Event,
+        allow_token: str,
+        nvidia_uuid: str,
+        fds: list[int],
+    ):
+        global forked
+        forked = True
+        signal.signal(signal.SIGTERM, drop_params(arg_queue.close))
+        initialized = False
+        while True:
+            try:
+                (args, kwargs), gradio_context = arg_queue.get()
+            except OSError:
+                break
+            if not initialized:
+                if (res := worker_init(
+                    res_queue=res_queue,
+                    allow_token=allow_token,
+                    nvidia_uuid=nvidia_uuid,
+                    fds=fds,
+                )) is not None:
+                    res_queue.put(res)
+                    return
+                initialized = True
+            def run_task():
+                try:
+                    res = task(*args, **kwargs) # pyright: ignore [reportCallIssue]
+                except Exception as e:
+                    res = exception_result(e)
+                else:
+                    res = OkResult(res)
+                try:
+                    res_queue.put(res)
+                except PicklingError as e:
+                    res_queue.put(exception_result(e))
+            GradioPartialContext.apply(gradio_context)
+            context = copy_context()
+            with ThreadPoolExecutor() as executor:
+                future = executor.submit(context.run, run_task)
+            future.result()
+
+    # https://github.com/python/cpython/issues/91002
+    if not hasattr(task, '__annotations__'):
+        gradio_handler.__annotations__ = {}
+
+    return gradio_handler

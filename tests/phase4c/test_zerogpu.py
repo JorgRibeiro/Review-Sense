@@ -37,6 +37,7 @@ def simulated_runtime(monkeypatch):
     import reviewsense.zerogpu as zero
 
     events = []
+    registry = {}
     original_loader = zero.load_bert_cpu
 
     def loader(directory):
@@ -56,12 +57,17 @@ def simulated_runtime(monkeypatch):
         events.append(("decorate", kwargs))
 
         def decorate(callback):
+            if callback in registry:
+                return registry[callback]
+
             @wraps(callback)
             def allocated(*args):
                 events.append("allocate_simulated")
                 return callback(*args)
 
             allocated.zerogpu = True
+            registry[callback] = allocated
+            registry[allocated] = allocated
             return allocated
 
         return decorate
@@ -86,6 +92,9 @@ def simulated_runtime(monkeypatch):
         ZeroGPUInferenceService, "_recover_cpu", Mock(side_effect=AssertionError("no fallback"))
     )
     monkeypatch.setitem(sys.modules, "spaces", SimpleNamespace(GPU=gpu))
+    monkeypatch.setitem(
+        sys.modules, "spaces.zero.decorator", SimpleNamespace(decorated_cache=registry)
+    )
     monkeypatch.setitem(
         sys.modules, "spaces.config", SimpleNamespace(Config=SimpleNamespace(zero_gpu=True))
     )
@@ -220,19 +229,28 @@ def test_invalid_weights_never_load_or_transfer(candidate, simulated_runtime, mo
     assert "load_cpu" not in simulated_runtime and "to_emulated_cuda" not in simulated_runtime
 
 
-def test_callback_zero_decorator_limits_and_sanitized_scheduler_error():
+def test_callback_zero_decorator_limits_and_sanitized_scheduler_error(monkeypatch):
     calls = []
+    registry = {}
+    monkeypatch.setitem(
+        sys.modules, "spaces.zero.decorator", SimpleNamespace(decorated_cache=registry)
+    )
 
     def gpu(**kwargs):
         assert kwargs == {"duration": GPU_DURATION_SECONDS}
 
         def decorate(fn):
+            if fn in registry:
+                return registry[fn]
+
             @wraps(fn)
             def allocate(*args):
                 calls.append(args)
                 raise RuntimeError("sensitive-text /home/private")
 
             allocate.zerogpu = True
+            registry[fn] = allocate
+            registry[allocate] = allocate
             return allocate
 
         return decorate

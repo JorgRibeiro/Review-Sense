@@ -124,7 +124,8 @@ def verify_runtime_versions(path: Path) -> dict:
 
 
 def import_zero_runtime():
-    if os.environ.get("SPACES_ZERO_GPU", "").lower() != "true":
+    # spaces.config.boolean, versão fixada 0.51.3: não faz strip nem aceita yes/on.
+    if os.environ.get("SPACES_ZERO_GPU", "").lower() not in {"1", "t", "true"}:
         raise RuntimeError("Este backend requer o runtime ZeroGPU, não a GPU local.")
     if "torch" in sys.modules and "spaces" not in sys.modules:
         raise RuntimeError("spaces precisa ser importado antes de torch.")
@@ -135,10 +136,21 @@ def import_zero_runtime():
 
 
 def gpu_callback_transform(spaces_module):
-    """Preserva metadata zerogpu no callback Gradio e sanitiza falhas do scheduler."""
+    """Registra o guard externo pela identidade, preservando a alocação e sanitização.
+
+    Compatibilidade deliberadamente restrita ao contrato decorated_cache de 0.51.3.
+    Atributos copiados por wraps não bastam; mudança de contrato falha no startup.
+    """
 
     def transform(callback):
         allocated = spaces_module.GPU(duration=GPU_DURATION_SECONDS)(callback)
+        registry = importlib.import_module("spaces.zero.decorator").decorated_cache
+        if (
+            type(registry) is not dict
+            or registry.get(callback) is not allocated
+            or registry.get(allocated) is not allocated
+        ):
+            raise RuntimeError("Registro GPU incompatível com o runtime preparado.")
 
         @wraps(allocated)
         def guarded(text, model):
@@ -157,6 +169,13 @@ def gpu_callback_transform(spaces_module):
                     "GPU temporariamente indisponível. Tente novamente mais tarde."
                 )
 
+        # O SDK usa esse mapa para reconhecer funções já decoradas (inclusive auto-wrap).
+        # guarded sempre delega a allocated: inferência não pula o scheduler do SDK.
+        # Mapear para si preserva o guard de entrada/erro quando GPU(guarded) é consultado.
+        registry[guarded] = guarded
+        if spaces_module.GPU(duration=GPU_DURATION_SECONDS)(guarded) is not guarded:
+            registry.pop(guarded, None)
+            raise RuntimeError("Callback final não reconhecido pelo registro GPU.")
         return guarded
 
     return transform
