@@ -6,16 +6,18 @@ com pipeline de dados reproduzível, baseline **TF-IDF + LinearSVC**, fine-tunin
 
 **Escopo da v1.0.0:** código-fonte, documentação, resultados experimentais e
 aplicação local. O clone **não contém os pesos treinados nem o dataset**.
-Não há pesos ajustados disponíveis para download ou inferência hospedada.
-A integração ZeroGPU está preparada para uma possível distribuição posterior.
+Um [candidato dos pesos foi publicado posteriormente no Hugging Face](https://huggingface.co/JorgeRibeiru/reviewsense-ptbr-bertimbau),
+e sua verificação pós-download foi concluída com cache compatível e todos os hashes aprovados.
+**Não há inferência hospedada.** A integração ZeroGPU permanece preparada, sem deploy.
 
 A [release v1.0.0](https://github.com/jorgeribeiru/Review-Sense/releases/tag/v1.0.0)
 está publicada no commit `98845aa`, com esse escopo. A
-[decisão de direitos](docs/RELEASE_RIGHTS_DECISION.md) mantém a distribuição dos
-pesos e o deploy pendentes de confirmação operacional específica, após autorização
-do responsável para [preparar o candidato e os destinos](docs/HF_PUBLIC_LAUNCH.md).
-Isso não representa aprovação jurídica. Os [materiais de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md)
-apresentam somente as entregas públicas e capturas históricas da demonstração local.
+[decisão do responsável](docs/RELEASE_RIGHTS_DECISION.md) autorizou o upload específico
+sob incerteza jurídica, sem representar aprovação jurídica. A execução parou antes
+de criar o Space. A falha inicial de cache foi resolvida por configuração externa,
+sem alterar os arquivos aprovados; [verificação e decisão sobre continuidade](reports/validation_hf_shared_blobs.md).
+Os [materiais anteriores de divulgação](docs/PUBLIC_LAUNCH_COMMUNICATION.md) precisam
+de revisão antes de uso e não foram publicados.
 
 [Guia da release](docs/RELEASE_v1.0.0.md) ·
 [Notas de lançamento](docs/RELEASE_NOTES_v1.0.0.md) ·
@@ -151,7 +153,10 @@ de Fábio Souza, Rodrigo Nogueira e Roberto Lotufo.
 O [código próprio é MIT](LICENSE). Avisos de terceiros, inclusive fixtures Apache-2.0,
 são preservados. A MIT não se estende automaticamente ao dataset ou aos pesos.
 O original do corpus declara CC BY-NC-SA 4.0; há divergência com o espelho no Hub.
-Pesos ajustados: **license_status=REQUIRES_REVIEW; upload_authorized=false**.
+Direitos dos pesos: **REQUIRES_REVIEW / NOT_ESTABLISHED**. Houve autorização
+operacional específica para o candidato público v2, com CC BY-NC-SA limitada aos
+direitos controlados pelo responsável e avisos MIT separados. O pacote 4B original
+permanece intacto, com upload_authorized=false.
 A release de código não é aprovação jurídica para distribuir o modelo.
 
 Finalidade educacional e não comercial prevista, sem parceria/endosso institucional.
@@ -160,6 +165,8 @@ A decisão de não solicitar autorização por e-mail permanece. A
 transparência, canal para manifestações fundamentadas e eventual suspensão/retirada;
 não presume autorização por silêncio, finalidade não comercial ou aviso de retirada.
 
-O escopo público atual é código, documentação e resultados. Distribuição de pesos
-e inferência hospedada/ZeroGPU ficam fora da v1.0.0 e dependem de revisão de direitos,
-artefatos/destinos aprovados, autorização humana e validação real da infraestrutura.
+A release v1.0.0 preserva seu escopo original de código, documentação e resultados.
+O candidato de pesos publicado depois dela teve download por revisão fixa, hashes
+e inferência independente verificados, mantendo a incerteza jurídica declarada.
+Não há Space implantado ou URL de inferência validada; não se declara lançamento
+hospedado concluído nem resolução jurídica dos direitos.

@@ -1,5 +1,34 @@
 # Decisão de direitos — preflight do lançamento público
 
+## Recuperação técnica por configuração de cache
+
+Após a falha inicial descrita abaixo, o responsável autorizou uma nova verificação
+por revisão fixa, com HF_HUB_DISABLE_SHARED_BLOBS=1 antes de importar a biblioteca.
+O novo download anônimo em cache vazio, os dez hashes/tamanhos e a inferência
+independente passaram, sem alterar pesos, código de segurança ou payload aprovado.
+O Space continua não criado nesta execução. A autorização operacional anterior
+permanece válida para os mesmos arquivos/destinos e condições gratuitas, com essa
+configuração externa, sem representar resolução jurídica. REQUIRES_REVIEW /
+NOT_ESTABLISHED permanecem intactos. [Verificação técnica atual](../reports/validation_hf_shared_blobs.md).
+
+## Execução após confirmação operacional
+
+O responsável confirmou explicitamente a publicação dos dez arquivos do modelo e
+dos 17 do Space nos destinos públicos, sem custos, conforme o plano canônico
+4c9baf15fd7a4e4a503690cbeee9d529d46785f698914188eb2590f82be3a340.
+A confirmação verdadeira foi registrada privadamente; não é parecer jurídico.
+Identidade JorgeRibeiru confirmada no terminal por OAuth e permissão de escrita
+verificada pelo servidor. O modelo foi enviado na revisão
+ae89cf168ffaa64115c097204e678ed513a54265.
+
+A verificação pós-download falhou no materializador seguro de cache (OSError,
+errno 40). A operação foi interrompida antes de inferência pós-download e criação
+do Space, conforme solicitado. Nenhum controle foi relaxado e nenhum arquivo
+aprovado foi substituído. O candidato permanece público, sem declaração de
+verificação integral ou deploy concluídos. A situação jurídica continua
+REQUIRES_REVIEW / NOT_ESTABLISHED, sem novas permissões de terceiros.
+[Registro técnico da operação](../reports/validation_hf_publication_execution.md).
+
 ## Atualização — preparação autorizada pelo responsável
 
 O responsável decidiu **prosseguir com a preparação da distribuição pública** dos
@@ -11,7 +40,7 @@ incertezas identificadas naquela análise, nem concede permissão de terceiros.
 
 | Dimensão | Situação atual |
 | --- | --- |
-| Intenção/autorização do responsável | Preparação local explicitamente autorizada; primeira escrita remota depende da confirmação final de arquivos/destinos |
+| Intenção/autorização do responsável | Preparação e operações específicas confirmadas para o plano 4c9baf15fd7a; execução interrompida conforme registro acima |
 | Condições pretendidas | Educacional, sem monetização, atribuição a corpus/base/autores; CC BY-NC-SA 4.0 nos direitos controlados, se existentes |
 | Direitos demonstrados | Declaração CC BY-NC-SA da fonte original e MIT do base/código, com os alcances e limites já documentados |
 | Direitos não demonstrados | Não há nova permissão de Americanas, autores de comentários ou NeuralMind; não há parecer jurídico ou conclusão de titularidade integral |
@@ -44,7 +73,7 @@ arquivos e seu manifest/descritor continuam intactos e bloqueados pelo contrato 
 Pesos, tokenizer, labels e métricas congeladas são preservados. Não são emitidos
 pareceres, permissões ou recibos de revisão fictícios.
 
-### Operação e confirmação que ainda falta
+### Operação e confirmação específica
 
 O contrato antigo acoplava autorização operacional ao estado jurídico APPROVED.
 O descritor v2 separa essas dimensões explicitamente: mantém REQUIRES_REVIEW e
@@ -54,15 +83,16 @@ do v1 não foi ligada: ela não integra o esquema v2, cuja autorização permane
 externa, requerida e vinculada aos bytes. Sem confirmação específica, o v2 também
 recusa operações. Os testes usam somente aprovações de modelos minúsculos sintéticos.
 
-Antes de qualquer escrita remota serão apresentados o plano/inventários exatos,
+Antes da primeira escrita remota foram apresentados o plano/inventários exatos,
 os dois repositórios públicos, o diff dos gates e os resultados técnicos. A confirmação
-pedida será **operacional** para esses arquivos/destinos e para o uso gratuito ZeroGPU,
-condicionado à elegibilidade e ao teste real; não será novo aceite genérico de risco
-ou pedido de parecer. O commit SHA do Hub só existirá após o upload e será verificado
-antes de configurar o Space. Não se inventa SHA ou aprovação antecipada.
+recebida foi **operacional** para esses arquivos/destinos e para o uso gratuito ZeroGPU,
+condicionado à elegibilidade e ao teste real, sem novo aceite genérico de risco
+ou pedido de parecer. O commit SHA real do modelo foi registrado após o upload.
+A verificação do download não concluiu; por isso o Space não foi configurado.
+Não se inventou SHA ou aprovação antecipada.
 
 Procedimento, diff e inventários: [HF_PUBLIC_LAUNCH.md](HF_PUBLIC_LAUNCH.md).
-Não houve upload/deploy, obtenção de credenciais, compra, e-mail ou postagem.
+Houve upload do modelo, com login local; não houve deploy, compra, e-mail ou postagem.
 A política de reclamações/suspensão/retirada permanece aplicável e não sana direitos.
 
 ---

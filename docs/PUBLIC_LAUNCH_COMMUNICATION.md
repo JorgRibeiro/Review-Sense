@@ -1,5 +1,11 @@
 # Divulgação disponível — v1.0.0 de código e demonstração local
 
+**Rascunho histórico, não usar sem revisão:** após sua redação, o responsável
+autorizou e executou o upload de um candidato de pesos. Sua primeira verificação
+foi interrompida e depois concluída por configuração de cache, sem mudar o payload.
+Não há Space validado. O texto abaixo não descreve integralmente
+o estado atual e não foi publicado. Ver [verificação atual](../reports/validation_hf_shared_blobs.md).
+
 Plano alternativo solicitado para a hipótese de direitos dos pesos ainda incertos.
 **Rascunho para revisão humana; nada foi postado.** Não anuncia modelo no Hub ou
 inferência hospedada. A [decisão de direitos](RELEASE_RIGHTS_DECISION.md) permanece
